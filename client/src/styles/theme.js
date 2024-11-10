@@ -1,6 +1,6 @@
 export const themeConfig = {
     token: {
-        colorPrimary: '#4CAF50',       // Color principal
+        colorPrimary: '#D149D1FF',       // Color principal
         colorBgContainer: '#7E7272FF',    // Fondo de contenedores
         colorText: '#333333',           // Color del texto principal
         colorBorder: '#dddddd',         // Color de bordes
@@ -9,6 +9,8 @@ export const themeConfig = {
         colorError: '#f44336',          // Color de error
         borderRadius: 8,                // Radio de bordes
         fontSizeBase: 16,               // Tamaño de fuente base
+        paddingContentHorizontal: 24,     // Espaciado horizontal en contenido
+        paddingContentVertical: 24,       // Espaciado vertical en contenido
     }
 };
 
