@@ -1,4 +1,4 @@
-import { ConfigProvider, theme } from 'antd'
+import { ConfigProvider} from 'antd'
 import { themeConfig } from './styles/theme'
 import { MainLayout } from './containers/mainLayout'
 import './App.css'

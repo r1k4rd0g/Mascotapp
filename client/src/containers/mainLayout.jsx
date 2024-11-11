@@ -1,9 +1,8 @@
-import { Layout, theme } from 'antd';
+import { Layout} from 'antd';
 import { HeaderComponent } from '../components/headerComponent';
 import { Sidebar } from '../components/siderBar';
 import { ContentArea } from '../components/contentArea';
-import { Breadcrumbs } from '../components/breadCrumbs';
-import { themeConfig } from '../styles/theme.js';
+
 
 
 
