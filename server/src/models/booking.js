@@ -13,9 +13,9 @@ const bookingSchema = new Schema(
       required: true,
     },
     vet: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
+      type: String,
+      enum: [],
+      required: true
     },
     date: {
       type: Date,
@@ -25,14 +25,6 @@ const bookingSchema = new Schema(
       type: String,
       enum: ['pending', 'confirmed', 'completed', 'cancelled'],
       default: 'pending',
-    },
-    clinicalHistory: {
-      type: String,
-      default: '',
-    },
-    report: {
-      type: String,
-      default: '',
     },
   },
   { timestamps: true }
