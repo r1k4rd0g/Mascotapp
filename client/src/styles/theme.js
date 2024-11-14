@@ -1,8 +1,8 @@
 export const themeConfig = {
     token: {
-        colorPrimary: '#D149D1FF',       // Color principal
+        colorPrimary: '#D149D1FF',       // Color principal -->  //este lo está tomando en el navegador!!
         colorBgContainer: '#DFF3BAFF',    // Fondo de contenedores
-        colorBgContent: '#F0EFAEFF',
+        colorBgContent: '#DCF0AEFF',          //este lo está tomando en el navegador!!
         colorText: '#333333',           // Color del texto principal
         colorBorder: '#dddddd',         // Color de bordes
         colorSuccess: '#28a745',        // Color de éxito
