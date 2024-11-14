@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { sideMenuItems } from '../config/menuConfig';
 
 
-const { Sider } = Layout
+const { Sider } = Layout;
 
 export const Sidebar = () => {
     const { token } = theme.useToken();
