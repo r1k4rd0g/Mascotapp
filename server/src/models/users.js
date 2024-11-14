@@ -18,11 +18,22 @@ const userSchema = new Schema(
       unique: true,
       match: /^[\d\+\-\(\)\s]*$/,
     },
+    cellphone: {
+      type: String,
+      unique: true,
+      match: /^[\d\+\-\(\)\s]*$/,
+      required: true
+    },
+    cdi: {
+      type: Number,
+      unique: true,
+      required: true
+    },
     address: {
       street: { type: String },
       city: { type: String },
-      postalCode: { type: String },
-      country: { type: String },
+      hood: { type: String },
+      dpt: { type: String },
     },
     mascots: [
       {
@@ -39,6 +50,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    review: [{ type: String }]
   },
   { timestamps: true }
 )
