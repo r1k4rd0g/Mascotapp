@@ -22,12 +22,12 @@ const userSchema = new Schema(
       type: String,
       unique: true,
       match: /^[\d\+\-\(\)\s]*$/,
-      required: true
+      required: true,
     },
     cdi: {
       type: Number,
       unique: true,
-      required: true
+      required: true,
     },
     address: {
       street: { type: String },
@@ -50,7 +50,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    review: [{ type: String }]
+    review: [{ type: String }],
   },
   { timestamps: true }
 )

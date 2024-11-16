@@ -15,7 +15,7 @@ const bookingSchema = new Schema(
     vet: {
       type: String,
       enum: [],
-      required: true
+      required: true,
     },
     date: {
       type: Date,

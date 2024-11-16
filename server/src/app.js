@@ -17,7 +17,11 @@ const baseDir = path.join(__dirname, 'routes')
 ;(async () => {
   try {
     await db()
-      .then(() => console.log(`> [NODE]  database connected  |  [SOURCE]  ${process.env.DB_URI}`))
+      .then(() =>
+        console.log(
+          `> [NODE]  database connected  |  [SOURCE]  ${process.env.DB_URI}`
+        )
+      )
       .catch(err => {
         throw err
       })
@@ -27,7 +31,9 @@ const baseDir = path.join(__dirname, 'routes')
     await router(app, baseDir)
 
     const listener = app.listen(PORT || 3001, () => {
-      console.log(`> [App]  listening now  |  [PORT]  ${listener.address().port}`)
+      console.log(
+        `> [App]  listening now  |  [PORT]  ${listener.address().port}`
+      )
     })
   } catch (error) {
     console.log(error.message)
