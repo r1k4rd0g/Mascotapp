@@ -24,11 +24,10 @@ const seedAdminUser = async () => {
     // Verificar si el usuario admin ya existe
     const adminUser = await userModel.findOne({ email: ADMIN_MAIL })
 
+    // Si no existe, crear el usuario admin
     if (!adminUser) {
-      // Si no existe, crear el usuario admin
-
       // Generar la contraseña cifrada
-      const hashedPassword = await bcrypt.hash(ADMIN_PASS, 10)
+      const hashedPassword = bcrypt.hash(ADMIN_PASS, 10)
 
       // Crear el nuevo usuario admin
       const newAdminUser = new userModel({
@@ -41,7 +40,7 @@ const seedAdminUser = async () => {
           city: 'Admin City',
           postalCode: '12345',
           country: 'Admin Country',
-        }
+        },
       })
 
       // Guardar el usuario admin
