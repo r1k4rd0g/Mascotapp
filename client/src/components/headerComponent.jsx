@@ -1,5 +1,5 @@
 import { Menu, Layout } from 'antd';
-import { topMenuItems } from '../config/menuConfig';
+import { topMenuItems } from  '../config/menuConfig.jsx'
 
 const { Header } = Layout;
 export const HeaderComponent = () => {
