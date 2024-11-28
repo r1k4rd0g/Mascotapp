@@ -1,10 +1,15 @@
 // Modules
 import { Schema, model } from 'mongoose'
+import { CountryModel } from '../countries/countriesModel'
+import { StatesModel } from '../states/statesModel'
+import { CitiesModel } from '../cities/citiesModel'
+import { NeighborhoodsModel } from '../neighborhoods/neighborhoodsModel'
+import { PetsModel } from '../pets/petsModel'
 
 // Schema
-const userSchema = new Schema(
+export const userSchema = new Schema(
   {
-    isActive:{
+    isActive: {
       type: Boolean,
       default: true,
     },
@@ -40,17 +45,23 @@ const userSchema = new Schema(
     street: {
       type: String
     },
-    hood: { type: String },
-    city: { type: String },
+    //Referencias a otros Modelos
+    country: {
+      type: [{ type: Schema.Types.ObjectId, ref: CountryModel }]
+    },
     state: {
-      type: String,
-      enum:{
-      }
+      type: [{ type: Schema.Types.ObjectId, ref: StatesModel }]
+    },
+    city: {
+      type: [{ type: Schema.Types.ObjectId, ref: CitiesModel }]
+    },
+    neighborhoods: {
+      type: [{ type: Schema.Types.ObjectId, ref: NeighborhoodsModel }]
     },
     pets: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Mascot',
+        ref: 'Pets',
       },
     ],
     userType: {

@@ -4,11 +4,11 @@ import mongoose from 'mongoose'
 // Imports
 
 // Variables
-const { DB_USER, DB_URI, DB_PASS, DB_NAME } = process.env
+const { DB_USER, DB_URL, DB_PASS, DB_NAME } = process.env
 
 // DB connection
 const db = async () => {
-  await mongoose.connect(DB_URI, {
+  await mongoose.connect(DB_URL, {
     dbName: DB_NAME,
     user: DB_USER,
     pass: DB_PASS,

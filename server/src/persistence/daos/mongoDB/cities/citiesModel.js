@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
-import { NeighborhoodsModel } from "../neighborhoods/neighborhoods.model";
-import { StatesModel } from "../states/states.model";
+import { NeighborhoodsModel } from "../neighborhoods/neighborhoodsModel";
+import { StatesModel } from "../states/statesModel";
 
 export const citiesSchema = new Schema(
     {

@@ -1,5 +1,5 @@
-import { UserModel } from "./users.model";
-import MongoDBDao from "../mongoDB.dao";
+import { UserModel } from "./usersModel";
+import MongoDBDao from "../mongoDBDao";
 
 
 

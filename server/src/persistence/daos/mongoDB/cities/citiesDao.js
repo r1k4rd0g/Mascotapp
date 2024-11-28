@@ -1,5 +1,5 @@
-import { CitiesModel } from "../cities/cities.model";
-import MongoDBDao from "../mongoDB.dao";
+import { CitiesModel } from "./citiesModel";
+import MongoDBDao from "../mongoDBDao";
 
 
 export default class CitiesMongoDBDao extends MongoDBDao {

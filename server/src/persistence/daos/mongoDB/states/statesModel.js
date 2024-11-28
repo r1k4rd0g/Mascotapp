@@ -1,7 +1,8 @@
 import { Schema, model } from "mongoose";
-import { CitiesModel } from "../cities/cities.model";
+import { CitiesModel } from "../cities/citiesModel";
+import { CountryModel } from "../countries/countriesModel";
 
-export const neighborhoodSchema = new Schema(
+export const statesSchema = new Schema(
     {
         isActive: {
             type: Boolean,
@@ -12,6 +13,9 @@ export const neighborhoodSchema = new Schema(
             required: true,
             unique: true,
         },
+        country: {
+            type:[{type: Schema.Types.ObjectId, ref: CountryModel}],
+        },
         city:{
             type: [{type: Schema.Types.ObjectId, ref: CitiesModel}],
         }
@@ -19,4 +23,4 @@ export const neighborhoodSchema = new Schema(
 )
 
 // Model
-export const NeighborhoodsModel = model('Neighborhood', neighborhoodSchema)
+export const StatesModel = model('State', statesSchema)

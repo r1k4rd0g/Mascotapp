@@ -5,7 +5,7 @@ import path from 'node:path'
 import '#env'
 import db from '#db'
 import app from '#app'
-import { initMailer } from '#mailer'
+//import { initMailer } from '#mailer'
 import { router } from '#utils'
 
 // Variables
@@ -26,7 +26,7 @@ const baseDir = path.join(__dirname, 'routes')
         throw err
       })
 
-    await initMailer()
+    //await initMailer()
 
     await router(app, baseDir)
 

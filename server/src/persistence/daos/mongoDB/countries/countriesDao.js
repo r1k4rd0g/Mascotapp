@@ -1,5 +1,5 @@
-import { CountryMode } from "../countries/countries.model";
-import MongoDBDao from "../mongoDB.dao";
+import { CountryMode } from "../countries/countriesModel";
+import MongoDBDao from "../mongoDBDao";
 
 
 export default class CountryMongoDBDao extends MongoDBDao {
