@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_ENV=dev nodemon src/app.js"
   },
   "keywords": [],
-  "author": "andresmdg",
+  "author": "r1k4rd0g",
   "license": "ISC",
   "description": "",
   "dependencies": {

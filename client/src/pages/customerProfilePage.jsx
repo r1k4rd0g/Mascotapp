@@ -1,5 +1,5 @@
 import { Layout } from "antd";
-import { UserProfileSection } from "../components/userProfileSection";
+import { UserProfileSection } from "../components/userProfileSections";
 
 const { Content } = Layout;
 
