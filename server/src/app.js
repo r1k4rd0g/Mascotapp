@@ -2,11 +2,11 @@
 import path from 'node:path'
 
 // Imports
-import '#env'
-import db from '#db'
-import app from '#app'
+
+//import db from '#db'
+//import app from '#app'
 //import { initMailer } from '#mailer'
-import { router } from '#utils'
+//import { router } from '#utils'
 
 // Variables
 const { PORT } = process.env
