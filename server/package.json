@@ -3,22 +3,9 @@
   "version": "1.0.0",
   "main": "src/app.js",
   "type": "module",
-  "imports": {
-    "#dto": "./src/dto/index.js",
-    "#env": "./src/config/env.js",
-    "#app": "./src/config/server.js",
-    "#utils": "./src/utils/index.js",
-    "#db": "./src/config/database.js",
-    "#models": "./src/models/index.js",
-    "#mailer": "./src/config/mailer.js",
-    "#services": "./src/services/index.js",
-    "#middlewares": "./src/middlewares/index.js",
-    "#controllers": "./src/controllers/index.js"
-  },
   "scripts": {
-    "start": "cross-env NODE_ENV=prod node src/app.js",
-    "dev": "cross-env NODE_ENV=dev nodemon src/app.js",
-    "prettier": "prettier --write ."
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
   },
   "keywords": [],
   "author": "r1k4rd0g",
@@ -26,20 +13,29 @@
   "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.1",
+    "express-session": "^1.18.1",
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.1",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.16",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "uuid": "^11.0.3",
-    "xlsx": "file:vendor/xlsx-0.20.3.tgz"
+    "winston": "^3.17.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
+=======
+>>>>>>> feature.daos
     "nodemon": "^3.1.7"
   }
 }
