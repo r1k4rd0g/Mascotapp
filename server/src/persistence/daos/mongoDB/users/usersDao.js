@@ -1,5 +1,5 @@
-import { UserModel } from "./usersModel";
-import MongoDBDao from "../mongoDBDao";
+import { UserModel } from "./usersModel.js";
+import MongoDBDao from "../mongoDBDao.js";
 
 
 

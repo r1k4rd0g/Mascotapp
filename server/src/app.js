@@ -1,41 +1,27 @@
 // Modules
-import path from 'node:path'
+import app from './config/server.js'
+import config from './config/configEnv.js'
+import logger from './utils/logger/loggerWinston.js'
 
 // Imports
 
-//import db from '#db'
-//import app from '#app'
-//import { initMailer } from '#mailer'
-//import { router } from '#utils'
 
 // Variables
-const { PORT } = process.env
-const __dirname = import.meta.dirname
-const baseDir = path.join(__dirname, 'routes')
+const PORT = config.PORT_DEV
+//const __dirname = import.meta.dirname
+//const baseDir = path.join(__dirname, 'routes')
 
 // Main function
-;(async () => {
+
+const startServer = async () => {
   try {
-    await db()
-      .then(() =>
-        console.log(
-          `> [NODE]  database connected  |  [SOURCE]  ${process.env.DB_URI}`
-        )
-      )
-      .catch(err => {
-        throw err
-      })
-
-    //await initMailer()
-
-    await router(app, baseDir)
-
-    const listener = app.listen(PORT || 3001, () => {
-      console.log(
-        `> [App]  listening now  |  [PORT]  ${listener.address().port}`
-      )
-    })
+    app.listen(PORT, () => {
+      logger.info(`🚀 Servidor iniciado en el puerto ${PORT}`);
+    });
   } catch (error) {
-    console.log(error.message)
+    logger.error('Error al iniciar el servidor;', error.message);
+    process.exit(1)
   }
-})()
+};
+
+startServer()

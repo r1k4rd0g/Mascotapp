@@ -1,8 +1,9 @@
-/*** import another files  ****/
-import config from "../../config/config";
+/*** Modules  ****/
+import config from "../../config/configEnv";
 import logger from "../../utils/logger/loggerWinston";
+import MongoConnection from "../../config/connection/mongoDBConnection";
 
-/*** importamos los DAO de MongoDB  ****/
+/*** DAO de MongoDB  ****/
 import UserMongoDBDao from "./mongoDB/users/usersDao";
 import PetMongoDBDao from "./mongoDB/pets/petsDao";
 import CountryMongoDBDao from "./mongoDB/countries/countriesDao";
@@ -23,7 +24,7 @@ let neighborhoodsDao;
 
 switch (persistence) {
     case 'MONGO':
-        await initMongoDB();
+        await MongoConnection.getInstance();
         usersDao = new UserMongoDBDao();
         petsDao = new PetMongoDBDao();
         countriesDao = new CountryMongoDBDao();
@@ -33,7 +34,7 @@ switch (persistence) {
         logger.info('factory - case: MONGO - use Mongo DB')
         break;
     case 'default':
-        await initMongoDB();
+        await MongoConnection.getInstance();
         usersDao = new UserMongoDBDao();
         petsDao = new PetMongoDBDao();
         countriesDao = new CountryMongoDBDao();

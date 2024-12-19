@@ -6,5 +6,5 @@ export default class NeighborhoodMongoDBDao extends MongoDBDao {
     constructor() {
         super(NeighborhoodsModel);
     }
-    //codigo específico...
+    //código específico...
 }
