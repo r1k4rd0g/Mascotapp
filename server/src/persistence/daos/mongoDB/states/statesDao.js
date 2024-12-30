@@ -1,10 +1,10 @@
-import { StatesModel } from "../states/statesModel";
-import MongoDBDao from "../mongoDBDao";
+import { StatesModel } from "../states/statesModel.js";
+import MongoDBDao from "../mongoDBDao.js";
 
 
 export default class StatesMongoDBDao extends MongoDBDao {
     constructor() {
         super(StatesModel);
     }
-    //codigo específico...
+    //código específico...
 }

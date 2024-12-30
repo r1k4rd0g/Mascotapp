@@ -1,6 +1,8 @@
+//Modules
 import { Schema, model } from "mongoose";
-import { CitiesModel } from "../cities/citiesModel";
+import { CitiesModel } from "../cities/citiesModel.js";
 
+//Schema
 export const neighborhoodSchema = new Schema(
     {
         isActive: {
@@ -14,8 +16,9 @@ export const neighborhoodSchema = new Schema(
         },
         city:{
             type: [{type: Schema.Types.ObjectId, ref: CitiesModel}],
-        }
-    }
+        },
+    },
+    { timestamps: true },
 )
 
 // Model

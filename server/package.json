@@ -30,12 +30,6 @@
     "winston": "^3.17.0"
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "cross-env": "^7.0.3",
-    "dotenv": "^16.4.5",
-    "dotenv-expand": "^11.0.6",
-=======
->>>>>>> feature.daos
     "nodemon": "^3.1.7"
   }
 }

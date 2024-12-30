@@ -1,7 +1,8 @@
+//Modules
 import { Schema, model } from "mongoose";
-import { NeighborhoodsModel } from "../neighborhoods/neighborhoodsModel";
-import { StatesModel } from "../states/statesModel";
+import { StatesModel } from "../states/statesModel.js";
 
+//Schema
 export const citiesSchema = new Schema(
     {
         isActive: {
@@ -13,13 +14,11 @@ export const citiesSchema = new Schema(
             required: true,
             unique: true,
         },
-        state:{
-            type: [{type: Schema.Types.ObjectId, ref: StatesModel}],
+        state: {
+            type: [{ type: Schema.Types.ObjectId, ref: StatesModel }],
         },
-        neighborhood: {
-            type: [{type: Schema.Types.ObjectId, ref: NeighborhoodsModel}],
-        },
-    }
+    },
+    { timestamps: true },
 )
 
 // Model

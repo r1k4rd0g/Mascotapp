@@ -1,6 +1,8 @@
+//Modules
 import { Schema, model } from "mongoose";
-import { StatesModel } from "../states/statesModel";
+import { capitalizeWords } from "../../../../utils/capitalizeWords.js";
 
+//Schema
 export const countrySchema = new Schema(
     {
         isActive: {
@@ -11,12 +13,14 @@ export const countrySchema = new Schema(
             type: String,
             required: true,
             unique: true,
+            collation: { locale: 'es', strength: 2 },
         },
-        state: {
-            type: [{ type: Schema.Types.ObjectId, ref: StatesModel }]
-        }
-    }
-)
+    },
+    { timestamps: true },
+);
+
+//Middlewares
+capitalizeWords(countrySchema, ['name']);
 
 // Model
 export const CountryModel = model('Country', countrySchema)
