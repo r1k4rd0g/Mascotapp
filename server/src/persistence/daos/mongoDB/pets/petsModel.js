@@ -1,17 +1,15 @@
 // Modules
 
 import { model, Schema } from 'mongoose'
-import { applyCapitalize } from '../../../../middlewares/applyCapitalize.js'
 
+// imports
+
+// Variables
 
 // Schema
-const petsSchema = new Schema(
+const mascotSchema = new Schema(
   {
     name: {
-      type: String,
-      required: true,
-    },
-    specie: {
       type: String,
       required: true,
     },
@@ -19,29 +17,24 @@ const petsSchema = new Schema(
       type: String,
       required: true,
     },
-    age: {
-      type: Number,
-      required: true
+    specie: {
+      type: String,
+      required: true,
     },
-    birthdate: {
+    born: {
       type: Date,
       required: true,
     },
-    registerDate: {
+    regisDate: {
       type: Date,
     },
-    comments: [
-      { type: String }
-    ],
+    reviews: [],
     diagnostic: [],
   },
-  { timestamps: true },
-);
-
-//Middlewares
-applyCapitalize(petsSchema, ['name', 'specie', 'breed']);
+  { timestamps: true }
+)
 
 // Model
-export const PetsModel = model('Pets', petsSchema);
+const Model = model('Mascot', mascotSchema)
 
-
+export default Model

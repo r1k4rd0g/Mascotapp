@@ -2,10 +2,9 @@
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
-import { mainRouter } from '../routes/index.js';
-import { errorHandler } from '../middlewares/errorHandler.js';
+//import { mainRouter } from '../routes/index'
 
-
+// Imports
 
 // Variables
 const app = express();
@@ -17,7 +16,6 @@ app.use(helmet());
 app.use(express.json());
 app.disable('x-powered-by');
 app.use(express.urlencoded({ extended: true }));
-app.use('/', mainRouter.getRouter());
-app.use(errorHandler);
+//app.use('/', mainRouter.getRouter());
 
 export default app
