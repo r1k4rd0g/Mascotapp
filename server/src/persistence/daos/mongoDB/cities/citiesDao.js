@@ -1,10 +1,10 @@
-import { CitiesModel } from "./citiesModel.js";
-import MongoDBDao from "../mongoDBDao.js";
+import { CitiesModel } from "./citiesModel";
+import MongoDBDao from "../mongoDBDao";
 
 
 export default class CitiesMongoDBDao extends MongoDBDao {
     constructor() {
         super(CitiesModel);
     }
-    //código específico...
+    //codigo específico...
 }

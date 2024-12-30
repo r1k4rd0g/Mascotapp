@@ -1,4 +1,3 @@
-import logger from "../utils/logger/loggerWinston.js";
 
 export default class Services {
     constructor(dao) {
@@ -11,7 +10,7 @@ export default class Services {
         try {
             return await this.dao.getAll();
         } catch (error) {
-            logger.error('entró en el catch - class.service - getAll: ' + error)
+            console.error('entró en el catch - class.service - getAll: ' + error)
 
         }
     };
@@ -19,41 +18,32 @@ export default class Services {
     getById = async (id) => {
         try {
             const itemSearch = await this.dao.getById(id);
-            if (!itemSearch) {
-                throw new Error(`no se encontró item buscado por id ${id}`);
-            }
-            return itemSearch;
+            if (!itemSearch) return false, console.log(`no se encontró item buscado por id ${id}`);
+            else return itemSearch;
         } catch (error) {
-            logger.error('entró en el catch - class.service - getById: ' + error)
+            console.error('entró en el catch - class.service - getById: ' + error)
         }
     };
     //crea un item:
-    create = async (data) => {
+    create = async (obj) => {
         try {
-            const newItem = await this.dao.create(data);
-            if (!newItem) {
-                throw new Error(`no se pudo crear el item ${data}`)
-            }
+            const newItem = await this.dao.create(obj);
+            if (!newItem) return false;
             return newItem;
         } catch (error) {
-            logger.error('entró en el catch - class.service - create: ' + error)
+            console.error('entró en el catch - class.service - create: ' + error)
         }
     };
 
     //actualizar un item:
-    update = async (id, data) => {
+    update = async (id, obj) => {
         try {
             const itemSearch = await this.dao.getById(id);
-            if (!itemSearch){
-                throw new Error(`no se encontró item buscado por id ${id}`);
-            }
-            const itemUpdate = await this.dao.update(id, data);
-            if (!itemUpdate) {
-                throw new Error(`no se pudo actualizar el item: ${itemUpdate}`);
-            }
+            if (!itemSearch) return false;
+            const itemUpdate = await this.dao.update(id, obj);
             return itemUpdate
         } catch (error) {
-            logger.error('entró en el catch - class.service - update: ' + error)
+            console.error('entró en el catch - class.service - update: ' + error)
         }
     };
     //borrar un item:
@@ -61,13 +51,13 @@ export default class Services {
         try {
             const itemSearch = await this.dao.getById(id);
             if (!itemSearch) {
-                throw new Error(`no se encontró item buscado por id ${id}`);
+                return false;
             } else {
                 const itemDelete = await this.dao.delete(id);
                 return itemDelete;
             }
         } catch (error) {
-            logger.error('entró en el catch - class.service - delete: ' + error)
+            console.error('entró en el catch - class.service - delete: ' + error)
         }
     }
 }

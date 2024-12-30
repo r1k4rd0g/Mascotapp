@@ -1,10 +1,10 @@
 // Modules
 import { Schema, model } from 'mongoose'
-import { CountryModel } from '../countries/countriesModel.js'
-import { StatesModel } from '../states/statesModel.js'
-import { CitiesModel } from '../cities/citiesModel.js'
-import { NeighborhoodsModel } from '../neighborhoods/neighborhoodsModel.js'
-import { PetsModel } from '../pets/petsModel.js'
+import { CountryModel } from '../countries/countriesModel'
+import { StatesModel } from '../states/statesModel'
+import { CitiesModel } from '../cities/citiesModel'
+import { NeighborhoodsModel } from '../neighborhoods/neighborhoodsModel'
+import { PetsModel } from '../pets/petsModel'
 
 // Schema
 export const userSchema = new Schema(
@@ -73,9 +73,7 @@ export const userSchema = new Schema(
       type: String,
       required: true,
     },
-    comments: [
-      { type: String }
-    ],
+    review: [{ type: String }],
   },
   { timestamps: true }
 )

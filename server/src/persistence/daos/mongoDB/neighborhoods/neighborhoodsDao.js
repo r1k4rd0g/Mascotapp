@@ -1,5 +1,5 @@
-import { NeighborhoodsModel } from "./neighborhoodsModel.js";
-import MongoDBDao from "../mongoDBDao.js";
+import { NeighborhoodsModel } from "./neighborhoodsModel";
+import MongoDBDao from "../mongoDBDao";
 
 
 export default class NeighborhoodMongoDBDao extends MongoDBDao {
