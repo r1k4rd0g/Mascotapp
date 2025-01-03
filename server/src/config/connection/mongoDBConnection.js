@@ -17,6 +17,9 @@ class MongoConnection {
         if(!connectionURL){
             throw new Error (`No se ha configurado la conexión para el entorno: ${env}`)
         }
+        mongoose.connect(connectionURL, {
+            serverSelectionTimeoutMS: 30000, // Tiempo máximo de espera para seleccionar un servidor
+        });
         logger.info(`Conectando a MongoDB en el entorno: ${env}`);
         mongoose.connection.once("open", ()=>{
             logger.info(`Conexión a MongoDB exitosa en el entorno: ${env}`);
@@ -25,6 +28,7 @@ class MongoConnection {
             logger.error(`Error de conexión a MongoDB en el entorno: ${env}, ${err.message}`);
         });
         this.connectionURL = connectionURL;
+
     }
     static getInstance() {
         if(!this.#instance){

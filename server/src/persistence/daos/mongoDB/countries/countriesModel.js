@@ -1,6 +1,6 @@
 //Modules
 import { Schema, model } from "mongoose";
-import { capitalizeWords } from "../../../../utils/capitalizeWords.js";
+import { applyCapitalize } from "../../../../middlewares/applyCapitalize.js";
 
 //Schema
 export const countrySchema = new Schema(
@@ -20,7 +20,7 @@ export const countrySchema = new Schema(
 );
 
 //Middlewares
-capitalizeWords(countrySchema, ['name']);
+applyCapitalize(countrySchema, ['name']);
 
 // Model
 export const CountryModel = model('Country', countrySchema)

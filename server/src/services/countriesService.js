@@ -4,7 +4,7 @@ import factoryDao from "../persistence/daos/factoryDao.js";
 import logger from "../utils/logger/loggerWinston.js";
 
 class CountriesService extends Services {
-    constructor(){
+    constructor() {
         super(factoryDao.countriesDao);
         this.countriesDao = factoryDao.countriesDao;
     }
@@ -14,14 +14,17 @@ class CountriesService extends Services {
         try {
             const name = data.name;
             const cityExist = await this.countriesDao.getByName(name);
-            if (cityExist) throw new Error('ya existe un país con ese nombre');
-            const newItem = await this.countriesDao.create(data);
-            if (!newItem) {
-                throw new Error(`no se pudo crear el item ${data}`)
+            if (cityExist) {
+                throw new Error(`There is already a country with that name: ${name}`)
+            } if (!cityExist) {
+                const newItem = await this.countriesDao.create(data);
+                if (!newItem) {
+                    throw new Error(`The item could not be created ${data}`)
+                }
+                return newItem;
             }
-            return newItem;
         } catch (error) {
-            logger.error('entró en el catch - class.service - create: ' + error)
+            logger.error('entró en el catch - countriesService - create: ' + error)
         }
     };
 }
