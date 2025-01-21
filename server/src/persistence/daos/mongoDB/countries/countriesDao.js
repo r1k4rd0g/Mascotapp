@@ -1,4 +1,4 @@
-import { CountryModel } from "../countries/countriesModel.js";
+import {CountryModel} from "../countries/countriesModel.js";
 import MongoDBDao from "../mongoDBDao.js";
 
 

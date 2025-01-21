@@ -8,10 +8,10 @@ class CountriesController extends Controllers {
     constructor() {
         super(countriesService)
     }
-    countryCreate = async (req, res, next) => {
+    createCountry = async (req, res, next) => {
         try {
             const data = req.body;
-            const newItem = await this.service.countryCreate(data);
+            const newItem = await this.service.createCountry(data);
             if (!newItem) {
                 return httpResponse.BadRequest(res, 'ERROR_TO_CREATE', newItem)
             }

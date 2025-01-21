@@ -16,6 +16,12 @@ export default {
     MONGO_PASS: process.env.MONGO_PASS,
     MONGO_DB_NAME: process.env.MONGO_DB_NAME,
 
+    //MYSQL
+    MYSQL_HOST_DEVELOP: process.env.MYSQL_HOST_DEVELOP,
+    MYSQL_USER_DEVELOP: process.env.MYSQL_USER_DEVELOP,
+    MYSQL_PASSWORD_DEVELOP: process.env.MYSQL_PASSWORD_DEVELOP,
+    MYSQL_DB_NAME_DEVELOP: process.env.MYSQL_DB_NAME_DEVELOP,
+
     //JWT:
     SECRET_KEY_JWT: process.env.SECRET_KEY_JWT,
     clientID: process.env.CLIENTID,

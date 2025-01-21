@@ -11,7 +11,8 @@ export default class Services {
         try {
             return await this.dao.getAll();
         } catch (error) {
-            logger.error('entró en el catch - class.service - getAll: ' + error)
+            logger.error('entró en el catch - class.service - getAll: ' + error);
+            throw error;
 
         }
     };
@@ -24,7 +25,8 @@ export default class Services {
             }
             return itemSearch;
         } catch (error) {
-            logger.error('entró en el catch - class.service - getById: ' + error)
+            logger.error('entró en el catch - class.service - getById: ' + error);
+            throw error;
         }
     };
     //crea un item:
@@ -33,11 +35,12 @@ export default class Services {
             console.log('data en service: ' + data)
             const newItem = await this.dao.create(data);
             if (!newItem) {
-                throw new Error(`no se pudo crear el item ${data}`)
+                throw new Error(`no se pudo crear el item ${data}`);
             }
             return newItem;
         } catch (error) {
-            logger.error('entró en el catch - class.service - create: ' + error)
+            logger.error('entró en el catch - class.service - create: ' + error);
+            throw error;
         }
     };
 
@@ -52,9 +55,10 @@ export default class Services {
             if (!itemUpdate) {
                 throw new Error(`no se pudo actualizar el item: ${itemUpdate}`);
             }
-            return itemUpdate
+            return itemUpdate;
         } catch (error) {
-            logger.error('entró en el catch - class.service - update: ' + error)
+            logger.error('entró en el catch - class.service - update: ' + error);
+            throw error;
         }
     };
     //borrar un item:
@@ -68,7 +72,8 @@ export default class Services {
                 return itemDelete;
             }
         } catch (error) {
-            logger.error('entró en el catch - class.service - delete: ' + error)
+            logger.error('entró en el catch - class.service - delete: ' + error);
+            throw error;
         }
     }
 }

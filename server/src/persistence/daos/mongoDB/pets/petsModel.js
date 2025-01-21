@@ -1,7 +1,7 @@
 // Modules
 
 import { model, Schema } from 'mongoose'
-import { applyCapitalize } from '../../../../middlewares/applyCapitalize.js'
+import { applyCapitalizeMongoDB } from '../../../../middlewares/applyCapitalize.js'
 
 
 // Schema
@@ -39,7 +39,7 @@ const petsSchema = new Schema(
 );
 
 //Middlewares
-applyCapitalize(petsSchema, ['name', 'specie', 'breed']);
+applyCapitalizeMongoDB(petsSchema, ['name', 'specie', 'breed']);
 
 // Model
 export const PetsModel = model('Pets', petsSchema);

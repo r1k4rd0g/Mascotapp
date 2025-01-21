@@ -2,6 +2,7 @@
 import Services from "./classService.js";
 import factoryDao from "../persistence/daos/factoryDao.js";
 import logger from "../utils/logger/loggerWinston.js";
+import { capitalizeWords } from "../utils/capitalizeWords.js";
 
 class CountriesService extends Services {
     constructor() {
@@ -10,9 +11,10 @@ class CountriesService extends Services {
     }
 
     //funciones especificas:
-    countryCreate = async (data) => {
+    createCountry = async (data) => {
         try {
-            const name = data.name;
+            const name = capitalizeWords(data.name);
+            console.log('name: ', name);
             const cityExist = await this.countriesDao.getByName(name);
             if (cityExist) {
                 throw new Error(`There is already a country with that name: ${name}`)
@@ -24,9 +26,23 @@ class CountriesService extends Services {
                 return newItem;
             }
         } catch (error) {
-            logger.error('entró en el catch - countriesService - create: ' + error)
+            logger.error('entró en el catch - countriesService - countryCreate: ' + error);
+            throw error;
         }
     };
+
+    getCountryById = async (id) => {
+        try {
+            const itemSearch = await this.countriesDao.getById(id);
+            if (!itemSearch) {
+                throw new Error(`no se encontró item buscado por id ${id}`);
+            }
+            return itemSearch;
+        } catch (error) {
+            logger.error('entró en el catch - countriesService - getCountryById: ' + error);
+            throw error;
+        }
+    }
 }
 
 export const countriesService = new CountriesService();

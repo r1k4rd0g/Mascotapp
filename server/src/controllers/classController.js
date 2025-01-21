@@ -17,7 +17,7 @@ export default class Controllers {
             };
             return httpResponse.Ok(res, items);
         } catch (error) {
-            logger.error('Entró al catch en class.controller getAll' + error)
+            logger.error('Entró al catch en class.controller getAll ' + error)
             next(error);
         }
     };
@@ -31,7 +31,7 @@ export default class Controllers {
             };
             return httpResponse.Ok(res, item);
         } catch (error) {
-            logger.error('Entró al catch en classController getById' + error)
+            logger.error('Entró al catch en classController getById ' + error)
             next(error);
         };
     };
@@ -45,7 +45,7 @@ export default class Controllers {
             }
             return httpResponse.Ok(res, newItem)
         } catch (error) {
-            logger.error('Entró al catch en classController create' + error)
+            logger.error('Entró al catch en classController create ' + error)
             next(error);
         };
     };
@@ -62,7 +62,7 @@ export default class Controllers {
                 return httpResponse.Ok(res, itemUpdate);
             }
         } catch (error) {
-            logger.error('Entró al catch en classController update' + error)
+            logger.error('Entró al catch en classController update ' + error)
             next(error);
         }
     }
@@ -77,7 +77,7 @@ export default class Controllers {
                 return httpResponse.Ok(res, itemDelete)
             }
         } catch (error) {
-            logger.error('Entró al catch en classController delete' + error)
+            logger.error('Entró al catch en classController delete ' + error)
             next (error);
         }
     }

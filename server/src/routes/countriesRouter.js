@@ -5,7 +5,8 @@ import { countriesController } from "../controllers/countriesController.js";
 const router = Router ();
 
 router.get('/', countriesController.getAll);
-router.post('/', countriesController.countryCreate);
+router.get('/:id', countriesController.getById);
+router.post('/', countriesController.createCountry);
 router.put('/:id', countriesController.update)
 
 export default router;
