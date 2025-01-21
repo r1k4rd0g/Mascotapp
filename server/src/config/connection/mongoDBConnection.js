@@ -8,7 +8,7 @@ class MongoConnection {
     static #instance;
 
     constructor() {
-        const env = config.NODE_ENV;
+        const env = config.NODE.ENV;
         const connectionURL = {
             develop: config.MONGO_URL_DEVELOP,
             test: config.MONGO_URL_TEST,
@@ -21,6 +21,10 @@ class MongoConnection {
             serverSelectionTimeoutMS: 30000, // Tiempo máximo de espera para seleccionar un servidor
         });
         logger.info(`Conectando a MongoDB en el entorno: ${env}`);
+        mongoose.connect(connectionURL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
         mongoose.connection.once("open", ()=>{
             logger.info(`Conexión a MongoDB exitosa en el entorno: ${env}`);
         });
