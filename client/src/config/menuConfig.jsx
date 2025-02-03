@@ -15,7 +15,7 @@ export const sideMenuItems = [
     icon: <Icons name="UserOutlined" />,
     label: "Clientes",
     items: [
-      { key: "1", label: "Listar", link: "/Clientes/Listar" },
+      { key: "1", label: "Listar", link: "/clientes/listar" },
       { key: "2", label: "Agregar", link: "/clientes/agregar" },
     ],
   },

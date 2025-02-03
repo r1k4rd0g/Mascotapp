@@ -11,7 +11,7 @@ import {CollapseButton} from './collapseButton';
 const { Sider, Content } = Layout;
 
 export const Sidebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const { token } = theme.useToken();
   const location = useLocation();
   const navigate = useNavigate();
