@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
-import {TableComponent} from '../components/table/tableClient';
+import { TableClient } from '../components/table/clientTable';
 import { useCrudOperations } from '../hooks/useCrudOperations';
 
 
 export const CustomersContainer = () => {
-    const [data, fetchData, editItem, deleteItem] = useCrudOperations('/api/customers');  // Aquí debes colocar tu endpoint real
+    const {data, fetchData, editItem, deleteItem} = useCrudOperations('/customers');  // Aquí debes colocar tu endpoint real
 
     useEffect(() => {
         fetchData(); //carga datos al inicio
     }, [fetchData]);
 
-    return <TableComponent data={data} onEdit={editItem} onDelete={deleteItem} />;
+    return <TableClient data={Array.isArray(data) ? data : []} onEdit={editItem} onDelete={deleteItem} />;
 };
 

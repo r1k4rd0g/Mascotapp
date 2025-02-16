@@ -1,12 +1,13 @@
 import { Table, Tag, Space } from 'antd';
 import PropTypes from "prop-types";
+import { Icons } from '../utils/icons';
 
 const { Column, ColumnGroup } = Table;
 
-export const TableComponent = ({ data, onEdit, onDelete }) => {
+export const TableClient = ({ data, onEdit, onDelete }) => {
     return (
         <Table dataSource={data} rowKey="id">
-            <ColumnGroup title="Nombre">
+            <ColumnGroup title="Nombre Completo">
                 <Column title="Nombre" dataIndex="firstName" key="firstName" />
                 <Column title="Apellido" dataIndex="lastName" key="lastName" />
             </ColumnGroup>
@@ -31,8 +32,12 @@ export const TableComponent = ({ data, onEdit, onDelete }) => {
                 key="action"
                 render={(_ignored, record) => (
                     <Space size="middle">
-                        <a onClick={() => onEdit(record)}>Editar</a>
-                        <a onClick={() => onDelete(record)}>Eliminar</a>
+                        <a onClick={() => onEdit(record)}>
+                            <Icons name="EditTwoTone" />
+                        </a>
+                        <a onClick={() => onDelete(record)}>
+                            <Icons name="DeleteTwoTone"/>
+                            </a>
                     </Space>
                 )}
             />
@@ -40,7 +45,7 @@ export const TableComponent = ({ data, onEdit, onDelete }) => {
     );
 };
 
-TableComponent.propTypes = {
+TableClient.propTypes = {
     data: PropTypes.array.isRequired,
     onEdit: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,

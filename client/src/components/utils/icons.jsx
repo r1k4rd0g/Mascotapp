@@ -8,6 +8,10 @@ import {
     SettingOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
+    EllipsisOutlined,
+    EditTwoTone,
+    DeleteTwoTone,
+    PlusCircleTwoTone
 } from "@ant-design/icons";
 
 
@@ -20,6 +24,10 @@ const iconsMap = {
     EnvironmentOutlined: EnvironmentOutlined,
     MenuFoldOutlined: MenuFoldOutlined,
     MenuUnfoldOutlined: MenuUnfoldOutlined,
+    EllipsisOutlined: EllipsisOutlined,
+    EditTwoTone: EditTwoTone,
+    DeleteTwoTone: DeleteTwoTone,
+    PlusCircleTwoTone: PlusCircleTwoTone
 }
 
 export const Icons = ({name, ...props})=>{

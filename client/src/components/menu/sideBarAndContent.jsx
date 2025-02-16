@@ -1,18 +1,16 @@
-import { Layout, Menu, Breadcrumb, theme, } from 'antd';
+import { Layout, Menu, Breadcrumb, } from 'antd';
 import { Link, Outlet, useLocation, useNavigate, } from 'react-router-dom';
-import { sideMenuItems } from '../../config/menuConfig';
 import { useState } from 'react';
-import {CollapseButton} from './collapseButton';
-
-
-
-
+import { sideMenuItems } from '../../config/menuConfig';
+import { CollapseButton } from './collapseButton';
+import { extendedThemeConfig } from '../../styles/theme';
+import "./sideBar.css";
 
 const { Sider, Content } = Layout;
 
 export const Sidebar = () => {
-  const [collapsed, setCollapsed] = useState(true);
-  const { token } = theme.useToken();
+  const [collapsed, setCollapsed] = useState(false);
+  //const { token } = theme.useToken();
   const location = useLocation();
   const navigate = useNavigate();
   //Generar dinamicamente la ruta:
@@ -31,13 +29,19 @@ export const Sidebar = () => {
     }
   };
   return (
-    <Layout style={{ minHeight: "100vh", bodyBg: token.bodyBg, borderRadius: token.borderRs }}>
+    <Layout
+    className="custom-layout"
+      style={{
+        minHeight: "100vh",
+        bodyBg: extendedThemeConfig.bodyBg,
+      }}
+    >
       {/* Sidebar */}
       <Sider
         width={200}
         style={{
-          background: token.colorBgSidebar,
-          borderRadius: token.borderRadius,
+          background: extendedThemeConfig.colorBgSidebar,
+          borderRadius: extendedThemeConfig.borderRadius,
         }}
         collapsible
         collapsed={collapsed}
@@ -52,7 +56,7 @@ export const Sidebar = () => {
           style={{
             height: "90%",
             backgroundColor: 'transparent',
-            colorBorder: token.colorBorder,
+            colorBorder: extendedThemeConfig.colorBorder,
             alignItems: 'center',
           }}
         >
@@ -76,9 +80,9 @@ export const Sidebar = () => {
               ) : (
                 <Menu.Item
                   key={item.key}
-                  icon={item.icon}
                   onClick={() => handleMenuClick(item)}
                 >
+                  {item.icon}
                   {item.label}
                 </Menu.Item>
               )
@@ -92,9 +96,9 @@ export const Sidebar = () => {
         <Breadcrumb
           style={{
             margin: "16px",
-            backgroundColor: token.backgroundColor,
+            backgroundColor: extendedThemeConfig.backgroundColor,
             padding: "8px",
-            borderRadius: token.borderRadius,
+            borderRadius: extendedThemeConfig.borderRadius,
           }}
         >
           {breadCrumbItems.map((item) => (
@@ -111,8 +115,8 @@ export const Sidebar = () => {
           style={{
             padding: "16px",
             margin: "16px",
-            backgroundColor: token.backgroundColor,
-            borderRadius: token.borderRadius
+            backgroundColor: extendedThemeConfig.backgroundColor,
+            borderRadius: extendedThemeConfig.borderRadius
           }}
         >
           <Outlet />

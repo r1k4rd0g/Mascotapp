@@ -6,7 +6,10 @@ import { Sidebar } from '../components/menu/sideBarAndContent';
 
 export const MainLayout = () => {
   return (
-    <Layout style={{ maxHeight: "1920", maxWidth: "1080", borderRadius: "58px" }}>
+    <Layout style={{
+      maxWidth: "1920",
+      maxHeight: "1080",
+      borderRadius: "18px" }}>
       <HeaderComponent />
       <Layout style={{ borderRadius: "18px" }}>
         <Sidebar />

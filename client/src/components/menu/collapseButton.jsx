@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { Icons } from "../icons";
+import { Icons } from "../utils/icons";
 import PropTypes from "prop-types";
 
 export const CollapseButton = ({ collapsed, setCollapsed }) => {

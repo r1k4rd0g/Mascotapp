@@ -1,29 +1,40 @@
 import { useState, useCallback } from 'react';
-import axios from 'axios';
+import { baseUrl } from '../config/axiosConfig';
 
-export const useCrudOperations = (baseUrl) => {
+const API_BASE_URL = baseUrl;
+export const useCrudOperations = (endpoint) => {
     const [data, setData] = useState([]);
 
     // Obtener datos
-    const fetchData = useCallback(() => {
-        axios.get(baseUrl)
-            .then(response => setData(response.data))
-            .catch(error => console.error("Error al obtener datos", error));
-    }, [baseUrl]);
+    const fetchData = useCallback(async () => {
+        try {
+            const response = await API_BASE_URL.get(endpoint)
+            console.log("Datos obtenidos", response.data.detail);
+            setData(response.data.detail)
+        }
+        catch (error) {
+            console.error("Error al obtener datos", error)
+        };
+    }, [endpoint]);
 
     // Editar un registro
-    const editItem = (id, updatedItem) => {
-        return axios.put(`${baseUrl}/${id}`, updatedItem)
-            .then(() => {
-                console.log("Registro actualizado");
-                fetchData();  // Recargar datos
-            })
-            .catch(error => console.error("Error al actualizar", error));
+    const editItem = async (id, updatedItem) => {
+        try {
+            const response = await API_BASE_URL.put(`${endpoint}/${id}`, updatedItem)
+            console.log("Registro actualizado", response.data.detail);
+            setData(prevData =>
+                prevData.map(item => item.id === id ? { ...item, ...updatedItem } : item)
+            );
+            return response.data;
+        } catch (error) {
+            console.error("Error al actualizar", error)
+            throw error;
+        }
     };
 
     // Eliminar un registro
-    const deleteItem = (id) => {
-        return axios.delete(`${baseUrl}/${id}`)
+    const deleteItem = async (id) => {
+        return API_BASE_URL.delete(`${endpoint}/${id}`)
             .then(() => {
                 console.log("Registro eliminado");
                 setData(prevData => prevData.filter(item => item.id !== id));  // Actualiza sin recargar

@@ -1,5 +1,5 @@
 //este archivo contiene la configuración de los menú headerComponent y sideBar.
-import { Icons } from "../components/icons";
+import { Icons } from "../components/utils/icons";
 
 
 export const topMenuItems = [
@@ -43,7 +43,7 @@ export const sideMenuItems = [
     label: "Ubicaciones",
     link: "/user-profile",
     items: [
-      { key: "7", label: "País" },
+      { key: "7", label: "País", link: "/ubicaciones/pais" },
       { key: "8", label: "Departamento" },
       { key: "9", label: "Ciudad" },
       { key: "10", label: "Barrio" }
