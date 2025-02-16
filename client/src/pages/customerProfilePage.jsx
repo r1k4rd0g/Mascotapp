@@ -4,13 +4,13 @@ import { UserProfileSection } from "../components/UserProfileSection";
 const { Content } = Layout;
 
 export const CustomerProfilePage = () => (
-  <Layout
-    style={{ padding: "24px", minHeight: "100vh", backgroundColor: "#f0f2f5" }}
-  >
-    <Content
-      style={{ backgroundColor: "#fff", padding: "24px", borderRadius: "8px" }}
+    <Layout
+        style={{ padding: "24px", minHeight: "100vh", backgroundColor: "#f0f2f5" }}
     >
-      <UserProfileSection />
-    </Content>
-  </Layout>
+        <Content
+            style={{ backgroundColor: "#fff", padding: "24px", borderRadius: "8px" }}
+        >
+            <UserProfileSection />
+        </Content>
+    </Layout>
 );

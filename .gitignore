@@ -4,6 +4,8 @@ logs
 **/*.backup.*
 **/*.back.*
 
+vitacora.txt
+list.todo
 node_modules
 bower_components
 .vscode

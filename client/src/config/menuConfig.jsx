@@ -1,51 +1,53 @@
 //este archivo contiene la configuración de los menú headerComponent y sideBar.
+import { Icons } from "../components/utils/icons";
 
-import {
-  CalendarOutlined,
-  UserOutlined,
-  HomeOutlined,
-  SmileOutlined,
-} from "@ant-design/icons";
 
 export const topMenuItems = [
-  { key: "1", label: "Dashboard", icon: <HomeOutlined /> },
-  { key: "2", label: "Clientes", icon: <UserOutlined /> },
-  { key: "3", label: "Mascotas", icon: <SmileOutlined /> },
-  { key: "4", label: "Calendario", icon: <CalendarOutlined /> },
+  { key: "1", label: "Dashboard", icon: <Icons name="HomeOutlined" />, link: "/dashboard" },
+  { key: "2", label: "Clientes", icon: <Icons name="UserOutlined" />, link: "/clientes/listar" },
+  { key: "3", label: "Mascotas", icon: <Icons name="BaiduOutlined" />, link: "/mascotas/listar" },
+  { key: "4", label: "Ajustes", icon: <Icons name="SettingOutlined" />, link: "/ajustes" },
 ];
 
 export const sideMenuItems = [
   {
     key: "sub1",
-    icon: <UserOutlined />,
+    icon: <Icons name="UserOutlined" />,
     label: "Clientes",
-    children: [
-      { key: "1", label: "Agregar Cliente" },
-      { key: "2", label: "Listar Clientes" },
+    items: [
+      { key: "1", label: "Listar", link: "/clientes/listar" },
+      { key: "2", label: "Agregar", link: "/clientes/agregar" },
     ],
   },
   {
     key: "sub2",
-    icon: <SmileOutlined />,
+    icon: <Icons name="BaiduOutlined" />,
     label: "Mascotas",
-    children: [
-      { key: "3", label: "Agregar Mascota" },
-      { key: "4", label: "Listar Mascotas" },
+    items: [
+      { key: "3", label: "Listar", link: "/mascotas/listar" },
+      { key: "4", label: "Agregar", link: "/mascotas/agregar" },
     ],
   },
   {
     key: "sub3",
-    icon: <CalendarOutlined />,
+    icon: <Icons name="CalendarOutlined" />,
     label: "Calendario",
-    children: [
-      { key: "5", label: "Ver Citas" },
-      { key: "6", label: "Programar Cita" },
+    items: [
+      { key: "5", label: "Programar Cita", link: "/calendario/agregar" },
+      { key: "6", label: "Ver Citas del día", link: "/calendario" },
     ],
   },
   {
-    key: "7",
-    icon: <UserOutlined />,
-    label: "User Profile",
+    key: "sub4",
+    icon: <Icons name="EnvironmentOutlined" />,
+    label: "Ubicaciones",
     link: "/user-profile",
+    items: [
+      { key: "7", label: "País", link: "/ubicaciones/pais" },
+      { key: "8", label: "Departamento" },
+      { key: "9", label: "Ciudad" },
+      { key: "10", label: "Barrio" }
+    ]
   },
 ];
+
