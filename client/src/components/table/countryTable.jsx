@@ -93,7 +93,7 @@ export const CountryTable = ({ data, onEdit, onDelete, onAdd, onEditMultiple, se
                 />
                 <TableActionsMenu
                     onAdd={onAdd}
-                    onEdit={() => onEdit(selectedRowKeys)}
+                    onEdit={selectedRowKeys.length === 1 ? () => onEdit(data.find(item => item.id === selectedRowKeys[0])) : undefined}
                     onEditMultiple={onEditMultiple}
                     onDelete={() => onDelete(selectedRowKeys)}
                     selectedKeys={selectedRowKeys}

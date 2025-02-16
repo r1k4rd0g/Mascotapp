@@ -9,7 +9,7 @@ export const CountryContainer = () => {
     const { data, fetchData, editItem, deleteItem } = useCrudOperations('api/countries/');  // Aquí debes colocar tu endpoint real
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalKey, setModalKey] = useState(0);
-    const [selectedRowKeys, setSelectedRowKeys] = useState(undefined);
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [modalData, setModalData] = useState([]);
 
 
@@ -43,14 +43,8 @@ export const CountryContainer = () => {
         }
     };
 
-    const handleCancel = () => {
-        setIsModalVisible(false);
-        setSelectedRowKeys([]);
-        setModalData([]);
-    };
-
     const handleEditMultiple = () => {
-        if (selectedRowKeys.length === 0) return;
+        if (!selectedRowKeys || selectedRowKeys.length === 0) return;
         const rows = data.filter(item => selectedRowKeys.includes(item.id));
         setModalData(rows);
         setIsModalVisible(true);
@@ -60,12 +54,22 @@ export const CountryContainer = () => {
     const handleSaveMultiple = async (updatedData) => {
         try {
             await editItem(updatedData.id, updatedData);
-            const newData = await fetchData(); // Asegurar que fetchData retorne los nuevos datos
-            setModalData(newData.filter(item => selectedRowKeys.includes(item.id)));
+            await fetchData(); // Refresca los datos
+            // Actualiza modalData manteniendo los IDs seleccionados
+            setModalData(prev =>
+                prev.slice(1).filter(item => selectedRowKeys.includes(item.id))
+            );
         } catch (error) {
             console.error('Error al guardar:', error);
         }
     };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+        setSelectedRowKeys([]);
+        setModalData([]);
+    };
+
 
     return (
         <>

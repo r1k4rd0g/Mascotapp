@@ -16,7 +16,8 @@ export const EditCountryModal = ({
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
-        if (modalData && modalData.length > 0) {
+        form.resetFields();
+        if (modalData?.length > 0) {
             form.setFieldsValue(modalData[currentIndex]);
         }
     }, [currentIndex, modalData, form]);

@@ -5,29 +5,26 @@ import { Icons } from '../utils/icons'; // Ajusta la ruta según tu estructura
 
 export const TableActionsMenu = ({
     onAdd,
-    onEdit,
+    onEditMultiple,
     onDelete,
     selectedKeys,
     addLabel = 'Agregar',
     editLabel = 'Editar selección',
     deleteLabel = 'Eliminar selección',
-    addIcon = 'PlusCircleTwoTone',
-    editIcon = 'EditTwoTone',
-    deleteIcon = 'DeleteTwoTone',
     extraMenuItems = []
 }) => {
     const menu = (
         <Menu>
             <Menu.Item key="add" onClick={onAdd}>
-                <Icons name={addIcon} /> {addLabel}
+                <Icons name={'PlusCircleTwoTone'} /> {addLabel}
             </Menu.Item>
 
             {selectedKeys?.length > 0 && [
-                <Menu.Item key="edit" onClick={() => onEdit(selectedKeys)}>
-                    <Icons name={editIcon} /> {editLabel}
+                <Menu.Item key="edit" onClick={() => onEditMultiple(selectedKeys)}>
+                    <Icons name={'EditTwoTone'} /> {editLabel}
                 </Menu.Item>,
                 <Menu.Item key="delete" onClick={() => onDelete(selectedKeys)}>
-                    <Icons name={deleteIcon} /> {deleteLabel}
+                    <Icons name={'DeleteTwoTone'} /> {deleteLabel}
                 </Menu.Item>
             ]}
 
@@ -48,7 +45,7 @@ export const TableActionsMenu = ({
 
 TableActionsMenu.propTypes = {
     onAdd: PropTypes.func.isRequired,
-    onEdit: PropTypes.func,
+    onEditMultiple: PropTypes.func,
     onDelete: PropTypes.func,
     selectedKeys: PropTypes.array,
     addLabel: PropTypes.string,
