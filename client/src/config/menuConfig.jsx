@@ -43,10 +43,10 @@ export const sideMenuItems = [
     label: "Ubicaciones",
     link: "/user-profile",
     items: [
-      { key: "7", label: "País", link: "/ubicaciones/pais" },
-      { key: "8", label: "Departamento" },
-      { key: "9", label: "Ciudad" },
-      { key: "10", label: "Barrio" }
+      { key: "7", label: "Paises", link: "/ubicaciones/paises" },
+      { key: "8", label: "Departamento", link:"/ubicaciones/estados" },
+      { key: "9", label: "Ciudades" },
+      { key: "10", label: "Barrios" }
     ]
   },
 ];

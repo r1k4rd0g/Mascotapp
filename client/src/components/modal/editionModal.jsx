@@ -32,6 +32,7 @@ export const EditCountryModal = ({
                     setCurrentIndex(prev => prev + 1);
                     form.setFieldsValue(modalData[currentIndex + 1]);
                 } else {
+                    setCurrentIndex(0);
                     onCancel();
                 }
             } else {

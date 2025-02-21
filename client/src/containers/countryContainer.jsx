@@ -54,11 +54,9 @@ export const CountryContainer = () => {
     const handleSaveMultiple = async (updatedData) => {
         try {
             await editItem(updatedData.id, updatedData);
-            await fetchData(); // Refresca los datos
-            // Actualiza modalData manteniendo los IDs seleccionados
-            setModalData(prev =>
-                prev.slice(1).filter(item => selectedRowKeys.includes(item.id))
-            );
+            const newData = await fetchData(); // Espera a que fetchData termine
+            // Filtra solo los IDs aún seleccionados (evita datos obsoletos)
+            setModalData(newData.filter(item => selectedRowKeys.includes(item.id)));
         } catch (error) {
             console.error('Error al guardar:', error);
         }

@@ -1,14 +1,14 @@
 import { useState, useCallback } from 'react';
 import { baseUrl } from '../config/axiosConfig';
 
-const API_BASE_URL = baseUrl;
+
 export const useCrudOperations = (endpoint) => {
     const [data, setData] = useState([]);
 
     // Obtener datos
     const fetchData = useCallback(async () => {
         try {
-            const response = await API_BASE_URL.get(endpoint)
+            const response = await baseUrl.get(endpoint)
             console.log("Datos obtenidos", response.data.detail);
             setData(response.data.detail)
         }
@@ -20,7 +20,7 @@ export const useCrudOperations = (endpoint) => {
     // Editar un registro
     const editItem = async (id, updatedItem) => {
         try {
-            const response = await API_BASE_URL.put(`${endpoint}/${id}`, updatedItem)
+            const response = await baseUrl.put(`${endpoint}/${id}`, updatedItem)
             console.log("Registro actualizado", response.data.detail);
             setData(prevData =>
                 prevData.map(item => item.id === id ? { ...item, ...updatedItem } : item)
@@ -34,7 +34,7 @@ export const useCrudOperations = (endpoint) => {
 
     // Eliminar un registro
     const deleteItem = async (id) => {
-        return API_BASE_URL.delete(`${endpoint}/${id}`)
+        return baseUrl.delete(`${endpoint}/${id}`)
             .then(() => {
                 console.log("Registro eliminado");
                 setData(prevData => prevData.filter(item => item.id !== id));  // Actualiza sin recargar

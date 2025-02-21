@@ -23,11 +23,34 @@ export const Sidebar = () => {
       return { key: url, label: <Link to={url}>{label}</Link> }
     }),
   ];
+   // Obtener la key seleccionada basada en la ruta actual
+   const getSelectedKey = (pathname) => {
+    for (const menu of sideMenuItems) {
+      if (menu.items) {
+        const foundItem = menu.items.find((item) => item.link === pathname);
+        if (foundItem) return foundItem.key;
+      } else if (menu.link === pathname) {
+        return menu.key;
+      }
+    }
+    return "";
+  };
+
+  // Obtener la key del submenú abierto basado en la ruta actual
+  const getOpenKey = (pathname) => {
+    const foundMenu = sideMenuItems.find((menu) =>
+      menu.items?.some((subItem) => subItem.link === pathname)
+    );
+    return foundMenu ? foundMenu.key : undefined;
+  };
+
+  // Manejar la navegación al hacer clic en un menú
   const handleMenuClick = (menuItem) => {
     if (menuItem?.link) {
       navigate(menuItem.link);
     }
   };
+
   return (
     <Layout
     className="custom-layout"
@@ -51,8 +74,8 @@ export const Sidebar = () => {
         <CollapseButton collapsed={collapsed} setCollapsed={setCollapsed} />
         <Menu
           mode="inline"
-          defaultSelectedKeys={[sideMenuItems[0]?.items[0]?.key || "2"]}
-          defaultOpenKeys={[sideMenuItems[0]?.key || "sub1"]}
+          selectedKeys={[getSelectedKey(location.pathname)]} // Encuentra la clave correcta
+          defaultOpenKeys={getOpenKey(location.pathname) ? [getOpenKey(location.pathname)] : []} // Abre el sub menú correcto
           style={{
             height: "90%",
             backgroundColor: 'transparent',
