@@ -1,10 +1,9 @@
 //Modules
 import { Schema, model } from "mongoose";
-import { StatesModel } from "../states/statesModel.js";
-import { applyCapitalizeMongoDB } from "../../../../middlewares/applyCapitalize.js";
+import { applyCapitalizeMongoDB } from "../../../../../middlewares/applyCapitalize.js";
 
 //Schema
-export const citiesSchema = new Schema(
+export const countrySchema = new Schema(
     {
         isActive: {
             type: Boolean,
@@ -14,10 +13,7 @@ export const citiesSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-        },
-        stateId: {
-                type: Schema.Types.ObjectId,
-                ref: StatesModel
+            collation: { locale: 'es', strength: 2 },
         },
         deletedAt: { //campo para borrado lógico
             type: Date,
@@ -25,10 +21,10 @@ export const citiesSchema = new Schema(
         },
     },
     { timestamps: true },
-)
+);
 
 //Middlewares
-applyCapitalizeMongoDB(citiesSchema, ['name']);
+applyCapitalizeMongoDB(countrySchema, ['name']);
 
 // Model
-export const CitiesModel = model('Cities', citiesSchema)
+export const CountryModel = model('Country', countrySchema)

@@ -7,18 +7,18 @@ import MySQLConnection from "../../config/connection/mySqlDBConnection.js";
 //DAO de MongoDB
 import UserMongoDBDao from "./mongoDB/users/usersDao.js";
 import PetMongoDBDao from "./mongoDB/pets/petsDao.js";
-import CountryMongoDBDao from "./mongoDB/countries/countriesDao.js";
-import StatesMongoDBDao from "./mongoDB/states/statesDao.js";
-import CitiesMongoDBDao from "./mongoDB/cities/citiesDao.js";
-import NeighborhoodMongoDBDao from "./mongoDB/neighborhoods/neighborhoodsDao.js";
+import CountryMongoDBDao from "./mongoDB/locations/countries/countriesDao.js";
+import StatesMongoDBDao from "./mongoDB/locations/states/statesDao.js";
+import CitiesMongoDBDao from "./mongoDB/locations/cities/citiesDao.js";
+import NeighborhoodMongoDBDao from "./mongoDB/locations/neighborhoods/neighborhoodsDao.js";
 
 //DAO de MySQL
 //import UserMySQLDao from "./mySql/users/usersDao.js";
 //import PetMySQLDao from "./mySql/pets/petsDao.js";
-import CountryMySQLDao from "./mySql/countries/countriesDao.js";
-import StateMySQLDao from "./mySql/states/statesDao.js";
-import CitiesMySQLDao from "./mySql/cities/citiesDao.js";
-import NeighborhoodMySQLDao from "./mySql/neighborhoods/neighborhoodsDao.js";
+import CountryMySQLDao from "./mySql/locations/countries/countriesDao.js";
+import StateMySQLDao from "./mySql/locations/states/statesDao.js";
+import CitiesMySQLDao from "./mySql/locations/cities/citiesDao.js";
+import NeighborhoodMySQLDao from "./mySql/locations/neighborhoods/neighborhoodsDao.js";
 
 
 

@@ -1,12 +1,11 @@
 //Modules
 import { DataTypes } from "sequelize";
-import { applyCapitalizeSQL } from "../../../../middlewares/applyCapitalize.js";
-
+import { applyCapitalizeSQL } from "../../../../../middlewares/applyCapitalize.js";
 
 //Modelo
-const StateModel = (sequelize) => {
-    const State = sequelize.define(
-        "State",
+const NeighborhoodModel = (sequelize) => {
+    const Neighborhood = sequelize.define(
+        "Neighborhood",
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -23,27 +22,27 @@ const StateModel = (sequelize) => {
                 type: DataTypes.BOOLEAN,
                 defaultValue: true
             },
-            countryId: {
+            cityId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'countries',
+                    model: 'cities',
                     key: 'id'
                 },
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE'
-            }
+            },
         },
         {
-            tableName: "states",
+            tableName: "neighborhoods",
             timestamps: true,
             paranoid: true,
         },
     );
     //Middlewares
-    applyCapitalizeSQL(State, ['name']);
-    return State;
-};
+    applyCapitalizeSQL(Neighborhood, ['name']);
+    return Neighborhood;
+};4
 
 //exportamos el modelo
-export default StateModel
+export default NeighborhoodModel
