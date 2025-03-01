@@ -4,26 +4,19 @@ import { useCrudOperations } from '../hooks/useCrudOperations';
 import { GenericTable } from '../components/table/genericTable';
 import { DynamicEditModal } from '../components/modal/dynamicEditModal';
 
-export const GenericTableContainer = ({ endpoint, entityConfig }) => {
+export const GenericTableContainer = ({ endpoint, entityConfig, parentData }) => {
     const { data, fetchData, editItem, deleteItem } = useCrudOperations(endpoint);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalKey, setModalKey] = useState(0);
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [modalData, setModalData] = useState([]);
-    const [parentData, setParentData] = useState(null);
 
-    // Cargar datos principales y relacionados
+
+
     useEffect(() => {
-        const loadData = async () => {
-            await fetchData();
-            if (entityConfig.parentEndpoint) {
-                const parentResponse = await fetch(entityConfig.parentEndpoint);
-                const parentData = await parentResponse.json();
-                setParentData(parentData);
-            }
-        };
-        loadData();
-    }, [fetchData, entityConfig.parentEndpoint]);
+        fetchData(); //carga datos al inicio desde el useCrudOperations
+    }, [fetchData]);
+
 
     // Sincronizar datos seleccionados
     useEffect(() => {
@@ -61,6 +54,16 @@ export const GenericTableContainer = ({ endpoint, entityConfig }) => {
             console.error("Error al guardar:", error);
         }
     };
+    const handleSaveMultiple = async (updatedData) => {
+        try {
+            await editItem(updatedData.id, updatedData);
+            const newData = await fetchData(); // Espera a que fetchData termine
+            // Filtra solo los IDs aún seleccionados (evita datos obsoletos)
+            setModalData(newData.filter(item => selectedRowKeys.includes(item.id)));
+        } catch (error) {
+            console.error('Error al guardar:', error);
+        }
+    }
 
     const handleCancel = () => {
         setIsModalVisible(false);
@@ -85,9 +88,12 @@ export const GenericTableContainer = ({ endpoint, entityConfig }) => {
                 visible={isModalVisible}
                 onCancel={handleCancel}
                 onSave={handleSave}
-                entityConfig={entityConfig}
+                onSaveMultiple={handleSaveMultiple}
                 initialData={modalData[0] || {}}
                 modalData={modalData}
+                isMultiple={modalData.length > 1}
+                totalItems={modalData.length}
+                entityConfig={entityConfig}
                 parentData={parentData}
             />
         </>
@@ -139,7 +145,8 @@ GenericTableContainer.propTypes = {
                 fixed: PropTypes.oneOf(['left', 'right', true, false])
             })
         )
-    }).isRequired
+    }).isRequired,
+    parentData: PropTypes.array
 };
 
 // Valor por defecto para customFields
@@ -147,5 +154,6 @@ GenericTableContainer.defaultProps = {
     entityConfig: {
         customFields: {},
         tableColumns: []
-    }
+    },
+    parentData: null
 };

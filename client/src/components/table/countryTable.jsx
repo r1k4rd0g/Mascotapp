@@ -26,7 +26,7 @@ export const CountryTable = ({ data, onEdit, onDelete, onAdd, onEditMultiple, se
             title: 'Id',
             dataIndex: 'id',
             key: 'id',
-            align: 'center',
+            align: 'right',
             ellipsis,
         },
         {
@@ -85,8 +85,8 @@ export const CountryTable = ({ data, onEdit, onDelete, onAdd, onEditMultiple, se
                 borderRadius: token.borderRadiusLG
             }}>
                 <Switch
-                    checkedChildren="Modo compacto"
-                    unCheckedChildren="Modo expandido"
+                    checkedChildren={ellipsis ? "Modo compacto" : "Modo expandido"} // Cambia la etiqueta del switch
+                    unCheckedChildren={ellipsis ? "Modo compacto" : "Modo expandido"} // Cambia la etiqueta del switch
                     checked={ellipsis}
                     onChange={setEllipsis}
                     style={{ marginLeft: 16 }}

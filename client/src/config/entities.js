@@ -6,7 +6,7 @@ export const entitiesConfig = {
         tableColumns: []
     },
     state: {
-        label: 'Estado',
+        label: 'Departamento',
         endpoint: '/api/states',
         showParent: true,
         parentEndpoint: '/api/countries',

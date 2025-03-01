@@ -3,7 +3,6 @@ import { Dashboard } from '../components/dashboard';
 import { Login } from '../components/login';
 import { CustomersPage } from '../pages/customersPage';
 import {CountryPage, StatePage} from '../pages/locationsPage';
-import { UserProfileSection } from '../components/userProfileSections';
 import { ProtectedRoute } from '../components/protectedRoute';
 import { MainLayout } from '../layouts/mainLayout';
 
@@ -18,7 +17,6 @@ export const IndicatorRoutes = () => {
                     <Route path="/" element={<MainLayout />} >
                         <Route path="/Dashboard" element={<Dashboard />} />
                         <Route path="/clientes/listar" element={<CustomersPage />} />
-                        <Route path="/user-profile" element={<UserProfileSection />} />
                         <Route path="/ubicaciones/paises" element={<CountryPage />} />
                         <Route path="/ubicaciones/estados" element={<StatePage />} />
                     </Route>

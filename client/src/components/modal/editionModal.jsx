@@ -22,7 +22,7 @@ export const EditCountryModal = ({
         }
     }, [currentIndex, modalData, form]);
 
-    const handleOk = async () => {
+    const handleSave = async () => {
         try {
             const values = await form.validateFields();
             const updatedItem = { ...modalData[currentIndex], ...values };
@@ -52,11 +52,11 @@ export const EditCountryModal = ({
                 <Button key="cancel" onClick={onCancel}>
                     Cancelar
                 </Button>,
-                <Button key="submit" type="primary" onClick={handleOk}>
+                <Button key="submit" type="primary" onClick={handleSave}>
                     {isMultiple ? `Guardar y ${currentIndex === totalItems - 1 ? 'Finalizar' : 'Siguiente'}` : 'Guardar'}
                 </Button>,
             ]}
-            onOk={!isMultiple ? handleOk : null}
+            onOk={!isMultiple ? handleSave : null}
         >
             <Form form={form} initialValues={initialData}>
                 <Form.Item label="Nombre" name="name" rules={[{ required: true }]}>
