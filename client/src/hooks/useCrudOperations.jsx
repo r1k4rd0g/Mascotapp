@@ -6,7 +6,7 @@ export const useCrudOperations = (endpoint) => {
     const [data, setData] = useState([]);
 
     // Obtener datos
-    const fetchData = useCallback(async () => {
+    const getData = useCallback(async () => {
         try {
             const response = await baseUrl.get(endpoint)
             console.log("Datos obtenidos", response.data.detail);
@@ -32,6 +32,19 @@ export const useCrudOperations = (endpoint) => {
         }
     };
 
+    //Agregar un registro
+    const addItem = async (newItem) => {
+        try {
+            const response = await baseUrl.post(endpoint, newItem)
+            console.log("Registro agregado", response.data.detail);
+            setData(prevData => [...prevData, response.data.detail]);
+            return response.data;
+        } catch (error) {
+            console.error("Error al agregar", error)
+            throw error;
+        }
+    };
+
     // Eliminar un registro
     const deleteItem = async (id) => {
         return baseUrl.delete(`${endpoint}/${id}`)
@@ -42,5 +55,5 @@ export const useCrudOperations = (endpoint) => {
             .catch(error => console.error("Error al eliminar", error));
     };
 
-    return { data, fetchData, editItem, deleteItem };
+    return { data, getData, editItem, deleteItem, addItem };
 };

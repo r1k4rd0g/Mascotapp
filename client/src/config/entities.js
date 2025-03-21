@@ -25,7 +25,7 @@ export const entitiesConfig = {
             population: {
                 type: 'number',
                 label: 'Población',
-                rules: [{ required: true }]
+                rules: [{ required: true, message: 'Este campo es requerido' }]
             }
         }
     },

@@ -4,7 +4,7 @@ import { Icons } from "../components/utils/icons";
 
 export const topMenuItems = [
   { key: "1", label: "Dashboard", icon: <Icons name="HomeOutlined" />, link: "/dashboard" },
-  { key: "2", label: "Clientes", icon: <Icons name="UserOutlined" />, link: "/clientes/listar" },
+  { key: "2", label: "Process", icon: <Icons name="FieldTimeOutlined" />, link: "/clientes/listar" },
   { key: "3", label: "Mascotas", icon: <Icons name="BaiduOutlined" />, link: "/mascotas/listar" },
   { key: "4", label: "Ajustes", icon: <Icons name="SettingOutlined" />, link: "/ajustes" },
 ];
@@ -44,9 +44,9 @@ export const sideMenuItems = [
     link: "/user-profile",
     items: [
       { key: "7", label: "Paises", link: "/ubicaciones/paises" },
-      { key: "8", label: "Departamento", link:"/ubicaciones/estados" },
-      { key: "9", label: "Ciudades" },
-      { key: "10", label: "Barrios" }
+      { key: "8", label: "Departamento", link:"/ubicaciones/departamentos" },
+      { key: "9", label: "Ciudades", link: "/ubicaciones/ciudades" },
+      { key: "10", label: "Barrios", link: "/ubicaciones/barrios" },
     ]
   },
 ];

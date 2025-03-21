@@ -2,20 +2,25 @@ import { useEffect, useState } from 'react';
 import PropTypes from "prop-types"
 import { useCrudOperations } from '../hooks/useCrudOperations';
 import { GenericTable } from '../components/table/genericTable';
-import { DynamicEditModal } from '../components/modal/dynamicEditModal';
+import { EditModalDynamic } from '../components/modal/editModalDynamic';
+import { MessageGenerics } from '../components/messageGenerics';
+
 
 export const GenericTableContainer = ({ endpoint, entityConfig, parentData }) => {
-    const { data, fetchData, editItem, deleteItem } = useCrudOperations(endpoint);
+    const { data, getData, editItem, deleteItem } = useCrudOperations(endpoint);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalKey, setModalKey] = useState(0);
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [modalData, setModalData] = useState([]);
+    const [messageContent, setMessageContent] = useState(null);
+    const [messageType, setMessageType ] = useState(null);
+    const [messageCounter, setMessageCounter] = useState(0);
 
 
 
     useEffect(() => {
-        fetchData(); //carga datos al inicio desde el useCrudOperations
-    }, [fetchData]);
+        getData(); //carga datos al inicio desde el useCrudOperations
+    }, [getData]);
 
 
     // Sincronizar datos seleccionados
@@ -44,57 +49,58 @@ export const GenericTableContainer = ({ endpoint, entityConfig, parentData }) =>
         setIsModalVisible(true);
         setModalKey(prev => prev + 1);
     };
-
-    const handleSave = async (updatedData) => {
-        try {
-            await editItem(updatedData.id, updatedData);
-            await fetchData();
-            setIsModalVisible(false);
-        } catch (error) {
-            console.error("Error al guardar:", error);
-        }
-    };
-    const handleSaveMultiple = async (updatedData) => {
-        try {
-            await editItem(updatedData.id, updatedData);
-            const newData = await fetchData(); // Espera a que fetchData termine
-            // Filtra solo los IDs aún seleccionados (evita datos obsoletos)
-            setModalData(newData.filter(item => selectedRowKeys.includes(item.id)));
-        } catch (error) {
-            console.error('Error al guardar:', error);
-        }
+    const handleAdd = () => {
+        setModalData([{}]);
+        setIsModalVisible(true);
+        setModalKey(prev => prev + 1);
     }
-
-    const handleCancel = () => {
+    const handleSaveCompleted = async (content, type) => {
+        await getData();
         setIsModalVisible(false);
         setSelectedRowKeys([]);
         setModalData([]);
+        setMessageContent({message: content, counter: messageCounter});
+        setMessageType(type);
+        setMessageCounter(prevCounter => prevCounter + 1);
+
+    }
+
+    const handleCancel = async (content, type) => {
+        setIsModalVisible(false);
+        setSelectedRowKeys([]);
+        setModalData([]);
+        setMessageContent({message: content, counter: messageCounter});
+        setMessageType(type);
+        setMessageCounter(prevCounter => prevCounter + 1);
+        await getData();
     };
 
     return (
         <>
+            <MessageGenerics messageContent={messageContent} type={messageType} />
             <GenericTable
                 data={data}
+                onAdd={handleAdd}
                 onEdit={handleEdit}
-                onDelete={deleteItem}
+                onDelete={deleteItem} //falta configurar
                 onEditMultiple={handleEditMultiple}
                 selectedRowKeys={selectedRowKeys}
                 setSelectedRowKeys={setSelectedRowKeys}
                 entityConfig={entityConfig}
                 parentData={parentData}
             />
-            <DynamicEditModal
+            <EditModalDynamic
                 key={modalKey}
                 visible={isModalVisible}
                 onCancel={handleCancel}
-                onSave={handleSave}
-                onSaveMultiple={handleSaveMultiple}
+                onSaveCompleted={handleSaveCompleted}
                 initialData={modalData[0] || {}}
                 modalData={modalData}
                 isMultiple={modalData.length > 1}
                 totalItems={modalData.length}
                 entityConfig={entityConfig}
                 parentData={parentData}
+                editItem={editItem}
             />
         </>
     );

@@ -5,7 +5,8 @@ import { MainLayout } from '../src/layouts/mainLayout';
 import './App.css'
 import { IndicatorRoutes } from './config/routesConfig';
 
-export const App = () => (
+
+export const MascotApp = () => (
   <ConfigProvider theme={themeConfig}>
     <Router>
       <IndicatorRoutes>

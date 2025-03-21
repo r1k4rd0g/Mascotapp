@@ -9,6 +9,7 @@ import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     EllipsisOutlined,
+    FieldTimeOutlined,
     EditTwoTone,
     DeleteTwoTone,
     PlusCircleTwoTone
@@ -25,6 +26,7 @@ const iconsMap = {
     MenuFoldOutlined: MenuFoldOutlined,
     MenuUnfoldOutlined: MenuUnfoldOutlined,
     EllipsisOutlined: EllipsisOutlined,
+    FieldTimeOutlined: FieldTimeOutlined,
     EditTwoTone: EditTwoTone,
     DeleteTwoTone: DeleteTwoTone,
     PlusCircleTwoTone: PlusCircleTwoTone

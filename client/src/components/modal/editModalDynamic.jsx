@@ -2,20 +2,22 @@ import { Modal, Form, Input, Switch, Select, Button, InputNumber } from 'antd';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
-export const DynamicEditModal = ({
+
+export const EditModalDynamic = ({
     visible,
     onCancel,
-    onSave,
-    onSaveMultiple,
+    onSaveCompleted,
     entityConfig,
     initialData,
     isMultiple,
     totalItems,
     modalData,
-    parentData
+    parentData,
+    editItem,
 }) => {
     const [form] = Form.useForm();
     const [currentIndex, setCurrentIndex] = useState(0);
+
 
     useEffect(() => {
         form.resetFields();
@@ -24,35 +26,49 @@ export const DynamicEditModal = ({
         }
     }, [currentIndex, modalData, form]);
 
-    const handleSave = async () => {
+    const handleSaveForm = async () => {
         try {
             const values = await form.validateFields();
             const updatedItem = { ...modalData[currentIndex], ...values };
+            await editItem(updatedItem.id, updatedItem);
+
+
             if (modalData.length > 1) {
-                await onSaveMultiple(updatedItem);
                 if (currentIndex < modalData.length - 1) {
                     setCurrentIndex(prev => prev + 1);
                 } else {
                     setCurrentIndex(0);
-                    onCancel();
+                    onSaveCompleted(`Se han editado y actualizado los items seleccionados`, "success");
                 }
             } else {
-                await onSave(updatedItem);
-                onCancel();
+                onSaveCompleted(`Se ha editado y actualizado: ${updatedItem.name}`, "success");
             }
-        } catch (error) {
-            console.error("Error al validar:", error);
+        } catch (errorInfo) { // Cambiar error a errorInfo
+            const errorMessages = errorInfo.errorFields.map(field => field.errors.join(', ')).join('; ');
+            onCancel(`Error de validación: ${errorMessages}`, "error");
         }
     };
     const renderFormItems = () => {
         const formItems = [];
         formItems.push(
-            <Form.Item label="Nombre" name="name" rules={[{ required: true, message: 'Este campo es requerido' }]} key="name">
+            <Form.Item
+                label="Nombre"
+                name="name"
+                rules={[
+                    { required: true, message: 'Este campo es requerido' },
+                    { max: 50, message: 'El nombre no puede tener más de 50 caracteres' },
+                    { pattern: /^[a-zA-Z\s\-']+$/, message: 'El nombre solo puede contener letras, espacios, guiones y apóstrofes' }
+                ]}
+                key="name">
                 <Input />
             </Form.Item>
         );
         formItems.push(
-            <Form.Item label="Activo" name="isActive" valuePropName="checked" key="isActive">
+            <Form.Item
+                label="Activo"
+                name="isActive"
+                valuePropName="checked"
+                key="isActive">
                 <Switch />
             </Form.Item>
         );
@@ -105,15 +121,15 @@ export const DynamicEditModal = ({
             title={`Editar ${entityConfig.label} ${isMultiple && totalItems ? `(${currentIndex + 1} de ${totalItems})` : ''}`}
             onCancel={onCancel}
             footer={[
-                <Button key="cancel" onClick={onCancel}>
+                <Button key="cancel" onClick={() => onCancel("Cancelado", "info")}>
                     Cancelar
                 </Button>,
-                <Button key="submit" type="primary" onClick={handleSave}>
+                <Button key="submit" type="primary" onClick={handleSaveForm}>
                     {isMultiple ? `Guardar y ${currentIndex === totalItems - 1 ?
-                    'Finalizar' : 'Siguiente'}` : 'Guardar'}
+                        'Finalizar' : 'Siguiente'}` : 'Guardar'}
                 </Button>
             ]}
-            onOk={!isMultiple ? handleSave : null}
+            onOk={!isMultiple ? handleSaveForm : null}
         >
             <Form form={form} layout="vertical" initialValues={initialData}>
                 {renderFormItems()}
@@ -122,15 +138,16 @@ export const DynamicEditModal = ({
     );
 };
 
-DynamicEditModal.propTypes = {
+EditModalDynamic.propTypes = {
     visible: PropTypes.bool,
     onCancel: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired,
+    onSaveCompleted: PropTypes.func.isRequired,
     entityConfig: PropTypes.object.isRequired,
     initialData: PropTypes.object,
     modalData: PropTypes.array.isRequired,
     parentData: PropTypes.array,
     isMultiple: PropTypes.bool,
     totalItems: PropTypes.number,
-    onSaveMultiple: PropTypes.func
+    editItem: PropTypes.func.isRequired,
+    messageCounter: PropTypes.number.isRequired
 }

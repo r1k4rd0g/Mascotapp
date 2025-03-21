@@ -17,6 +17,9 @@ class StatesService extends Services {
             const countryId= data.countryId;
             console.log('country: ' + countryId)
             const name = capitalizeWords(data.name)
+            if(/^[a-zA-Z\s\-\']+$/.test(name)){
+                throw new Error(`The state name can only contain letters, spaces, hyphens, and apostrophes: ${name}`);
+            }
             const countryExist = await this.countriesDao.getById(countryId);
             if (!countryExist) {
                 throw new Error(`There is no country with that id: ${countryId}`)

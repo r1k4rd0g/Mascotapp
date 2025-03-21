@@ -6,7 +6,7 @@ import { EditCountryModal } from '../components/modal/editionModal';
 
 
 export const CountryContainer = () => {
-    const { data, fetchData, editItem, deleteItem } = useCrudOperations('api/countries/');  // Aquí debes colocar tu endpoint real
+    const { data, getData, editItem, deleteItem } = useCrudOperations('api/countries/');  // Aquí debes colocar tu endpoint real
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalKey, setModalKey] = useState(0);
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -14,8 +14,8 @@ export const CountryContainer = () => {
 
 
     useEffect(() => {
-        fetchData(); //carga datos al inicio desde el useCrudOperations
-    }, [fetchData]);
+        getData(); //carga datos al inicio desde el useCrudOperations
+    }, [getData]);
 
     useEffect(() => {
         // Este useEffect se encarga de sincronizar modalData con selectedRowKeys
@@ -36,7 +36,7 @@ export const CountryContainer = () => {
     const handleSave = async (updatedData) => {
         try {
             await editItem(updatedData.id, updatedData);
-            fetchData();
+            getData();
             setIsModalVisible(false);
         } catch (error) {
             console.error("Error al guardar:", error);
@@ -54,7 +54,7 @@ export const CountryContainer = () => {
     const handleSaveMultiple = async (updatedData) => {
         try {
             await editItem(updatedData.id, updatedData);
-            const newData = await fetchData(); // Espera a que fetchData termine
+            const newData = await getData(); // Espera a que fetchData termine
             // Filtra solo los IDs aún seleccionados (evita datos obsoletos)
             setModalData(newData.filter(item => selectedRowKeys.includes(item.id)));
         } catch (error) {

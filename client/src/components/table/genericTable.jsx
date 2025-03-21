@@ -9,6 +9,7 @@ import { useData } from '../../hooks/useData';
 
 export const GenericTable = ({
     data,
+    onAdd,
     onEdit,
     onDelete,
     onEditMultiple,
@@ -91,7 +92,7 @@ export const GenericTable = ({
                     style={{ marginLeft: 16 }}
                 />
                 <TableActionsMenu
-                    onAdd={() => {/* Implementar según necesidad */ }}
+                    onAdd={onAdd}
                     onEditMultiple={selectedRowKeys.length > 0 ? onEditMultiple : undefined}
                     onDeleteMultiple={selectedRowKeys.length > 0 ? () => onDelete(selectedRowKeys) : undefined}
                     selectedKeys={selectedRowKeys}
@@ -127,6 +128,7 @@ export const GenericTable = ({
 
 GenericTable.propTypes = {
     data: PropTypes.array.isRequired,
+    onAdd: PropTypes.func.isRequired,
     onEdit: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
     onEditMultiple: PropTypes.func.isRequired,

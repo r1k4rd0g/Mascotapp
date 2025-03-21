@@ -51,37 +51,30 @@ class MySqlConnection {
                     acquire: 30000, //tiempo de espera en milisegundos
                     idle: 10000, //tiempo de inactividad en milisegundos
                 },
-                //logging: (msg) => logger.info('logger info de instancia Sequelize ' + msg), //registra las consultas
+                logging: false, //desactivar log de consultas - si este está activado, no se puede activar el siguiente
+                /*logging: (msg) => {
+                    if (msg.includes('ERROR')) {
+                        logger.error('Sequelize Error: ' + msg); // Registra solo errores
+                    } else if (msg.includes('SELECT') && msg.length > 200) {
+                        logger.warn("Consulta Larga: " + msg);
+                    }
+                },*/
             }
         );
         (async()=>{
             try {
                 await this.sequelize.authenticate();
-                //logger.info(`Conexión a MySQL exitosa en el entorno: ${env}`);
                 registerModels(this.sequelize);
                 if (env === 'develop') {
                     await this.syncTables();
                 }
             } catch (error) {
                 logger.error(`Error de conexión a MySQL en el entorno: ${env}, ${err.message}`);
-                throw err; // Detener flujo si ocurre un error
+                throw error; // Detener flujo si ocurre un error
             }
-        })
-        //Probar la conexión
-        this.sequelize
-            .authenticate()
-            .then(() => {
-                //logger.info(`Conexión a MySQL exitosa en el entorno: ${env}`);
-            })
-            .catch((err) => {
-                logger.error(`Error de conexión a MySQL en el entorno: ${env}, ${err.message}`);
-                throw err;
-            });
+        })(); //llamada auto ejecutable
+
         this.connectionConfig = connectionConfig;
-
-        //Registrar modelos
-        registerModels(this.sequelize);
-
         //Sincronización opcional de tablas según entorno
         if (env === 'develop') {
             this.syncTables();
@@ -90,8 +83,6 @@ class MySqlConnection {
     static getInstance() {
         if (!this.#instance) {
             this.#instance = new MySqlConnection();
-        } else {
-            //logger.info('Conectado usando una instancia existente de MySQL');
         }
         return this.#instance;
     }
@@ -103,7 +94,7 @@ class MySqlConnection {
     async closeConnection() {
         try {
             await this.sequelize.close();
-            logger.info('Conexión a MySQL cerrada correctamente');
+           // logger.info('Conexión a MySQL cerrada correctamente');
         } catch (err) {
             logger.error(`Error al cerrar la conexión a MySQL: ${err.message}`);
         }

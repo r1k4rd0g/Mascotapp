@@ -23,8 +23,8 @@ export const Sidebar = () => {
       return { key: url, label: <Link to={url}>{label}</Link> }
     }),
   ];
-   // Obtener la key seleccionada basada en la ruta actual
-   const getSelectedKey = (pathname) => {
+  // Obtener la key seleccionada basada en la ruta actual
+  const getSelectedKey = (pathname) => {
     for (const menu of sideMenuItems) {
       if (menu.items) {
         const foundItem = menu.items.find((item) => item.link === pathname);
@@ -36,7 +36,7 @@ export const Sidebar = () => {
     return "";
   };
 
-  // Obtener la key del submenú abierto basado en la ruta actual
+  // Obtener la key del sub menú abierto basado en la ruta actual
   const getOpenKey = (pathname) => {
     const foundMenu = sideMenuItems.find((menu) =>
       menu.items?.some((subItem) => subItem.link === pathname)
@@ -53,7 +53,7 @@ export const Sidebar = () => {
 
   return (
     <Layout
-    className="custom-layout"
+      className="custom-layout"
       style={{
         minHeight: "100vh",
         bodyBg: extendedThemeConfig.bodyBg,

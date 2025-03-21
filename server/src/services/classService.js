@@ -32,7 +32,6 @@ export default class Services {
     //crea un item:
     create = async (data) => {
         try {
-            console.log('data en service: ' + data)
             const newItem = await this.dao.create(data);
             if (!newItem) {
                 throw new Error(`no se pudo crear el item ${data}`);

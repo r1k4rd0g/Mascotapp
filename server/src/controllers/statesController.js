@@ -11,7 +11,7 @@ class StatesController extends Controllers {
         try {
             const {name, countryId} = req.body;
             if(!name || !countryId) {
-                return httpResponse.BadRequest(res, 'Name and Country ID must be required', req.body)
+                return httpResponse.BadRequest(res, 'Name and Country ID must be required')
             }
             const newItem = await this.service.createState({name, countryId});
             if (!newItem) {
