@@ -1,7 +1,6 @@
 import { Menu, Layout, theme } from 'antd';
 import { topMenuItems } from '../../config/menuConfig.jsx'
 import Logo from '../../assets/logo.png';
-
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,9 +24,10 @@ export const HeaderComponent = () => {
             borderRadius: token.borderRadius,
             display: 'flex',
             alignItems: 'center',
-            height: '64',
-            padding: '0 16px',
-            zIndex: 10,
+            height: 70,
+            width: '100%',
+            padding: '0 8px',
+            zIndex: 20,
 
         }}>
             <div style={{ display: 'flex', alignItems: 'center', height: '80%' }}>
@@ -43,9 +43,10 @@ export const HeaderComponent = () => {
                     defaultSelectedKeys={['1']}
                     items={menuItems}
                     style={{
-                        flex: 1,
+                        flexGrow: 1,
                         backgroundColor: 'transparent',
-                        display: 'flex',
+                        overflow: 'visible',
+                        minWidth: '100%',
                         alignItems: 'center',
                         justifyContent: 'flex-end',
                     }}

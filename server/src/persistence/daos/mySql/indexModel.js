@@ -1,8 +1,8 @@
 //Modules
-import CountryModel from "../mySql/countries/countriesModel.js";
-import StateModel from "../mySql/states/statesModel.js";
-import CityModel from "../mySql/cities/citiesModel.js";
-import NeighborhoodModel from "../mySql/neighborhoods/neighborhoodsModel.js";
+import CountryModel from "../mySql/locations/countries/countriesModel.js";
+import StateModel from "../mySql/locations/states/statesModel.js";
+import CityModel from "../mySql/locations/cities/citiesModel.js";
+import NeighborhoodModel from "../mySql/locations/neighborhoods/neighborhoodsModel.js";
 //import UserModel from "../mySql/users/usersModel.js";
 //import CustomerModel from "../mySql/clients/customerModel.js";
 //import PetModel from "../mySql/pets/petsModel.js";

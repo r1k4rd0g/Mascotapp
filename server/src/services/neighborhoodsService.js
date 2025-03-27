@@ -16,6 +16,9 @@ class NeighborhoodsService extends Services {
         try {
             const cityId = data.cityId;
             const name = capitalizeWords(data.name)
+            if(!/^[a-zA-Z\s\-\']+$/.test(name)){
+                throw new Error(`The neighborhood name can only contain letters, spaces, hyphens, and apostrophes: ${name}`);
+            }
             const cityExist = await this.citiesDao.getById(cityId);
             if (!cityExist) {
                 throw new Error(`There is no city with that id: ${cityId}`)

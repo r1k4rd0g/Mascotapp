@@ -2,8 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Dashboard } from '../components/dashboard';
 import { Login } from '../components/login';
 import { CustomersPage } from '../pages/customersPage';
-import {CountryPage} from '../pages/countryPage';
-import { UserProfileSection } from '../components/userProfileSections';
+import {CountryPage, StatePage, CityPage, NeighborhoodPage} from '../pages/locationsPage';
 import { ProtectedRoute } from '../components/protectedRoute';
 import { MainLayout } from '../layouts/mainLayout';
 
@@ -18,8 +17,10 @@ export const IndicatorRoutes = () => {
                     <Route path="/" element={<MainLayout />} >
                         <Route path="/Dashboard" element={<Dashboard />} />
                         <Route path="/clientes/listar" element={<CustomersPage />} />
-                        <Route path="/user-profile" element={<UserProfileSection />} />
-                        <Route path="/ubicaciones/pais" element={<CountryPage />} />
+                        <Route path="/ubicaciones/paises" element={<CountryPage />} />
+                        <Route path="/ubicaciones/departamentos" element={<StatePage />} />
+                        <Route path='/ubicaciones/ciudades' element={<CityPage />} />
+                        <Route path='/ubicaciones/barrios' element={<NeighborhoodPage />} />
                     </Route>
             </Route>
         </Routes >

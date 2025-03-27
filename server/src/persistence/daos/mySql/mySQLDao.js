@@ -1,7 +1,8 @@
 
 export default class MySQLDao {
-    constructor(model) {
+    constructor(model, sequelize) {
         this.model = model;
+        this.sequelize = sequelize
     }
 
     //Crud:
@@ -32,11 +33,12 @@ export default class MySQLDao {
     }
     async update(id, data) {
         try {
-            const response = await this.model.update(data, {
-                where: {
-                    id: id
-                }
-            });
+            const instance = await this.model.findByPk(id);
+            if(!instance){
+                throw new Error(`No se encontró el item con id: ${id}`)
+            }
+            instance.set(data);
+            const response = await instance.save();
             return response;
         } catch (error) {
             console.error('entró en catch: mySQL - mySQL.dao - create' + error);

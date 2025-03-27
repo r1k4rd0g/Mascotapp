@@ -1,10 +1,18 @@
 // Modules
 import { Schema, model } from 'mongoose'
+<<<<<<< HEAD
 import { CountryModel } from '../countries/countriesModel'
 import { StatesModel } from '../states/statesModel'
 import { CitiesModel } from '../cities/citiesModel'
 import { NeighborhoodsModel } from '../neighborhoods/neighborhoodsModel'
 import { PetsModel } from '../pets/petsModel'
+=======
+import { CountryModel } from '../locations/countries/countriesModel.js'
+import { StatesModel } from '../locations/states/statesModel.js'
+import { CitiesModel } from '../locations/cities/citiesModel.js'
+import { NeighborhoodsModel } from '../locations/neighborhoods/neighborhoodsModel.js'
+import { PetsModel } from '../pets/petsModel.js'
+>>>>>>> develop
 
 // Schema
 export const userSchema = new Schema(

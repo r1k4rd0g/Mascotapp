@@ -16,6 +16,9 @@ class CitiesService extends Services {
         try {
             const stateId = data.stateId;
             const name = capitalizeWords(data.name)
+            if(!/^[a-zA-Z\s\-\']+$/.test(name)){
+                throw new Error(`The city name can only contain letters, spaces, hyphens, and apostrophes: ${name}`);
+            }
             const stateExist = await this.statesDao.getById(stateId);
             if (!stateExist) {
                 throw new Error(`There is no state with that id: ${stateId}`)

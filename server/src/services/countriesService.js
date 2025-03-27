@@ -14,7 +14,9 @@ class CountriesService extends Services {
     createCountry = async (data) => {
         try {
             const name = capitalizeWords(data.name);
-            console.log('name: ', name);
+            if (!/^[a-zA-Z\s\-\']+$/.test(name)) {
+                throw new Error(`The country name can only contain letters, spaces, hyphens, and apostrophes: ${name}`);
+            }
             const cityExist = await this.countriesDao.getByName(name);
             if (cityExist) {
                 throw new Error(`There is already a country with that name: ${name}`)

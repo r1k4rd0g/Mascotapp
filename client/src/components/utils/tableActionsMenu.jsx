@@ -1,36 +1,28 @@
 import PropTypes from 'prop-types';
-import { Menu, Dropdown, Button } from 'antd';
-import { EllipsisOutlined } from '@ant-design/icons';
+import { Button, Dropdown, Menu, Space } from 'antd';
+import { TooltipGenerics } from './tooltipGenerics';
 import { Icons } from '../utils/icons'; // Ajusta la ruta según tu estructura
 
 export const TableActionsMenu = ({
     onAdd,
-    onEdit,
+    onEditMultiple,
     onDelete,
     selectedKeys,
     addLabel = 'Agregar',
     editLabel = 'Editar selección',
     deleteLabel = 'Eliminar selección',
-    addIcon = 'PlusCircleTwoTone',
-    editIcon = 'EditTwoTone',
-    deleteIcon = 'DeleteTwoTone',
     extraMenuItems = []
 }) => {
     const menu = (
         <Menu>
-            <Menu.Item key="add" onClick={onAdd}>
-                <Icons name={addIcon} /> {addLabel}
-            </Menu.Item>
-
             {selectedKeys?.length > 0 && [
-                <Menu.Item key="edit" onClick={() => onEdit(selectedKeys)}>
-                    <Icons name={editIcon} /> {editLabel}
+                <Menu.Item key="edit" onClick={() => onEditMultiple(selectedKeys)}>
+                    <Icons name={'EditTwoTone'} /> {editLabel}
                 </Menu.Item>,
                 <Menu.Item key="delete" onClick={() => onDelete(selectedKeys)}>
-                    <Icons name={deleteIcon} /> {deleteLabel}
+                    <Icons name={'DeleteTwoTone'} /> {deleteLabel}
                 </Menu.Item>
             ]}
-
             {extraMenuItems.map((item, index) => (
                 <Menu.Item key={`extra-${index}`} {...item.props}>
                     {item.content}
@@ -40,15 +32,24 @@ export const TableActionsMenu = ({
     );
 
     return (
-        <Dropdown overlay={menu} trigger={['click']}>
-            <Button type="text" icon={<EllipsisOutlined />} />
-        </Dropdown>
+        <Space>
+            <TooltipGenerics title="Agregar" placement='top'>
+            <Button type="text" onClick={onAdd} addLabel={addLabel}
+                icon={<Icons name={'PlusCircleTwoTone'} />}
+            />
+            </TooltipGenerics>
+            <Dropdown overlay={menu} trigger={['click']}>
+                <TooltipGenerics title="Más opciones al seleccionar items" placement='top'>
+                    <Button type="text" icon={<Icons name={'EllipsisOutlined'} />} />
+                </TooltipGenerics>
+            </Dropdown>
+        </Space>
     );
 };
 
 TableActionsMenu.propTypes = {
     onAdd: PropTypes.func.isRequired,
-    onEdit: PropTypes.func,
+    onEditMultiple: PropTypes.func,
     onDelete: PropTypes.func,
     selectedKeys: PropTypes.array,
     addLabel: PropTypes.string,

@@ -1,30 +1,42 @@
 import PropTypes from "prop-types";
 import {
-    CalendarOutlined,
-    UserOutlined,
-    HomeOutlined,
+    /* Out Lined */
     BaiduOutlined,
+    CalendarOutlined,
+    CloseOutlined,
+    EllipsisOutlined,
     EnvironmentOutlined,
-    SettingOutlined,
+    FieldTimeOutlined,
+    FilterOutlined,
+    HomeOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    EllipsisOutlined,
-    EditTwoTone,
+    RedoOutlined,
+    SearchOutlined,
+    SettingOutlined,
+    UserOutlined,
+    /* Two Tones */
     DeleteTwoTone,
+    EditTwoTone,
     PlusCircleTwoTone
 } from "@ant-design/icons";
 
 
 const iconsMap = {
-    HomeOutlined: HomeOutlined,
-    UserOutlined: UserOutlined,
     BaiduOutlined: BaiduOutlined,
-    SettingOutlined: SettingOutlined,
     CalendarOutlined: CalendarOutlined,
+    CloseOutlined: CloseOutlined,
+    EllipsisOutlined: EllipsisOutlined,
     EnvironmentOutlined: EnvironmentOutlined,
+    FieldTimeOutlined: FieldTimeOutlined,
+    FilterOutlined:FilterOutlined,
+    HomeOutlined: HomeOutlined,
     MenuFoldOutlined: MenuFoldOutlined,
     MenuUnfoldOutlined: MenuUnfoldOutlined,
-    EllipsisOutlined: EllipsisOutlined,
+    RedoOutlined: RedoOutlined,
+    SearchOutlined: SearchOutlined,
+    SettingOutlined: SettingOutlined,
+    UserOutlined: UserOutlined,
     EditTwoTone: EditTwoTone,
     DeleteTwoTone: DeleteTwoTone,
     PlusCircleTwoTone: PlusCircleTwoTone
