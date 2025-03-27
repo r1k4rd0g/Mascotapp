@@ -8,7 +8,6 @@ class CountriesService extends Services {
     constructor() {
         super(factoryDao.countriesDao);
         this.countriesDao = factoryDao.countriesDao;
-        console.log('countriesDao en constructor de service:', this.countriesDao)
     }
 
     //funciones especificas:

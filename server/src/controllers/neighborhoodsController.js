@@ -11,7 +11,6 @@ class NeighborhoodsController extends Controllers {
     createNeighborhood = async (req, res, next) => {
         try {
             const {name, cityId} = req.body;
-            console.log('data en controller: ' + name, cityId)
             if(!name || !cityId) {
                 return httpResponse.BadRequest(res, 'Name and City ID must be required', req.body)
             }

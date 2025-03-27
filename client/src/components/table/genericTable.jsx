@@ -6,6 +6,8 @@ import { Icons } from '../utils/icons';
 import { TableActionsMenu } from '../utils/tableActionsMenu';
 import { useLoadingState } from '../../hooks/useLoadingState';
 import { useData } from '../../hooks/useData';
+import { useSearchGenerics } from '../utils/searchGenerics';
+import { TooltipGenerics } from '../utils/tooltipGenerics';
 
 export const GenericTable = ({
     data,
@@ -22,12 +24,14 @@ export const GenericTable = ({
     const [ellipsis, setEllipsis] = useState(false); //aparece modo expandido por default
     const { reloading } = useData(data);
     const { loadingStates, percent } = useLoadingState();
+    const nameSearchProps = useSearchGenerics('name');
     const columns = [
         {
             title: 'Id', dataIndex: 'id', key: 'id', align: 'right', ellipsis
         },
         {
-            title: 'Nombre', dataIndex: 'name', key: 'name', ellipsis
+            title: 'Nombre', dataIndex: 'name', key: 'name', ellipsis,
+            ...nameSearchProps
         },
         ...(entityConfig.showParent ? [{
             title: entityConfig.parentLabel, dataIndex: entityConfig.parentField, key: 'parent', ellipsis,
@@ -50,18 +54,23 @@ export const GenericTable = ({
             align: 'center',
             render: (_, record) => (
                 <Space>
-                    <Button
-                        type="link"
-                        onClick={() => onEdit(record)}
-                        disabled={loadingStates.edit}
-                        icon={loadingStates.edit ? <Spin percent={percent.edit} size="small" /> : <Icons name="EditTwoTone" />}
-                    />
+                    <TooltipGenerics title= "Editar" placement='top'>
+                        <Button
+                            type="link"
+                            onClick={() => onEdit(record)}
+                            disabled={loadingStates.edit}
+                            icon={loadingStates.edit ? <Spin percent={percent.edit} size="small" /> : <Icons name="EditTwoTone" />}
+                        />
+                    </TooltipGenerics>
+                    <TooltipGenerics title= "Eliminar" placement='top'>
                     <Button
                         type="link"
                         onClick={() => onDelete(record.id)}
                         disabled={loadingStates.delete}
                         icon={loadingStates.delete ? <Spin percent={percent.delete} size="small" /> : <Icons name="DeleteTwoTone" />}
                     />
+                    </TooltipGenerics>
+
                 </Space>
             )
         }
@@ -107,7 +116,12 @@ export const GenericTable = ({
                     dataSource={data}
                     rowKey="id"
                     bordered
-                    pagination={{ pageSize: 5 }}
+                    pagination={{
+                        showSizeChanger: true,
+                        position: ['bottomCenter'],
+                        pageSizeOptions: ['10', '20', '50', '100'],
+                        showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} registros`
+                    }}
                     rowSelection={rowSelection}
                     footer={() => 'Fin de tabla'}
                     style={{

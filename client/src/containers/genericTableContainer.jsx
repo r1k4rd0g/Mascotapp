@@ -3,12 +3,15 @@ import PropTypes from "prop-types"
 import { useCrudOperations } from '../hooks/useCrudOperations';
 import { GenericTable } from '../components/table/genericTable';
 import { EditModalDynamic } from '../components/modal/editModalDynamic';
-import { MessageGenerics } from '../components/messageGenerics';
+import { MessageGenerics } from '../components/utils/messageGenerics';
+import { AddModalDynamic } from '../components/modal/addModalDynamic';
+
 
 
 export const GenericTableContainer = ({ endpoint, entityConfig, parentData }) => {
-    const { data, getData, editItem, deleteItem } = useCrudOperations(endpoint);
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const { data, getData, addItem, editItem, deleteItem } = useCrudOperations(endpoint);
+    const [editModalVisible, setEditModalVisible] = useState(false);
+    const [addModalVisible, setAddModalVisible] = useState(false);
     const [modalKey, setModalKey] = useState(0);
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [modalData, setModalData] = useState([]);
@@ -38,7 +41,7 @@ export const GenericTableContainer = ({ endpoint, entityConfig, parentData }) =>
     // Handlers comunes
     const handleEdit = (item) => {
         setModalData([item]);
-        setIsModalVisible(true);
+        setEditModalVisible(true);
         setModalKey(prev => prev + 1);
     };
 
@@ -46,27 +49,30 @@ export const GenericTableContainer = ({ endpoint, entityConfig, parentData }) =>
         if (!selectedRowKeys?.length) return;
         const rows = data.filter(item => selectedRowKeys.includes(item.id));
         setModalData(rows);
-        setIsModalVisible(true);
+        setEditModalVisible(true);
         setModalKey(prev => prev + 1);
     };
+
     const handleAdd = () => {
         setModalData([{}]);
-        setIsModalVisible(true);
+        setAddModalVisible(true);
         setModalKey(prev => prev + 1);
     }
+
     const handleSaveCompleted = async (content, type) => {
         await getData();
-        setIsModalVisible(false);
+        setEditModalVisible(false);
+        setAddModalVisible(false);
         setSelectedRowKeys([]);
         setModalData([]);
         setMessageContent({message: content, counter: messageCounter});
         setMessageType(type);
         setMessageCounter(prevCounter => prevCounter + 1);
-
     }
 
     const handleCancel = async (content, type) => {
-        setIsModalVisible(false);
+        setEditModalVisible(false);
+        setAddModalVisible(false);
         setSelectedRowKeys([]);
         setModalData([]);
         setMessageContent({message: content, counter: messageCounter});
@@ -91,7 +97,7 @@ export const GenericTableContainer = ({ endpoint, entityConfig, parentData }) =>
             />
             <EditModalDynamic
                 key={modalKey}
-                visible={isModalVisible}
+                visible={editModalVisible}
                 onCancel={handleCancel}
                 onSaveCompleted={handleSaveCompleted}
                 initialData={modalData[0] || {}}
@@ -101,6 +107,15 @@ export const GenericTableContainer = ({ endpoint, entityConfig, parentData }) =>
                 entityConfig={entityConfig}
                 parentData={parentData}
                 editItem={editItem}
+            />
+            <AddModalDynamic
+                key={modalKey +1000}
+                visible={addModalVisible}
+                onCancel={handleCancel}
+                onSaveCompleted={handleSaveCompleted}
+                entityConfig={entityConfig}
+                parentData={parentData}
+                addItem={addItem}
             />
         </>
     );

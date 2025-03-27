@@ -6,7 +6,7 @@ import MySQLDao from "../../mySQLDao.js";
 export default class CountryMySQLDao extends MySQLDao {
     constructor(sequelize) {
         const countryModel = CountryModel(sequelize);
-        super(countryModel, sequelize);
+        super(countryModel);
     }
     //código específico...
 }

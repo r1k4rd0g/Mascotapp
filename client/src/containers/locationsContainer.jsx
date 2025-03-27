@@ -2,6 +2,15 @@ import { GenericTableContainer } from './genericTableContainer';
 import { entitiesConfig } from '../config/entities';
 import { useLocations } from '../hooks/useLocations';
 
+export const CountryContainer = () => {
+    return(
+        <GenericTableContainer
+        endpoint={entitiesConfig.country.endpoint}
+        entityConfig={entitiesConfig.country}
+    />
+    )
+}
+
 export const StateContainer = () => {
     const {countries} = useLocations();
 
