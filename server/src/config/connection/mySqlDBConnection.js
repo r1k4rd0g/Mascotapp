@@ -15,6 +15,7 @@ class MySqlConnection {
                 username: config.MYSQL_USER_DEVELOP,
                 password: config.MYSQL_PASSWORD_DEVELOP,
                 host: config.MYSQL_HOST_DEVELOP,
+                port: config.MYSQL_PORT_DEVELOP,
                 dialect: 'mysql',
             },
             test: {
@@ -29,6 +30,7 @@ class MySqlConnection {
                 username: config.MYSQL_USER_PRODUCTION,
                 password: config.MYSQL_PASSWORD_PRODUCTION,
                 host: config.MYSQL_HOST_PRODUCTION,
+                port: config.MYSQL_PORT_PRODUCTION || config.MYSQL_PORT_DEVELOP,
                 dialect: 'mysql',
             },
         }[env];
