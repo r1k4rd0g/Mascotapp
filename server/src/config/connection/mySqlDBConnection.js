@@ -71,7 +71,7 @@ class MySqlConnection {
                     await this.syncTables();
                 }
             } catch (error) {
-                logger.error(`Error de conexión a MySQL en el entorno: ${env}, ${err.message}`);
+                logger.error(`Error de conexión a MySQL en el entorno: ${env}, ${error.message}`);
                 throw error; // Detener flujo si ocurre un error
             }
         })(); //llamada auto ejecutable
