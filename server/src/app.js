@@ -7,7 +7,7 @@ import logger from './utils/logger/loggerWinston.js'
 
 
 // Variables
-const PORT = config.PORT_DEV
+const PORT = config.PORT_DEV || config.PORT_PROD || config.PORT_TEST
 //const __dirname = import.meta.dirname
 //const baseDir = path.join(__dirname, 'routes')
 
