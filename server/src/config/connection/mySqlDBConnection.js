@@ -26,11 +26,11 @@ class MySqlConnection {
                 dialect: 'mysql',
             },
             production: {
-                database: config.MYSQL_DATABASE_PRODUCTION,
+                database: config.MYSQL_DB_NAME_PRODUCTION,
                 username: config.MYSQL_USER_PRODUCTION,
                 password: config.MYSQL_PASSWORD_PRODUCTION,
                 host: config.MYSQL_HOST_PRODUCTION,
-                port: config.MYSQL_PORT_PRODUCTION || config.MYSQL_PORT_DEVELOP,
+                port: config.MYSQL_PORT_PRODUCTION,
                 dialect: 'mysql',
             },
         }[env];
