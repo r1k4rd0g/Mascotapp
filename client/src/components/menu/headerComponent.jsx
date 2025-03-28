@@ -1,6 +1,6 @@
 import { Menu, Layout, theme } from 'antd';
 import { topMenuItems } from '../../config/menuConfig.jsx'
-import Logo from '../../assets/logo.png';
+import Logo from '../../assets/Logo2.png';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
@@ -33,8 +33,8 @@ export const HeaderComponent = () => {
             <div style={{ display: 'flex', alignItems: 'center', height: '80%' }}>
                 <Link to='/'>
                     <img src={Logo} alt='Logo' style={{
-                        width: '65px',
-                        height: '60px',
+                        width: '85px',
+                        height: '50px',
                         marginTop: '16px'
                     }}></img>
                 </Link>

@@ -65,7 +65,9 @@ export const useSearchGenerics = (dataIndex) => {
                     <TooltipGenerics title="Limpiar y cerrar" placement='top'>
                         <Button
                             type="default"
-                            onClick={() => clearFilters && handleReset(clearFilters)}
+                            onClick={() => {clearFilters && handleReset(clearFilters);
+                                close()
+                            }}
                             icon={<Icons name="RedoOutlined" />}
                             size="small"
                             style={{ width: 50 }}
