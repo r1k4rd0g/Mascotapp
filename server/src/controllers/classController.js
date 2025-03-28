@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //Modules
 import logger from "../utils/logger/loggerWinston.js";
 import httpResponse from "../utils/httpResponse.js";
@@ -83,5 +82,3 @@ export default class Controllers {
         }
     }
 }
-=======
->>>>>>> 2a099d6139b39928a394870e1264031cdaa87479

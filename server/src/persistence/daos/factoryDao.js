@@ -4,13 +4,13 @@ import logger from "../../utils/logger/loggerWinston.js";
 import MongoConnection from "../../config/connection/mongoDBConnection.js";
 import MySQLConnection from "../../config/connection/mySqlDBConnection.js";
 
-/*** DAO de MongoDB  ****/
-import UserMongoDBDao from "./mongoDB/users/usersDao";
-import PetMongoDBDao from "./mongoDB/pets/petsDao";
-import CountryMongoDBDao from "./mongoDB/countries/countriesDao";
-import StatesMongoDBDao from "./mongoDB/states/statesDao";
-import CitiesMongoDBDao from "./mongoDB/cities/citiesDao";
-import NeighborhoodMongoDBDao from "./mongoDB/neighborhoods/neighborhoodsDao";
+//DAO de MongoDB
+import UserMongoDBDao from "./mongoDB/users/usersDao.js";
+import PetMongoDBDao from "./mongoDB/pets/petsDao.js";
+import CountryMongoDBDao from "./mongoDB/locations/countries/countriesDao.js";
+import StatesMongoDBDao from "./mongoDB/locations/states/statesDao.js";
+import CitiesMongoDBDao from "./mongoDB/locations/cities/citiesDao.js";
+import NeighborhoodMongoDBDao from "./mongoDB/locations/neighborhoods/neighborhoodsDao.js";
 
 //DAO de MySQL
 //import UserMySQLDao from "./mySql/users/usersDao.js";
@@ -23,7 +23,7 @@ import NeighborhoodMySQLDao from "./mySql/locations/neighborhoods/neighborhoodsD
 
 
 
-/*** Variables y Constantes */
+//Variables y Constantes
 const persistence = config.PERSISTENCE
 let usersDao;
 let petsDao;
@@ -70,6 +70,7 @@ switch (persistence) {
         throw new Error('Error en la conexión a la base de datos');
 }
 
+//se exporta como objeto
 export default {
     usersDao,
     petsDao,
