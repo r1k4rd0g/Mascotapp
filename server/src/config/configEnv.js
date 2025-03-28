@@ -5,6 +5,7 @@ export default {
     NODE_ENV: process.env.NODE_ENV,
     PERSISTENCE: process.env.PERSISTENCE,
     //PORTS:
+    PORT_TEST: process.env.PORT_TEST,
     PORT_DEV: process.env.PORT_DEV,
     PORT_PROD: process.env.PORT_PROD,
     HOST: process.env.HOST,
