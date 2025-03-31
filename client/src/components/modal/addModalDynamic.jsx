@@ -1,6 +1,6 @@
 import { Modal, Form, Input, Switch, Select, Button, InputNumber } from 'antd';
 import PropTypes from 'prop-types';
-import { useEffect} from 'react';
+import { useEffect, useState} from 'react';
 
 
 export const AddModalDynamic = ({
@@ -12,6 +12,7 @@ export const AddModalDynamic = ({
     addItem,
 }) => {
     const [form] = Form.useForm();
+    const [guardando, setGuardando] = useState(false);
 
 
 
@@ -21,10 +22,12 @@ export const AddModalDynamic = ({
 
     const handleSaveForm = async () => {
         try {
+            setGuardando(true);
             const values = await form.validateFields();
             await addItem(values);
             onSaveCompleted(`Se ha creado: ${values.name}`, "success");
         } catch (errorInfo) { // Cambiar error a errorInfo
+            setGuardando(false);
             const errorMessages = errorInfo.errorFields.map(field => field.errors.join(', ')).join('; ');
             onCancel(`Error de validación: ${errorMessages}`, "error");
         }
@@ -105,7 +108,7 @@ export const AddModalDynamic = ({
                 <Button key="cancel" onClick={() => onCancel("Cancelado", "info")}>
                     Cancelar
                 </Button>,
-                <Button key="submit" type="primary" onClick={handleSaveForm}>
+                <Button key="submit" type="primary" onClick={handleSaveForm} loading={guardando} disabled={guardando}>
                     Guardar
                 </Button>
             ]}

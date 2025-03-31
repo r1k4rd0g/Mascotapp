@@ -17,6 +17,7 @@ export const EditModalDynamic = ({
 }) => {
     const [form] = Form.useForm();
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [guardando, setGuardando] = useState(false);
 
 
     useEffect(() => {
@@ -28,6 +29,7 @@ export const EditModalDynamic = ({
 
     const handleSaveForm = async () => {
         try {
+            setGuardando(true);
             const values = await form.validateFields();
             const updatedItem = { ...modalData[currentIndex], ...values };
             await editItem(updatedItem.id, updatedItem);
@@ -44,6 +46,7 @@ export const EditModalDynamic = ({
                 onSaveCompleted(`Se ha editado y actualizado: ${updatedItem.name}`, "success");
             }
         } catch (errorInfo) { // Cambiar error a errorInfo
+            setGuardando(false);
             const errorMessages = errorInfo.errorFields.map(field => field.errors.join(', ')).join('; ');
             onCancel(`Error de validación: ${errorMessages}`, "error");
         }
@@ -124,7 +127,7 @@ export const EditModalDynamic = ({
                 <Button key="cancel" onClick={() => onCancel("Cancelado", "info")}>
                     Cancelar
                 </Button>,
-                <Button key="submit" type="primary" onClick={handleSaveForm}>
+                <Button key="submit" type="primary" onClick={handleSaveForm} loading={guardando} disabled={guardando}>
                     {isMultiple ? `Guardar y ${currentIndex === totalItems - 1 ?
                         'Finalizar' : 'Siguiente'}` : 'Guardar'}
                 </Button>

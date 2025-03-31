@@ -77,8 +77,7 @@ export const GenericTableContainer = ({ endpoint, entityConfig, parentData }) =>
         setModalData([]);
         setMessageContent({message: content, counter: messageCounter});
         setMessageType(type);
-        setMessageCounter(prevCounter => prevCounter + 1);
-        await getData();
+        setMessageCounter(prevCounter => prevCounter + 1);;
     };
 
     return (
