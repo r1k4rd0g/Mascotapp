@@ -1,6 +1,7 @@
-import { Modal, Form, Input, Switch, Select, Button, InputNumber } from 'antd';
+import { Modal, Form, Input, Switch, Select, Button, InputNumber, Spin } from 'antd';
 import PropTypes from 'prop-types';
-import { useEffect, useState} from 'react';
+import { useEffect} from 'react';
+import { useLoadingState } from '../../hooks/useLoadingState';
 
 
 export const AddModalDynamic = ({
@@ -12,7 +13,7 @@ export const AddModalDynamic = ({
     addItem,
 }) => {
     const [form] = Form.useForm();
-    const [guardando, setGuardando] = useState(false);
+    const { loadingStates, startLoading, stopLoading } = useLoadingState();
 
 
 
@@ -22,12 +23,13 @@ export const AddModalDynamic = ({
 
     const handleSaveForm = async () => {
         try {
-            setGuardando(true);
+            startLoading("addItem");
             const values = await form.validateFields();
             await addItem(values);
+            stopLoading("addItem");
             onSaveCompleted(`Se ha creado: ${values.name}`, "success");
         } catch (errorInfo) { // Cambiar error a errorInfo
-            setGuardando(false);
+            stopLoading("addItem");
             const errorMessages = errorInfo.errorFields.map(field => field.errors.join(', ')).join('; ');
             onCancel(`Error de validación: ${errorMessages}`, "error");
         }
@@ -108,8 +110,8 @@ export const AddModalDynamic = ({
                 <Button key="cancel" onClick={() => onCancel("Cancelado", "info")}>
                     Cancelar
                 </Button>,
-                <Button key="submit" type="primary" onClick={handleSaveForm} loading={guardando} disabled={guardando}>
-                    Guardar
+                <Button key="submit" type="primary" onClick={handleSaveForm} loading={loadingStates.addItem} disabled={loadingStates.addItem}>
+                    {loadingStates.addItem ? <Spin size="small" /> : 'Guardar'}
                 </Button>
             ]}
             onOk={handleSaveForm}
