@@ -104,7 +104,7 @@ class MySqlConnection {
     //sincronizar tablas
     async syncTables() {
         try {
-            await this.sequelize.sync({ alter: true }); //alter: true sincroniza las tablas sin borrar datos
+            await this.sequelize.sync();
             //logger.info(`Tablas sincronizadas en MySQL en entorno ${env}`);
         } catch (error) {
             logger.error(`Error al sincronizar las tablas en MySQL: ${error.message}`);
