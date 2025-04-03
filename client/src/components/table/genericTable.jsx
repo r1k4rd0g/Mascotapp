@@ -109,7 +109,7 @@ export const GenericTable = ({
                 />
             </div>
             {reloading ? (
-                <Spin tip="Cargando datos..." size="large" style={{ display: 'block', textAlign: 'center', marginTop: 50 }} />
+                <Spin size="large" style={{ display: 'block', textAlign: 'center', marginTop: 50 }} />
             ) : (
                 <Table
                     columns={columns}

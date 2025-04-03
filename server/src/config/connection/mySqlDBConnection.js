@@ -77,6 +77,7 @@ class MySqlConnection {
         })(); //llamada auto ejecutable
 
         this.connectionConfig = connectionConfig;
+        logger.info(`Conexión a MySQL establecida correctamente en el entorno: ${env}`);
         //Sincronización opcional de tablas según entorno
         if (env === 'develop') {
             this.syncTables();
@@ -96,7 +97,7 @@ class MySqlConnection {
     async closeConnection() {
         try {
             await this.sequelize.close();
-           // logger.info('Conexión a MySQL cerrada correctamente');
+            logger.info('Conexión a MySQL cerrada correctamente');
         } catch (err) {
             logger.error(`Error al cerrar la conexión a MySQL: ${err.message}`);
         }

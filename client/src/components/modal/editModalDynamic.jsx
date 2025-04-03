@@ -152,5 +152,5 @@ EditModalDynamic.propTypes = {
     isMultiple: PropTypes.bool,
     totalItems: PropTypes.number,
     editItem: PropTypes.func.isRequired,
-    messageCounter: PropTypes.number.isRequired
+    messageCounter: PropTypes.number
 }

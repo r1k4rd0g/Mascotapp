@@ -8,7 +8,6 @@ export const TableActionsMenu = ({
     onEditMultiple,
     onDelete,
     selectedKeys,
-    addLabel = 'Agregar',
     editLabel = 'Editar selección',
     deleteLabel = 'Eliminar selección',
     extraMenuItems = []
@@ -34,11 +33,11 @@ export const TableActionsMenu = ({
     return (
         <Space>
             <TooltipGenerics title="Agregar" placement='top'>
-            <Button type="text" onClick={onAdd} addLabel={addLabel}
+            <Button type="text" onClick={onAdd}
                 icon={<Icons name={'PlusCircleTwoTone'} />}
             />
             </TooltipGenerics>
-            <Dropdown overlay={menu} trigger={['click']}>
+            <Dropdown menu={{ items: menu.props.children }} trigger={['click']}>
                 <TooltipGenerics title="Más opciones al seleccionar items" placement='top'>
                     <Button type="text" icon={<Icons name={'EllipsisOutlined'} />} />
                 </TooltipGenerics>

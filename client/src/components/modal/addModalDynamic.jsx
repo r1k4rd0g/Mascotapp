@@ -130,5 +130,5 @@ AddModalDynamic.propTypes = {
     entityConfig: PropTypes.object.isRequired,
     parentData: PropTypes.array,
     addItem: PropTypes.func.isRequired,
-    messageCounter: PropTypes.number.isRequired
+    messageCounter: PropTypes.number
 }
