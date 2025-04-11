@@ -22,7 +22,7 @@ export const GenericTable = ({
     parentData
 }) => {
 
-    const [ellipsis, setEllipsis] = useState(false); //aparece modo expandido por default
+    const [ellipsis, setEllipsis] = useState(true); //aparece modo compacto por default
     const { reloading } = useData(data);
     const { loadingStates, percent } = useLoadingState();
     const nameSearchProps = useSearchGenerics('name');
