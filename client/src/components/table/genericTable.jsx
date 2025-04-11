@@ -1,13 +1,14 @@
 import { format } from 'date-fns';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Space, theme, Button, Switch, Spin } from 'antd';
+import { Table, Space, Button, Switch, Spin } from 'antd';
 import { Icons } from '../utils/icons';
 import { TableActionsMenu } from '../utils/tableActionsMenu';
 import { useLoadingState } from '../../hooks/useLoadingState';
 import { useData } from '../../hooks/useData';
 import { useSearchGenerics } from '../utils/searchGenerics';
 import { TooltipGenerics } from '../utils/tooltipGenerics';
+import {extendedThemeConfig} from '../../styles/theme';
 
 export const GenericTable = ({
     data,
@@ -20,7 +21,7 @@ export const GenericTable = ({
     entityConfig,
     parentData
 }) => {
-    const { token } = theme.useToken();
+
     const [ellipsis, setEllipsis] = useState(false); //aparece modo expandido por default
     const { reloading } = useData(data);
     const { loadingStates, percent } = useLoadingState();
@@ -70,7 +71,6 @@ export const GenericTable = ({
                         icon={loadingStates.delete ? <Spin percent={percent.delete} size="small" /> : <Icons name="DeleteTwoTone" />}
                     />
                     </TooltipGenerics>
-
                 </Space>
             )
         }
@@ -83,15 +83,19 @@ export const GenericTable = ({
     };
 
     return (
-        <>
+        <div style={{
+            textAlign: "center",
+            borderRadius: extendedThemeConfig.borderRadius,
+        }}>
             <div style={{
                 marginBottom: 16,
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                backgroundColor: token.colorBgContainer,
+                backgroundColor: extendedThemeConfig.colorBgContainer,
                 padding: '8px 16px',
-                borderRadius: token.borderRadiusLG
+                borderRadius: extendedThemeConfig.borderRadius,
+                border: `1px solid ${extendedThemeConfig.borderColor}`,
             }}>
                 <Switch
                     checkedChildren={ellipsis ? "Modo compacto" : "Modo expandido"} // Cambia la etiqueta del switch
@@ -109,13 +113,23 @@ export const GenericTable = ({
                 />
             </div>
             {reloading ? (
-                <Spin tip="Cargando datos..." size="large" style={{ display: 'block', textAlign: 'center', marginTop: 50 }} />
+                <Spin size="large" style={{ display: 'block', textAlign: 'center', marginTop: 50 }} />
             ) : (
                 <Table
+                style={{
+                    rowsColor: extendedThemeConfig.rowsColor,
+                    borderColor: extendedThemeConfig.borderColor,
+                    borderRadius: extendedThemeConfig.borderRadius,
+                    colorText: extendedThemeConfig.colorText,
+                    colorHeader: extendedThemeConfig.headerColor,
+                    headerBg: extendedThemeConfig.headerBg,
+                    rowHoverBg: extendedThemeConfig.rowHoverBg,
+                    rowSelectedBg: extendedThemeConfig.rowSelectedBg,
+                }}
                     columns={columns}
                     dataSource={data}
                     rowKey="id"
-                    bordered
+                    bordered = {true}
                     pagination={{
                         showSizeChanger: true,
                         position: ['bottomCenter'],
@@ -123,20 +137,10 @@ export const GenericTable = ({
                         showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} registros`
                     }}
                     rowSelection={rowSelection}
-                    footer={() => 'Fin de tabla'}
-                    style={{
-                        bodySortBg: token.bodySortBg,
-                        borderColor: token.borderColor,
-                        borderRadius: token.borderRadius,
-                        colorText: token.colorText,
-                        colorHeader: token.colorHeader,
-                        headerBg: token.headerBg,
-                        rowHoverBg: token.rowHoverBg,
-                        rowSelectedBg: token.rowSelectedBg,
-                    }}
+                    footer={() => '--- * Pie de Tabla * ---'}
                 />
             )}
-        </>
+        </div>
     )
 };
 

@@ -1,6 +1,7 @@
 import { Modal, Form, Input, Switch, Select, Button, InputNumber } from 'antd';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import {useLoadingState} from '../../hooks/useLoadingState';
 
 
 export const EditModalDynamic = ({
@@ -17,6 +18,7 @@ export const EditModalDynamic = ({
 }) => {
     const [form] = Form.useForm();
     const [currentIndex, setCurrentIndex] = useState(0);
+    const { loadingStates, startLoading, stopLoading } = useLoadingState();
 
 
     useEffect(() => {
@@ -28,11 +30,10 @@ export const EditModalDynamic = ({
 
     const handleSaveForm = async () => {
         try {
+            startLoading(editItem);
             const values = await form.validateFields();
             const updatedItem = { ...modalData[currentIndex], ...values };
             await editItem(updatedItem.id, updatedItem);
-
-
             if (modalData.length > 1) {
                 if (currentIndex < modalData.length - 1) {
                     setCurrentIndex(prev => prev + 1);
@@ -43,7 +44,9 @@ export const EditModalDynamic = ({
             } else {
                 onSaveCompleted(`Se ha editado y actualizado: ${updatedItem.name}`, "success");
             }
+            stopLoading(editItem);
         } catch (errorInfo) { // Cambiar error a errorInfo
+            stopLoading(editItem);
             const errorMessages = errorInfo.errorFields.map(field => field.errors.join(', ')).join('; ');
             onCancel(`Error de validación: ${errorMessages}`, "error");
         }
@@ -124,7 +127,7 @@ export const EditModalDynamic = ({
                 <Button key="cancel" onClick={() => onCancel("Cancelado", "info")}>
                     Cancelar
                 </Button>,
-                <Button key="submit" type="primary" onClick={handleSaveForm}>
+                <Button key="submit" type="primary" onClick={handleSaveForm} loading={loadingStates.editItem} disabled={loadingStates.editItem}>
                     {isMultiple ? `Guardar y ${currentIndex === totalItems - 1 ?
                         'Finalizar' : 'Siguiente'}` : 'Guardar'}
                 </Button>
@@ -149,5 +152,5 @@ EditModalDynamic.propTypes = {
     isMultiple: PropTypes.bool,
     totalItems: PropTypes.number,
     editItem: PropTypes.func.isRequired,
-    messageCounter: PropTypes.number.isRequired
+    messageCounter: PropTypes.number
 }

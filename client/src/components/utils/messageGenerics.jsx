@@ -28,6 +28,6 @@ MessageGenerics.propTypes = {
         message: PropTypes.string,
         counter: PropTypes.number,
     }),
-    type: PropTypes.oneOf(['success', 'error', 'warning', 'info']).isRequired,
+    type: PropTypes.oneOf(['success', 'error', 'warning', 'info']),
     duration: PropTypes.number,
 };

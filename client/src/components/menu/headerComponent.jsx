@@ -24,13 +24,14 @@ export const HeaderComponent = () => {
             borderRadius: token.borderRadius,
             display: 'flex',
             alignItems: 'center',
-            height: 70,
+            height: 60,
             width: '100%',
             padding: '0 8px',
             zIndex: 20,
-
         }}>
-            <div style={{ display: 'flex', alignItems: 'center', height: '80%' }}>
+            <div style={{
+                display: 'flex',
+            }}>
                 <Link to='/'>
                     <img src={Logo} alt='Logo' style={{
                         width: '85px',
@@ -49,6 +50,7 @@ export const HeaderComponent = () => {
                         minWidth: '100%',
                         alignItems: 'center',
                         justifyContent: 'flex-end',
+                        border: 'none',
                     }}
                 />
             </div>

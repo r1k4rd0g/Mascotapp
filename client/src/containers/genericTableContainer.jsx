@@ -8,7 +8,13 @@ import { AddModalDynamic } from '../components/modal/addModalDynamic';
 
 
 
-export const GenericTableContainer = ({ endpoint, entityConfig, parentData }) => {
+export const GenericTableContainer = ({
+    endpoint,
+    entityConfig = {
+        customFields:{},
+        tableColumns: [],
+    },
+    parentData = null }) => {
     const { data, getData, addItem, editItem, deleteItem } = useCrudOperations(endpoint);
     const [editModalVisible, setEditModalVisible] = useState(false);
     const [addModalVisible, setAddModalVisible] = useState(false);
@@ -16,7 +22,7 @@ export const GenericTableContainer = ({ endpoint, entityConfig, parentData }) =>
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [modalData, setModalData] = useState([]);
     const [messageContent, setMessageContent] = useState(null);
-    const [messageType, setMessageType ] = useState(null);
+    const [messageType, setMessageType] = useState(null);
     const [messageCounter, setMessageCounter] = useState(0);
 
 
@@ -65,7 +71,7 @@ export const GenericTableContainer = ({ endpoint, entityConfig, parentData }) =>
         setAddModalVisible(false);
         setSelectedRowKeys([]);
         setModalData([]);
-        setMessageContent({message: content, counter: messageCounter});
+        setMessageContent({ message: content, counter: messageCounter });
         setMessageType(type);
         setMessageCounter(prevCounter => prevCounter + 1);
     }
@@ -75,10 +81,9 @@ export const GenericTableContainer = ({ endpoint, entityConfig, parentData }) =>
         setAddModalVisible(false);
         setSelectedRowKeys([]);
         setModalData([]);
-        setMessageContent({message: content, counter: messageCounter});
+        setMessageContent({ message: content, counter: messageCounter });
         setMessageType(type);
-        setMessageCounter(prevCounter => prevCounter + 1);
-        await getData();
+        setMessageCounter(prevCounter => prevCounter + 1);;
     };
 
     return (
@@ -107,15 +112,17 @@ export const GenericTableContainer = ({ endpoint, entityConfig, parentData }) =>
                 entityConfig={entityConfig}
                 parentData={parentData}
                 editItem={editItem}
+                messageCounter={messageCounter}
             />
             <AddModalDynamic
-                key={modalKey +1000}
+                key={modalKey + 1000}
                 visible={addModalVisible}
                 onCancel={handleCancel}
                 onSaveCompleted={handleSaveCompleted}
                 entityConfig={entityConfig}
                 parentData={parentData}
                 addItem={addItem}
+                messageCounter={messageCounter}
             />
         </>
     );
@@ -168,13 +175,4 @@ GenericTableContainer.propTypes = {
         )
     }).isRequired,
     parentData: PropTypes.array
-};
-
-// Valor por defecto para customFields
-GenericTableContainer.defaultProps = {
-    entityConfig: {
-        customFields: {},
-        tableColumns: []
-    },
-    parentData: null
 };
