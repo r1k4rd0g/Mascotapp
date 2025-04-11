@@ -1,4 +1,4 @@
-import { Layout, Menu, Breadcrumb, } from 'antd';
+import { Layout, Menu, Breadcrumb } from 'antd';
 import { Outlet, useLocation, useNavigate, } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { sideMenuItems } from '../../config/menuConfig';
@@ -6,9 +6,10 @@ import { CollapseButton } from './collapseButton';
 import { extendedThemeConfig } from '../../styles/theme';
 import "./sideBar.css";
 
+
 const { Sider, Content } = Layout;
 
-export const Sidebar = () => {
+export const SidebarAndContent = () => {
   const [collapsed, setCollapsed] = useState(true);
   const [breadCrumbItems, setBreadCrumbItems] = useState([]);
   //const { token } = theme.useToken();
@@ -19,7 +20,7 @@ export const Sidebar = () => {
     const path = location.pathname.split("/").filter((item) => item);
     //Generar dinamicamente la ruta:
     const items = [
-      { key: "home", title: "Home", onClick: ()=> navigate("/")}, //Estático ruta de inicio
+      { key: "home", title: "Home", onClick: () => navigate("/") }, //Estático ruta de inicio
       ...path.map((_, index) => {
         const url = `/${path.slice(0, index + 1).join("/")}`;
         const title = path[index].replace(/-/g, " ").toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
@@ -57,39 +58,43 @@ export const Sidebar = () => {
   };
   const menuItems = sideMenuItems.map((item) => {
     if (item.items) {
-        return {
-            key: item.key,
-            icon: item.icon,
-            label: item.label,
-            children: item.items.map((subItem) => ({
-                key: subItem.key,
-                label: subItem.label,
-                onClick: () => handleMenuClick(subItem),
-            })),
-        };
+      return {
+        key: item.key,
+        icon: item.icon,
+        label: item.label,
+        children: item.items.map((subItem) => ({
+          key: subItem.key,
+          label: subItem.label,
+          onClick: () => handleMenuClick(subItem),
+        })),
+      };
     } else {
-        return {
-            key: item.key,
-            icon: item.icon,
-            label: item.label,
-            onClick: () => handleMenuClick(item),
-        };
+      return {
+        key: item.key,
+        icon: item.icon,
+        label: item.label,
+        onClick: () => handleMenuClick(item),
+      };
     }
-});
+  });
   return (
     <Layout
       className="custom-layout"
       style={{
-        minHeight: "100vh",
+        minHeight: "80vh",
+        width: "100%",
         bodyBg: extendedThemeConfig.bodyBg,
+        padding: "8px 0px",
       }}
     >
       {/* Sidebar */}
       <Sider
-        width={200}
         style={{
           background: extendedThemeConfig.colorBgSidebar,
           borderRadius: extendedThemeConfig.borderRadius,
+          height: "80vh",
+          padding: "8px 0px",
+          marginRight: "8px",
         }}
         collapsible
         collapsed={collapsed}
@@ -102,10 +107,11 @@ export const Sidebar = () => {
           selectedKeys={[getSelectedKey(location.pathname)]} // Encuentra la clave correcta
           defaultOpenKeys={getOpenKey(location.pathname) ? [getOpenKey(location.pathname)] : []} // Abre el sub menú correcto
           style={{
-            height: "90%",
+            height: "70vh",
             backgroundColor: 'transparent',
             colorBorder: extendedThemeConfig.colorBorder,
             alignItems: 'center',
+            border: 'none',
           }}
           items={menuItems}
         />
@@ -115,7 +121,7 @@ export const Sidebar = () => {
         {/* Breadcrumb */}
         <Breadcrumb
           style={{
-            margin: "16px",
+            margin: "0px 0px 8px 0px",
             backgroundColor: extendedThemeConfig.backgroundColor,
             padding: "8px",
             borderRadius: extendedThemeConfig.borderRadius,
@@ -125,15 +131,19 @@ export const Sidebar = () => {
         {/* Content */}
         <Content
           style={{
-            padding: "16px",
-            margin: "16px",
+            textAlign: "center",
+            padding: "8px",
+            margin: "0px 0px",
             backgroundColor: extendedThemeConfig.backgroundColor,
-            borderRadius: extendedThemeConfig.borderRadius
+            borderRadius: "8px",
           }}
         >
-          <Outlet />
+          <Outlet
+          style={{
+            backgroundColor: 'none',
+          }}/>
         </Content>
       </Layout>
-    </Layout>
+    </Layout >
   );
 };
