@@ -45,10 +45,18 @@ export const EditModalDynamic = ({
                 onSaveCompleted(`Se ha editado y actualizado: ${updatedItem.name}`, "success");
             }
             stopLoading(editItem);
-        } catch (errorInfo) { // Cambiar error a errorInfo
+        } catch (error) { // Cambiar error a errorInfo
             stopLoading(editItem);
-            const errorMessages = errorInfo.errorFields.map(field => field.errors.join(', ')).join('; ');
-            onCancel(`Error de validación: ${errorMessages}`, "error");
+            if (error.response && error.response.data && error.response.data.message) {
+                // Error proveniente del backend
+                onCancel(error.response.data.message, "error");
+            } else if (error.errorFields) {
+                const errorMessages = error.errorFields.map(field => field.errors.join(', ')).join('; ');
+                onCancel(`Error de validación: ${errorMessages}`, "error");
+            } else {
+                // Otro tipo de error
+                onCancel("Error al editar el registro, sin respuesta del servidor", "error");
+            }
         }
     };
     const renderFormItems = () => {

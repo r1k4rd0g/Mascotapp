@@ -1,6 +1,6 @@
 import { Modal, Form, Input, Switch, Select, Button, InputNumber, Spin } from 'antd';
 import PropTypes from 'prop-types';
-import { useEffect} from 'react';
+import { useEffect } from 'react';
 import { useLoadingState } from '../../hooks/useLoadingState';
 
 
@@ -28,10 +28,19 @@ export const AddModalDynamic = ({
             await addItem(values);
             stopLoading("addItem");
             onSaveCompleted(`Se ha creado: ${values.name}`, "success");
-        } catch (errorInfo) { // Cambiar error a errorInfo
+        } catch (error) {
             stopLoading("addItem");
-            const errorMessages = errorInfo.errorFields.map(field => field.errors.join(', ')).join('; ');
-            onCancel(`Error de validación: ${errorMessages}`, "error");
+            if (error.response && error.response.data && error.response.data.message) {
+                // Error proveniente del backend
+                onCancel(error.response.data.message, "error");
+            } else if (error.errorFields) {
+                // Errores de validación del formulario (frontend)
+                const errorMessages = error.errorFields.map(field => field.errors.join(', ')).join('; ');
+                onCancel(`Error de validación: ${errorMessages}`, "error");
+            } else {
+                // Otro tipo de error (ej., error de red sin respuesta del backend)
+                onCancel("Error al crear el registro, sin respuesta del servidor", "error");
+            }
         }
     };
     const renderFormItems = () => {
@@ -105,7 +114,7 @@ export const AddModalDynamic = ({
         <Modal
             open={visible}
             title={`Agregar ${entityConfig.label} `}
-            onCancel={()=> onCancel("Cancelado", "info")}
+            onCancel={() => onCancel("Cancelado", "info")}
             footer={[
                 <Button key="cancel" onClick={() => onCancel("Cancelado", "info")}>
                     Cancelar
@@ -116,7 +125,7 @@ export const AddModalDynamic = ({
             ]}
             onOk={handleSaveForm}
         >
-            <Form form={form} layout="vertical" initialValues={{[entityConfig.parentField]: parentData?.[0]?.id}}>
+            <Form form={form} layout="vertical" initialValues={{ [entityConfig.parentField]: parentData?.[0]?.id }}>
                 {renderFormItems()}
             </Form>
         </Modal>

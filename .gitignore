@@ -4,7 +4,7 @@ logs
 **/*.backup.*
 **/*.back.*
 
-vitacora.txt
+bitácora.txt
 list.todo
 node_modules
 

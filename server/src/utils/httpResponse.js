@@ -6,7 +6,14 @@ const HttpStatus = {
     UNAUTHORIZED: 401,
     FORBIDDEN: 403,
     NOT_FOUND: 404,
+    CONFLICT: 409,
     INTERNAL_SERVER_ERROR: 500,
+}
+const setCoresHeaders = (res) => {
+    res.header("Access-Control-Allow-Origin", res.req.headers.origin || "*");
+    res.header("Access-control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.header("Access-Control-Allow-Credentials", "true");
 }
 
 class HttpResponse {
@@ -17,14 +24,17 @@ class HttpResponse {
             detail: data,
         });
     }
-    BadRequest (res, errorKey, data){
+    BadRequest (res, errorCode, data){
+        const message = errorsDictionary[errorCode];
+        setCoresHeaders(res);
         return res.status(HttpStatus.BAD_REQUEST).json({
             status: HttpStatus.BAD_REQUEST,
-            message: errorsDictionary[errorKey],
+            message: message,
             detail: data,
         });
     }
     Unauthorized (res, data){
+        setCoresHeaders(res);
         return res.status(HttpStatus.UNAUTHORIZED).json({
             status: HttpStatus.UNAUTHORIZED,
             message: "Unauthorized",
@@ -38,18 +48,31 @@ class HttpResponse {
             detail: data
         });
     }
-    NotFound (res, errorKey, data){
+    NotFound (res, errorCode, data){
+        const message = errorsDictionary[errorCode];
+        setCoresHeaders(res);
         return res.status(HttpStatus.NOT_FOUND).json({
             status: HttpStatus.NOT_FOUND,
-            message: errorsDictionary[errorKey] || "Unknown Error",
-            detail: data || null,
+            message: message,
+            detail: data,
         });
     }
-    ServerError (res, errorKey, data){
+    Conflict (res, errorCode, data){
+        const message = errorsDictionary[errorCode];
+        setCoresHeaders(res);
+        return res.status(HttpStatus.CONFLICT).json({
+            status: HttpStatus.CONFLICT,
+            message: message,
+            detail: data,
+        });
+    }
+    ServerError (res, errorCode, data){
+        const message = errorsDictionary[errorCode];
+        setCoresHeaders(res);
         return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            message: errorsDictionary[errorKey] || "Unknown Error",
-            detail: data || null,
+            message: message,
+            detail: data,
         });
     }
 }

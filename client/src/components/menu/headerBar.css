@@ -1,0 +1,5 @@
+.custom-header-menu .ant-menu-item-selected {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Ejemplo de sombreado */
+    border-bottom: none !important;
+    border-radius: 4px; /* Opcional */
+}

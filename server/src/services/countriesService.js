@@ -15,18 +15,18 @@ class CountriesService extends Services {
         try {
             const name = capitalizeWords(data.name);
             if (!/^[a-zA-Z\s\-\']+$/.test(name)) {
-                throw new Error(`The country name can only contain letters, spaces, hyphens, and apostrophes: ${name}`);
+                throw { errorCode: 'INVALID_COUNTRY_NAME', message: `The country name can only contain letters, spaces, hyphens, and apostrophes: ${name}`, statusCode: 400 };
             }
             const cityExist = await this.countriesDao.getByName(name);
             if (cityExist) {
-                throw new Error(`There is already a country with that name: ${name}`)
+                throw { errorCode: 'COUNTRY_ALREADY_EXISTS', message: `There is already a country with that name: ${name}`, statusCode: 409 };
             } if (!cityExist) {
                 const newItem = await this.countriesDao.create(data);
                 if (!newItem) {
-                    throw new Error(`The item could not be created ${data}`)
+                    throw { errorCode: 'ERROR_TO_CREATE', message: `The item could not be created ${data}`, statusCode: 500 };
                 }
-                return newItem;
             }
+            return newItem;
         } catch (error) {
             logger.error('entró en el catch - countriesService - countryCreate: ' + error);
             throw error;
@@ -37,7 +37,7 @@ class CountriesService extends Services {
         try {
             const itemSearch = await this.countriesDao.getById(id);
             if (!itemSearch) {
-                throw new Error(`no se encontró item buscado por id ${id}`);
+                throw { errorCode: 'COUNTRY_NOT_FOUND', message: `No se encontró el país con el ID: ${id}`, statusCode: 404 };
             }
             return itemSearch;
         } catch (error) {
@@ -46,5 +46,4 @@ class CountriesService extends Services {
         }
     }
 }
-
 export const countriesService = new CountriesService();
