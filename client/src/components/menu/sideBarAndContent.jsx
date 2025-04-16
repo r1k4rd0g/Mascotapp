@@ -117,10 +117,10 @@ export const SidebarAndContent = () => {
     <Layout
       className="custom-layout"
       style={{
-        minHeight: "80vh",
+        height: "83vh",
         width: "100%",
         bodyBg: extendedThemeConfig.bodyBg,
-        padding: "8px 0px",
+        padding: "4px 0px",
       }}
     >
       {/* Sidebar */}
@@ -128,9 +128,9 @@ export const SidebarAndContent = () => {
         style={{
           background: extendedThemeConfig.colorBgSidebar,
           borderRadius: extendedThemeConfig.borderRadius,
-          height: "80vh",
-          padding: "8px 0px",
-          marginRight: "8px",
+          height: "100%",
+          padding: "2px 0px",
+          margin: "0px 8px 0px 0px",
         }}
         collapsible
         collapsed={collapsed}
@@ -145,7 +145,7 @@ export const SidebarAndContent = () => {
           onOpenChange={(newOpenKeys) => setOpenKeys(newOpenKeys)}
           subMenuCloseDelay={0.3}
           style={{
-            height: "70vh",
+            height: "auto",
             backgroundColor: 'transparent',
             colorBorder: extendedThemeConfig.colorBorder,
             alignItems: 'center',
@@ -159,9 +159,9 @@ export const SidebarAndContent = () => {
         {/* Breadcrumb */}
         <Breadcrumb
           style={{
-            margin: "0px 0px 8px 0px",
+            margin: "0px 0px 4px 0px",
             backgroundColor: extendedThemeConfig.backgroundColor,
-            padding: "8px",
+            padding: "2px",
             borderRadius: extendedThemeConfig.borderRadius,
           }}
           items={breadCrumbItems}
@@ -169,8 +169,9 @@ export const SidebarAndContent = () => {
         {/* Content */}
         <Content
           style={{
+            height: "85vh",
             textAlign: "center",
-            padding: "8px",
+            padding: "4px",
             margin: "0px 0px",
             backgroundColor: extendedThemeConfig.backgroundColor,
             borderRadius: "8px",

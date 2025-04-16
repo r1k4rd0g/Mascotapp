@@ -3,13 +3,13 @@ export const themeConfig = {
     token: { //configuración genérica que aplica a todo el proyecto
         colorPrimary: '#EA3455FF',       // Color principal -->  EA3455FF
         colorPrimaryText: '#020B23FF',
-        backgroundColor: '#D8BBC2FF',// Fondo de contenedores
-        bodyBackground: '#F3E6D5FF',      // Fondo de la página
-        colorBgHeader: '#D8C4B6', // otro color posible 437B2BFF
-        colorBgFooter: '#D8C4B6',
-        colorBgSidebar: '#D8C4B6',
-        colorBgContainer: '#F3E6D5FF', // Color de fondo de los contenedores
-        borderColor: '#EA3455ff',
+        backgroundColor: '#E0E0E0',// Fondo de contenedores
+        bodyBackground: '#E0E0E0',      // Fondo de la página
+        colorBgHeader: '#767272FF', // otro color posible 437B2BFF
+        colorBgFooter: '#767272FF',
+        colorBgSidebar: '#767272FF',
+        colorBgContainer: '#E0E0E0', // Color de fondo de los contenedores
+        borderColor: '#999999 ',
         colorText: '#020B23FF',           // Color del texto principal
         colorSuccess: '#B8DC6B',        // Color de éxito
         colorWarning: '#ff9800',        // Color de advertencia
@@ -25,24 +25,24 @@ export const themeConfig = {
         },
         Menu: {
             colorText: '#020B23FF',
-            backgroundColor: '#F3E6D5FF',
+            backgroundColor: '#E0E0E0',
 
         },
         Content: {
             borderRadius: 8,
-            backgroundColor: '#F3E6D5FF',
+            backgroundColor: '#E0E0E0',
         },
         Form: {
         },
         Table: {
             bodySortBg: '#070700FF',
-            borderColor: '#032617FF',
-            colorText: '#4A0513FF',
+            borderColor: '#767272FF ',
+            colorText: '#020B23FF',
             headerBg: '#4F709C',
-            headerColor: '#F3E6D5FF',
-            footerColor: '#F3E6D5FF',
+            headerColor: '#F5EFE7',
+            footerColor: '#F5EFE7',
             footerBg: '#4F709C',
-            rowHoverBg: '#D6D392FF', //cuando paso por arriba de la fila, muestra en que fila estoy,
+            rowHoverBg: '#F580AFFF', //cuando paso por arriba de la fila, muestra en que fila estoy,
             rowSelectedBg: '#D6D392FF', //cuando selecciono una fila, la resalta
             borderRadius: 8,
         },

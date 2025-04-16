@@ -12,7 +12,7 @@ export default class MySQLDao {
             const response = await this.model.create(data);
             return response;
         } catch (error) {
-            console.error('entró en catch: mySQL - mySQL.dao - create' + error);
+            console.error('entró en catch: mySQL - mySQL.dao - create: ' + error);
         }
     }
     async getAll() {
@@ -20,7 +20,7 @@ export default class MySQLDao {
             const response = await this.model.findAll({});
             return response;
         } catch (error) {
-            console.error('entró en catch: mySQL - mySQL.dao - create' + error);
+            console.error('entró en catch: mySQL - mySQL.dao - getAll: ' + error);
         }
     }
     async getById(id) {
@@ -28,7 +28,7 @@ export default class MySQLDao {
             const response = await this.model.findByPk(id);
             return response;
         } catch (error) {
-            console.error('entró en catch: mySQL - mySQL.dao - create' + error);
+            console.error('entró en catch: mySQL - mySQL.dao - getById: ' + error);
         }
     }
     async update(id, data) {
@@ -41,7 +41,7 @@ export default class MySQLDao {
             const response = await instance.save();
             return response;
         } catch (error) {
-            console.error('entró en catch: mySQL - mySQL.dao - create' + error);
+            console.error('entró en catch: mySQL - mySQL.dao - update: ' + error);
         }
     }
     async delete(id) {
@@ -53,7 +53,7 @@ export default class MySQLDao {
             });
             return response;
         } catch (error) {
-            console.error('entró en catch: mySQL - mySQL.dao - create' + error);
+            console.error('entró en catch: mySQL - mySQL.dao - delete: ' + error);
         }
     }
     async getByName(name) {
@@ -65,7 +65,7 @@ export default class MySQLDao {
             });
             return response;
         } catch (error) {
-            console.error('entró en catch: mySQL - mySQL.dao - create' + error);
+            console.error('entró en catch: mySQL - mySQL.dao - getByName: ' + error);
         }
     }
 }

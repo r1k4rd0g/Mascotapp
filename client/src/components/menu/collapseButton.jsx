@@ -1,11 +1,12 @@
 import { Button } from "antd";
 import { Icons } from "../utils/icons";
 import PropTypes from "prop-types";
+import { extendedThemeConfig } from "../../styles/theme";
 
 export const CollapseButton = ({ collapsed, setCollapsed }) => {
     return (
         <Button
-            type="text"
+            type="default"
             size="large"
             icon={collapsed ? <Icons name="MenuUnfoldOutlined" /> : <Icons name="MenuFoldOutlined" />}
             onClick={() => setCollapsed(!collapsed)}
@@ -15,6 +16,7 @@ export const CollapseButton = ({ collapsed, setCollapsed }) => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                colorBorder: extendedThemeConfig.colorBorder,
             }}
         />
     );

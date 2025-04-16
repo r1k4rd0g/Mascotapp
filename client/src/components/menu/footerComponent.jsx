@@ -11,12 +11,25 @@ export const FooterComponent = () => {
         <Footer style={{
             width: '100%',
             textAlign: 'center',
-            padding: "0 8px",
+            justifyContent: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'row',
+            padding: "0px 0px 8px 0px",
+            height: '6vh',
             backgroundColor: extendedThemeConfig.colorBgFooter,
             borderRadius: extendedThemeConfig.borderRadius
         }}>
             <div
-                style={{ display: 'inline-flex', textAlign: 'center', alignItems: 'center' }}
+                style={{
+                    display: 'inline-flex',
+                    textAlign: 'center',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    height: '90%',
+                    margin: '0px 0px 0px 0px',
+                }}
             >
                 <h4>
                     Desarrollado por {' '}
@@ -30,16 +43,15 @@ export const FooterComponent = () => {
                     <img
                         src={Logo}
                         alt="Linkatic Logo"
-                        style={{ width: '100px', height: 'auto' }}
+                        style={{
+                            width: '90px',
+                            height: '100%',
+                            margin: '4px 0px 0px 0px',
+                        }}
                     />
                 </a>
                 <h4>
-                    - by Ricardo Graña
-                </h4>
-            </div>
-            <div>
-                <h4>
-                    ©{new Date().getFullYear()} Mascotapp. Todos los derechos reservados.
+                    - by Ricardo Graña - © {new Date().getFullYear()} Mascotapp. Todos los derechos reservados.
                 </h4>
             </div>
         </Footer>

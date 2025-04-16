@@ -1,12 +1,13 @@
-import { Menu, Layout, theme } from 'antd';
+import { Menu, Layout } from 'antd';
 import { topMenuItems } from '../../config/menuConfig.jsx'
 import Logo from '../../assets/Logo2.png';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { extendedThemeConfig } from '../../styles/theme.js';
+import './headerBar.css'
 
 const { Header } = Layout;
 export const HeaderComponent = () => {
-    const { token } = theme.useToken();
     const navigate = useNavigate();
 
     const handleMenuClick = (menuItem) => {
@@ -18,40 +19,44 @@ export const HeaderComponent = () => {
         ...item,
         onClick: () => handleMenuClick(item),
     }));
+
+    const menuStyle = {
+        flexGrow: 1,
+        backgroundColor: 'transparent',
+        width: '40vw',
+        overflow: 'visible',
+        alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        colorBorder: extendedThemeConfig.colorBorder,
+    }
     return (
         <Header style={{
-            backgroundColor: token.colorBgHeader,
-            borderRadius: token.borderRadius,
+            backgroundColor: extendedThemeConfig.colorBgHeader,
+            borderRadius: extendedThemeConfig.borderRadius,
             display: 'flex',
             alignItems: 'center',
-            height: 60,
+            height: '6vh',
             width: '100%',
-            padding: '0 8px',
-            zIndex: 20,
+            padding: '0 4px',
         }}>
             <div style={{
                 display: 'flex',
             }}>
                 <Link to='/'>
                     <img src={Logo} alt='Logo' style={{
-                        width: '85px',
-                        height: '50px',
-                        marginTop: '16px'
+                        width: '90px',
+                        height: '100px',
+                        margin: '30px 0px 0px 0px',
                     }}></img>
                 </Link>
                 <Menu
                     mode="horizontal"
                     defaultSelectedKeys={['1']}
                     items={menuItems}
-                    style={{
-                        flexGrow: 1,
-                        backgroundColor: 'transparent',
-                        overflow: 'visible',
-                        minWidth: '100%',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        border: 'none',
-                    }}
+                    style={menuStyle}
+                    className="custom-header-menu"
                 />
             </div>
         </Header>
