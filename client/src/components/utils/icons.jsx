@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import {
     /* Out Lined */
-    BaiduOutlined,
     CalendarOutlined,
     CloseOutlined,
     EllipsisOutlined,
@@ -11,9 +10,11 @@ import {
     HomeOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
+    MessageOutlined,
     RedoOutlined,
     SearchOutlined,
     SettingOutlined,
+    ToolOutlined,
     UserOutlined,
     /* Two Tones */
     DeleteTwoTone,
@@ -21,9 +22,25 @@ import {
     PlusCircleTwoTone
 } from "@ant-design/icons";
 
+import {
+    /* Out Lined */
+    MdOutlinePets,
+    MdOutlineAccountBalance,
+    MdLocationCity,
+    MdOutlineMyLocation,
+    MdOutlineMap,
+} from "react-icons/md";
+
+import {
+    FaEarthAmericas
+} from "react-icons/fa6";
 
 const iconsMap = {
-    BaiduOutlined: BaiduOutlined,
+    PetsOutlined: MdOutlinePets,
+    State: MdOutlineAccountBalance,
+    City: MdLocationCity,
+    Neigh: MdOutlineMyLocation,
+    Map: MdOutlineMap,
     CalendarOutlined: CalendarOutlined,
     CloseOutlined: CloseOutlined,
     EllipsisOutlined: EllipsisOutlined,
@@ -33,13 +50,16 @@ const iconsMap = {
     HomeOutlined: HomeOutlined,
     MenuFoldOutlined: MenuFoldOutlined,
     MenuUnfoldOutlined: MenuUnfoldOutlined,
+    MessageOutlined: MessageOutlined,
     RedoOutlined: RedoOutlined,
     SearchOutlined: SearchOutlined,
     SettingOutlined: SettingOutlined,
+    ToolOutlined: ToolOutlined,
     UserOutlined: UserOutlined,
     EditTwoTone: EditTwoTone,
     DeleteTwoTone: DeleteTwoTone,
-    PlusCircleTwoTone: PlusCircleTwoTone
+    PlusCircleTwoTone: PlusCircleTwoTone,
+    EarthPlanet : FaEarthAmericas ,
 }
 
 export const Icons = ({name, ...props})=>{

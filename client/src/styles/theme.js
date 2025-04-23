@@ -11,7 +11,7 @@ export const themeConfig = {
         colorBgContainer: '#E0E0E0', // Color de fondo de los contenedores
         borderColor: '#999999 ',
         colorText: '#020B23FF',           // Color del texto principal
-        colorSuccess: '#B8DC6B',        // Color de éxito
+        colorSuccess: '#6B9C02FF',        // Color de éxito
         colorWarning: '#ff9800',        // Color de advertencia
         colorError: '#f44336',          // Color de error
         borderRadius: 8,                // Radio de bordes
@@ -35,7 +35,7 @@ export const themeConfig = {
         Form: {
         },
         Table: {
-            bodySortBg: '#070700FF',
+            bodySortBg: '#767272FF',
             borderColor: '#767272FF ',
             colorText: '#020B23FF',
             headerBg: '#4F709C',

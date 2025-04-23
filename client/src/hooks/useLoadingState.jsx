@@ -23,7 +23,6 @@ export const useLoadingState = () => {
     const stopLoading = (action) => {
         clearInterval(timeRef.current[action]);
         delete timeRef.current[action];
-
         setLoadingStates(prev => ({ ...prev, [action]: false }));
         setPercent(prev => ({ ...prev, [action]: 100 })); // Fuerza a 100% inmediato
     };

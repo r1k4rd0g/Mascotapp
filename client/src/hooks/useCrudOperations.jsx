@@ -34,7 +34,6 @@ export const useCrudOperations = (endpoint) => {
         const cancelToken = createCancelToken(requestId); // Crear un nuevo CancelToken
         try {
             const response = await baseUrl.get(endpoint, { cancelToken })
-            console.log("Datos obtenidos", response.data.detail);
             setData(response.data.detail)
         }
         catch (error) {
@@ -54,7 +53,6 @@ export const useCrudOperations = (endpoint) => {
         const cancelToken = createCancelToken(requestId); // Crear un nuevo CancelToken
         try {
             const response = await baseUrl.put(`${endpoint}/${id}`, updatedItem, { cancelToken })
-            console.log("Registro actualizado", response.data.detail);
             setData(prevData =>
                 prevData.map(item => item.id === id ? { ...item, ...updatedItem } : item)
             );
@@ -79,7 +77,6 @@ export const useCrudOperations = (endpoint) => {
         const cancelToken = createCancelToken(requestId); // Crear un nuevo CancelToken
         try {
             const response = await baseUrl.post(endpoint, newItem, { cancelToken })
-            console.log("Registro agregado", response.data.detail);
             setData(prevData => [...prevData, response.data.detail]);
             removeCancelToken(requestId); // Eliminar el CancelToken después de la solicitud
             return response.data;
@@ -103,7 +100,6 @@ export const useCrudOperations = (endpoint) => {
         const cancelToken = createCancelToken(requestId); // Crear un nuevo CancelToken
         try {
             const response = await baseUrl.delete(`${endpoint}/${id}`, { cancelToken })
-            console.log("Registro eliminado", response.data.detail);
             setData(prevData => prevData.filter(item => item.id !== id));  // Actualiza sin recargar
             removeCancelToken(requestId); // Eliminar el CancelToken después de la solicitud
             return response.data;

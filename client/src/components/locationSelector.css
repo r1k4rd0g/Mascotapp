@@ -1,0 +1,7 @@
+.location-card:hover {
+    background-color: #dce6f6 !important;
+    /* Un gris claro, puedes cambiarlo al color que quieras */
+    cursor: pointer;
+    /* Opcional: cambiar el cursor al hacer hover para indicar interactividad */
+    /* También puedes cambiar otros estilos como el borde, la sombra, etc. */
+}

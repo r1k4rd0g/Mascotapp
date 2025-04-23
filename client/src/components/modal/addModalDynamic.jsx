@@ -1,48 +1,70 @@
-import { Modal, Form, Input, Switch, Select, Button, InputNumber, Spin } from 'antd';
+import { Modal, Form, Input, Switch, Select, Button, InputNumber } from 'antd';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLoadingState } from '../../hooks/useLoadingState';
-
+import { MessageGenerics } from '../utils/messageGenerics';
 
 export const AddModalDynamic = ({
     visible,
-    onCancel,
+    onClose,
     onSaveCompleted,
     entityConfig,
     parentData,
     addItem,
+    messageCounter
 }) => {
     const [form] = Form.useForm();
     const { loadingStates, startLoading, stopLoading } = useLoadingState();
+    const [localMessage, setLocalMessage] = useState(null);
+    const [localMessageType, setLocalMessageType] = useState(null);
 
 
 
     useEffect(() => {
-        form.resetFields();
+        if (visible) {
+            form.resetFields();
+            setLocalMessage(null);
+        }
     }, [form, visible]);
 
-    const handleSaveForm = async () => {
+    const handleSaveForm = async (shouldReset) => {
         try {
             startLoading("addItem");
             const values = await form.validateFields();
             await addItem(values);
             stopLoading("addItem");
-            onSaveCompleted(`Se ha creado: ${values.name}`, "success");
+            const successMessage = `Se ha creado: ${values.name}`;
+            setLocalMessage({ message: successMessage, counter: messageCounter });
+            setLocalMessageType("success");
+            if (shouldReset) {
+                form.resetFields();
+                setLocalMessage({ message: `${successMessage}. Listo para ingresar un nuevo registro`, counter: messageCounter + 1 });
+                setLocalMessageType("success");
+            } else {
+                onClose("Modal cerrado", "info");
+                onSaveCompleted(successMessage, "success", false);
+            }
         } catch (error) {
             stopLoading("addItem");
             if (error.response && error.response.data && error.response.data.message) {
                 // Error proveniente del backend
-                onCancel(error.response.data.message, "error");
+                onClose(error.response.data.message, "error");
             } else if (error.errorFields) {
                 // Errores de validación del formulario (frontend)
                 const errorMessages = error.errorFields.map(field => field.errors.join(', ')).join('; ');
-                onCancel(`Error de validación: ${errorMessages}`, "error");
+                onClose(`Error de validación: ${errorMessages}`, "error");
             } else {
                 // Otro tipo de error (ej., error de red sin respuesta del backend)
-                onCancel("Error al crear el registro, sin respuesta del servidor", "error");
+                onClose("Error al crear el registro, sin respuesta del servidor", "error");
             }
         }
     };
+    const handleSaveAndAddAnother = async () => {
+        await handleSaveForm(true);
+    };
+    const handleSaveAndClose = async () => {
+        await handleSaveForm(false);
+    }
     const renderFormItems = () => {
         const formItems = [];
         formItems.push(
@@ -111,30 +133,36 @@ export const AddModalDynamic = ({
         return formItems;
     };
     return (
-        <Modal
-            open={visible}
-            title={`Agregar ${entityConfig.label} `}
-            onCancel={() => onCancel("Cancelado", "info")}
-            footer={[
-                <Button key="cancel" onClick={() => onCancel("Cancelado", "info")}>
-                    Cancelar
-                </Button>,
-                <Button key="submit" type="primary" onClick={handleSaveForm} loading={loadingStates.addItem} disabled={loadingStates.addItem}>
-                    {loadingStates.addItem ? <Spin size="small" /> : 'Guardar'}
-                </Button>
-            ]}
-            onOk={handleSaveForm}
-        >
-            <Form form={form} layout="vertical" initialValues={{ [entityConfig.parentField]: parentData?.[0]?.id }}>
-                {renderFormItems()}
-            </Form>
-        </Modal>
+        <>
+            <Modal
+                open={visible}
+                title={`Agregar ${entityConfig.label} `}
+                onCancel={() => onClose("Modal cerrado, acción cancelada", "info")}
+                footer={[
+                    <Button key="Cerrar" onClick={() => onClose("Modal cerrado, acción cancelada", "info")}>
+                        Cerrar
+                    </Button>,
+                    <Button key="submit" type="primary" onClick={handleSaveAndClose} loading={loadingStates.addItem} disabled={loadingStates.addItem}>
+                        {'Guardar'}
+                    </Button>,
+                    <Button key="send-and-add-other" type= "primary" color="primary" variant='filled' onClick={handleSaveAndAddAnother} loading={loadingStates.addItem} disabled={loadingStates.addItem}>
+                        {'Guardar y Agregar Otro'}
+                    </Button>,
+                ]}
+                onOk={handleSaveAndClose} //comportamiento de "enter"
+            >
+                <Form form={form} layout="vertical" initialValues={{ [entityConfig.parentField]: parentData?.[0]?.id }}>
+                    {renderFormItems()}
+                </Form>
+            </Modal>
+            {<MessageGenerics messageContent={localMessage} type={localMessageType} />}
+        </>
     );
 };
 
 AddModalDynamic.propTypes = {
     visible: PropTypes.bool,
-    onCancel: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
     onSaveCompleted: PropTypes.func.isRequired,
     entityConfig: PropTypes.object.isRequired,
     parentData: PropTypes.array,

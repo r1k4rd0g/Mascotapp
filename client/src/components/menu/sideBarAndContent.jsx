@@ -17,16 +17,24 @@ export const SidebarAndContent = () => {
   const isInitialRender = useRef(true);
   const isFirstRender = useRef(true);
 
+
+
   useEffect(() => {
     const path = location.pathname.split("/").filter((item) => item);
 
     //Generar dinamicamente la ruta:
     const items = [
       { key: "home", title: "Home", onClick: () => navigate("/") }, //Estático ruta de inicio
-      ...path.map((_, index) => {
+      ...path.map((segment, index) => {
         const url = `/${path.slice(0, index + 1).join("/")}`;
-        const title = path[index].replace(/-/g, " ").toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
-        return { key: url, title: title, onClick: () => navigate(url) };
+        const title = segment.replace(/-/g, " ").toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+        return {
+          key: url,
+          title: title,
+          onClick: () => {
+            navigate(url);
+          }
+        }
       }),
     ];
     setBreadCrumbItems(items);

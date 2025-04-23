@@ -1,12 +1,12 @@
 import { Modal, Form, Input, Switch, Select, Button, InputNumber } from 'antd';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import {useLoadingState} from '../../hooks/useLoadingState';
-
+import { useLoadingState } from '../../hooks/useLoadingState';
+import { MessageGenerics } from '../utils/messageGenerics';
 
 export const EditModalDynamic = ({
     visible,
-    onCancel,
+    onClose,
     onSaveCompleted,
     entityConfig,
     initialData,
@@ -15,50 +15,63 @@ export const EditModalDynamic = ({
     modalData,
     parentData,
     editItem,
+    messageCounter
 }) => {
     const [form] = Form.useForm();
     const [currentIndex, setCurrentIndex] = useState(0);
     const { loadingStates, startLoading, stopLoading } = useLoadingState();
+    const [localMessage, setLocalMessage] = useState(null);
+    const [localMessageType, setLocalMessageType] = useState(null);
+
 
 
     useEffect(() => {
         form.resetFields();
+        setLocalMessage(null);
         if (modalData?.length > 0) {
             form.setFieldsValue(modalData[currentIndex]);
         }
-    }, [currentIndex, modalData, form]);
+    }, [currentIndex, modalData, form, visible,]);
 
     const handleSaveForm = async () => {
         try {
-            startLoading(editItem);
+            startLoading("editItem");
             const values = await form.validateFields();
             const updatedItem = { ...modalData[currentIndex], ...values };
             await editItem(updatedItem.id, updatedItem);
+            const successMessage = `Se ha editado y actualizado: ${updatedItem.name}`;
+            setLocalMessage({ message: successMessage, counter: messageCounter });
+            setLocalMessageType("success");
             if (modalData.length > 1) {
                 if (currentIndex < modalData.length - 1) {
                     setCurrentIndex(prev => prev + 1);
+                    stopLoading("editItem");
                 } else {
                     setCurrentIndex(0);
-                    onSaveCompleted(`Se han editado y actualizado los items seleccionados`, "success");
+                    onSaveCompleted(`Se han editado y actualizado todos los items seleccionados`, "success");
+                    onClose("Modal cerrado", "info");
+                    stopLoading("editItem");
                 }
             } else {
-                onSaveCompleted(`Se ha editado y actualizado: ${updatedItem.name}`, "success");
+                onSaveCompleted(successMessage, "success");
+                onClose("Modal cerrado", "info");
+                stopLoading("editItem");
             }
-            stopLoading(editItem);
-        } catch (error) { // Cambiar error a errorInfo
-            stopLoading(editItem);
+        } catch (error) {
+            stopLoading("editItem");
             if (error.response && error.response.data && error.response.data.message) {
                 // Error proveniente del backend
-                onCancel(error.response.data.message, "error");
+                onClose(error.response.data.message, "error");
             } else if (error.errorFields) {
                 const errorMessages = error.errorFields.map(field => field.errors.join(', ')).join('; ');
-                onCancel(`Error de validación: ${errorMessages}`, "error");
+                onClose(`Error de validación: ${errorMessages}`, "error");
             } else {
                 // Otro tipo de error
-                onCancel("Error al editar el registro, sin respuesta del servidor", "error");
+                onClose("Error al editar el registro, sin respuesta del servidor", "error");
             }
         }
     };
+
     const renderFormItems = () => {
         const formItems = [];
         formItems.push(
@@ -127,31 +140,36 @@ export const EditModalDynamic = ({
         return formItems;
     };
     return (
-        <Modal
-            open={visible}
-            title={`Editar ${entityConfig.label} ${isMultiple && totalItems ? `(${currentIndex + 1} de ${totalItems})` : ''}`}
-            onCancel={onCancel}
-            footer={[
-                <Button key="cancel" onClick={() => onCancel("Cancelado", "info")}>
-                    Cancelar
-                </Button>,
-                <Button key="submit" type="primary" onClick={handleSaveForm} loading={loadingStates.editItem} disabled={loadingStates.editItem}>
-                    {isMultiple ? `Guardar y ${currentIndex === totalItems - 1 ?
-                        'Finalizar' : 'Siguiente'}` : 'Guardar'}
-                </Button>
-            ]}
-            onOk={!isMultiple ? handleSaveForm : null}
-        >
-            <Form form={form} layout="vertical" initialValues={initialData}>
-                {renderFormItems()}
-            </Form>
-        </Modal>
+        <>
+            <Modal
+                open={visible}
+                title={`Editar ${entityConfig.label} ${isMultiple && totalItems ? `(${currentIndex + 1} de ${totalItems})` : ''}`}
+                onCancel={() => onClose("Modal cerrado, acción cancelada", "info")}
+                footer={[
+                    <Button key="Cerrar" onClick={() => onClose("Modal cerrado, acción cancelada", "info")}>
+                        Cerrar
+                    </Button>,
+                    <Button key="submit" type="primary" onClick={handleSaveForm} loading={loadingStates.editItem} disabled={loadingStates.editItem}>
+                        {isMultiple ? `Guardar y ${currentIndex === totalItems - 1 ?
+                            'Finalizar' : 'Siguiente'}` : 'Guardar'}
+                    </Button>
+                ]}
+                onOk={!isMultiple ? handleSaveForm : null}
+            >
+                <Form form={form} layout="vertical" initialValues={initialData}>
+                    {renderFormItems()}
+                </Form>
+            </Modal>
+            {<MessageGenerics messageContent={localMessage} type={localMessageType} />}
+        </>
     );
 };
 
+
+
 EditModalDynamic.propTypes = {
     visible: PropTypes.bool,
-    onCancel: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
     onSaveCompleted: PropTypes.func.isRequired,
     entityConfig: PropTypes.object.isRequired,
     initialData: PropTypes.object,

@@ -3,10 +3,44 @@ import { Icons } from "../components/utils/icons";
 
 
 export const topMenuItems = [
-  { key: "1", label: "Dashboard", icon: <Icons name="HomeOutlined" />, link: "/dashboard" },
-  { key: "2", label: "Process", icon: <Icons name="FieldTimeOutlined" />, link: "/clientes/listar" },
-  { key: "3", label: "Mascotas", icon: <Icons name="BaiduOutlined" />, link: "/mascotas/listar" },
-  { key: "4", label: "Ajustes", icon: <Icons name="SettingOutlined" />, link: "/ajustes" },
+  {
+    key: "1",
+    label: "Dashboard",
+    icon: <Icons name="HomeOutlined" />,
+    link: "/dashboard"
+  },
+  {
+    key: "2",
+    label: "Process",
+    icon: <Icons name="FieldTimeOutlined" />,
+    link: "/clientes/listar"
+  },
+  {
+    key: "3",
+    label: "Mascotas",
+    icon: <Icons name="PetsOutlined" />,
+    link: "/mascotas/listar"
+  },
+  {
+    key: "4",
+    label: "Ajustes",
+    icon: <Icons name="SettingOutlined" />,
+    link: "/ajustes"
+  },
+  {
+    key: "5",
+    label: "Tools",
+    icon: <Icons name="ToolOutlined" />,
+    link: "/tools/mensajes-del-sistema",
+    items: [
+      {
+        key: "6",
+        label: "Historial de Mensajes",
+        icon: <Icons name="MessageOutlined" />,
+        link: "/tools/mensajes-del-sistema"
+      },
+    ]
+  },
 ];
 
 export const sideMenuItems = [
@@ -21,7 +55,7 @@ export const sideMenuItems = [
   },
   {
     key: "sub2",
-    icon: <Icons name="BaiduOutlined" />,
+    icon: <Icons name="PetsOutlined" />,
     label: "Mascotas",
     items: [
       { key: "3", label: "Listar", link: "/mascotas/listar" },
@@ -39,12 +73,12 @@ export const sideMenuItems = [
   },
   {
     key: "sub4",
-    icon: <Icons name="EnvironmentOutlined" />,
+    icon: <Icons name="Map" />,
     label: "Ubicaciones",
-    link: "/user-profile",
+    //link: "/user-profile",
     items: [
       { key: "7", label: "Paises", link: "/ubicaciones/paises" },
-      { key: "8", label: "Departamento", link:"/ubicaciones/departamentos" },
+      { key: "8", label: "Departamento", link: "/ubicaciones/departamentos" },
       { key: "9", label: "Ciudades", link: "/ubicaciones/ciudades" },
       { key: "10", label: "Barrios", link: "/ubicaciones/barrios" },
     ]

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Button, Dropdown, Menu, Space } from 'antd';
+import { Button, Dropdown, Space } from 'antd';
 import { TooltipGenerics } from './tooltipGenerics';
 import { Icons } from '../utils/icons'; // Ajusta la ruta según tu estructura
 
@@ -12,32 +12,51 @@ export const TableActionsMenu = ({
     deleteLabel = 'Eliminar selección',
     extraMenuItems = []
 }) => {
-    const menu = (
-        <Menu>
-            {selectedKeys?.length > 0 && [
-                <Menu.Item key="edit" onClick={() => onEditMultiple(selectedKeys)}>
-                    <Icons name={'EditTwoTone'} /> {editLabel}
-                </Menu.Item>,
-                <Menu.Item key="delete" onClick={() => onDelete(selectedKeys)}>
-                    <Icons name={'DeleteTwoTone'} /> {deleteLabel}
-                </Menu.Item>
-            ]}
-            {extraMenuItems.map((item, index) => (
-                <Menu.Item key={`extra-${index}`} {...item.props}>
+    const menuItems = [];
+    if (selectedKeys?.length > 0) {
+        menuItems.push({
+            key: 'edit',
+            label: (
+                <TooltipGenerics title={editLabel} placement="left">
+                    <span>
+                        <Icons name={'EditTwoTone'} />
+                    </span>
+                </TooltipGenerics>
+            ),
+            onClick: () => onEditMultiple(selectedKeys),
+        });
+        menuItems.push({
+            key: 'delete',
+            label: (
+                <TooltipGenerics title={deleteLabel} placement="left">
+                    <span>
+                        <Icons name={'DeleteTwoTone'} />
+                    </span>
+                </TooltipGenerics>
+            ),
+            onClick: () => onDelete(selectedKeys),
+        });
+    }
+    extraMenuItems.forEach((item, index) => {
+        menuItems.push({
+            key: `extra-${index}`,
+            label: (
+                <TooltipGenerics title={item.props?.tooltipTitle || ''} placement="left">
                     {item.content}
-                </Menu.Item>
-            ))}
-        </Menu>
-    );
-
+                </TooltipGenerics>
+            ),
+            onClick: item.props?.onClick,
+            ...item.props, // Pass other props if needed
+        });
+    });
     return (
         <Space>
             <TooltipGenerics title="Agregar" placement='top'>
-            <Button type="text" onClick={onAdd}
-                icon={<Icons name={'PlusCircleTwoTone'} />}
-            />
+                <Button type="text" onClick={onAdd}
+                    icon={<Icons name={'PlusCircleTwoTone'} />}
+                />
             </TooltipGenerics>
-            <Dropdown menu={{ items: menu.props.children }} trigger={['click']}>
+            <Dropdown menu={{ items: menuItems }} trigger={['click']}>
                 <TooltipGenerics title="Más opciones al seleccionar items" placement='top'>
                     <Button type="text" icon={<Icons name={'EllipsisOutlined'} />} />
                 </TooltipGenerics>
