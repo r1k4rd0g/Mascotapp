@@ -65,7 +65,7 @@ export const entitiesConfig = {
                 title: 'Departamento', dataIndex: 'stateId', key: 'stateId', align: 'center'
             },
             {
-                title: 'Activo', dataIndex: 'isActive', key: 'isActive', render: (isActive) => isActive ? 'Sí' : 'No'
+                title: 'Activo', dataIndex: 'isActive', key: 'isActive', align: 'center', render: (isActive) => isActive ? 'Sí' : 'No'
             },
             {
                 title: 'Fecha creación', dataIndex: 'createdAt', key: 'createdAt', align: 'center',
@@ -91,7 +91,7 @@ export const entitiesConfig = {
                 title: 'Ciudad', dataIndex: 'cityId', key: 'cityId', align: 'center'
             },
             {
-                title: 'Activo', dataIndex: 'isActive', key: 'isActive', render: (isActive) => isActive ? 'Sí' : 'No'
+                title: 'Activo', dataIndex: 'isActive', key: 'isActive', align: 'center', render: (isActive) => isActive ? 'Sí' : 'No'
             },
             {
                 title: 'Fecha creación', dataIndex: 'createdAt', key: 'createdAt', align: 'center',

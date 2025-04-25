@@ -37,17 +37,20 @@ export const HeaderComponent = () => {
             borderRadius: extendedThemeConfig.borderRadius,
             display: 'flex',
             alignItems: 'center',
-            height: '6vh',
+            height: 'clamp(4em, auto, 7vh)',
             width: '100%',
-            padding: '0 4px',
+            padding: '0 2px',
+            marginTop: '1px'
         }}>
             <div style={{
                 display: 'flex',
             }}>
                 <Link to='/'>
                     <img src={Logo} alt='Logo' style={{
-                        width: '90px',
-                        height: '100px',
+                        //width: '90px',
+                        width: 'clamp(40px, 15vw, 90px',
+                        //height: '100px',
+                        height: 'clamp(3vh, auto, 7vh)',
                         margin: '30px 0px 0px 0px',
                     }}></img>
                 </Link>

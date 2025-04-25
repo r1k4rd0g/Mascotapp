@@ -125,7 +125,7 @@ export const SidebarAndContent = () => {
     <Layout
       className="custom-layout"
       style={{
-        height: "83vh",
+        height: "clamp(79vh, 81vh, 82vh)",
         width: "100%",
         bodyBg: extendedThemeConfig.bodyBg,
         padding: "4px 0px",
@@ -177,12 +177,15 @@ export const SidebarAndContent = () => {
         {/* Content */}
         <Content
           style={{
-            height: "85vh",
+            //height: "auto",
+            height: 'clamp(600px, 90vh, 95vh)',
+            //minHeight: '85vh',
             textAlign: "center",
             padding: "4px",
             margin: "0px 0px",
             backgroundColor: extendedThemeConfig.backgroundColor,
             borderRadius: "8px",
+            overflowY: "auto",
           }}
         >
           <Outlet

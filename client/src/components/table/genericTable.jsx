@@ -1,5 +1,3 @@
-//import { format } from 'date-fns';
-//import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Space, Button, Spin } from 'antd';
 import { Icons } from '../utils/icons';
@@ -30,6 +28,8 @@ export const GenericTable = ({
         title: 'Acciones',
         key: 'actions',
         align: 'center',
+        fixed: 'right',
+        //width: 120,
         render: (_, record) => (
             <Space>
                 <TooltipGenerics title={disableActions ? "Acción inhabilitada" : "Editar"} placement='top'>
@@ -64,6 +64,7 @@ export const GenericTable = ({
         <div style={{
             textAlign: "center",
             borderRadius: extendedThemeConfig.borderRadius,
+            overflow: "auto",
         }}>
             <div style={{
                 marginBottom: "8px",
@@ -74,6 +75,9 @@ export const GenericTable = ({
                 padding: '4px 4px',
                 borderRadius: extendedThemeConfig.borderRadius,
                 border: `1px solid ${extendedThemeConfig.borderColor}`,
+                position: 'sticky',
+                top: 0,
+                zIndex: 1,
             }}>
                 {ellipsisSwitch}
                 <TableActionsMenu
@@ -85,7 +89,7 @@ export const GenericTable = ({
                 />
             </div>
             {reloading ? (
-                <Spin size="large" style={{ display: 'block', textAlign: 'center', marginTop: 50 }} />
+                <Spin size="large" style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', marginTop: 50 }} />
             ) : (
                 <Table
                     style={{
@@ -109,6 +113,7 @@ export const GenericTable = ({
                         showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} registros`
                     }}
                     rowSelection={rowSelection}
+                    scroll={{ x: 'max-content', }}
                     footer={() => '--- * Pie de Tabla * ---'}
                 />
             )}

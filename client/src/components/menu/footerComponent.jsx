@@ -15,19 +15,20 @@ export const FooterComponent = () => {
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'row',
-            padding: "0px 0px 8px 0px",
-            height: '6vh',
+            padding: "0px 0px 0px 0px",
+            height: 'clamp(4em, 4vh, 6vh)',
             backgroundColor: extendedThemeConfig.colorBgFooter,
             borderRadius: extendedThemeConfig.borderRadius
         }}>
             <div
                 style={{
-                    display: 'inline-flex',
+                    display: 'flex',
                     textAlign: 'center',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexDirection: 'row',
-                    height: '90%',
+                    height: 'clamp(4vh, 4vh, 7vh)',
+                    width: '100%',
                     margin: '0px 0px 0px 0px',
                 }}
             >
@@ -44,8 +45,8 @@ export const FooterComponent = () => {
                         src={Logo}
                         alt="Linkatic Logo"
                         style={{
-                            width: '90px',
-                            height: '100%',
+                            width: 'clamp(30px, 12vw, 90px',
+                            height: 'clamp(20px, 5vh, 100%)',
                             margin: '4px 0px 0px 0px',
                         }}
                     />
