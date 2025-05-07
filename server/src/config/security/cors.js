@@ -16,7 +16,7 @@ const corsOptions = {
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
-    allowedOrigins: 'Content-Type, Authorization',
+    allowedHeaders: 'Content-Type, Authorization',
 }
 
 export const corsConfig = cors(corsOptions);
