@@ -13,6 +13,13 @@ export const errorsDictionary = {
     ERROR_VERIFY_TOKEN: 'Error al verificar token o token expirado',
 
     INVALID_COUNTRY_NAME: 'El nombre del país solo puede contener letras, espacios, guiones y apóstrofes.',
+    ERROR_MISSING_COUNTRY_ID: 'El ID del país es obligatorio.',
+    ERROR_MISSING_STATE_ID: 'El ID del estado es obligatorio.',
+    ERROR_MISSING_CITY_ID: 'El ID de la ciudad es obligatorio.',
     COUNTRY_ALREADY_EXISTS: 'Ya existe un país con ese nombre.',
-    COUNTRY_NOT_FOUND: 'No se encontró el país con el ID especificado.'
+    COUNTRY_NOT_FOUND: 'No se encontró el país con el ID especificado.',
+    ERROR_INVALID_NAME: 'El nombre solo puede contener letras, espacios, guiones y apóstrofes.',
+    ERROR_INVALID_ENTITY_TYPE: 'El tipo de entidad no es válido.',
+    ERROR_NAME_ALREADY_EXISTS: 'El nombre ya existe para la entidad con un ID diferente.',
 };
+

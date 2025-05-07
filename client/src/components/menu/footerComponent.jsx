@@ -16,7 +16,7 @@ export const FooterComponent = () => {
             alignItems: 'center',
             flexDirection: 'row',
             padding: "0px 0px 0px 0px",
-            height: 'clamp(4em, 4vh, 6vh)',
+            height: 'clamp(3em, 4vh, 6vh)',
             backgroundColor: extendedThemeConfig.colorBgFooter,
             borderRadius: extendedThemeConfig.borderRadius
         }}>
@@ -27,7 +27,7 @@ export const FooterComponent = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexDirection: 'row',
-                    height: 'clamp(4vh, 4vh, 7vh)',
+                    height: 'clamp(3em, 4vh, 6vh)',
                     width: '100%',
                     margin: '0px 0px 0px 0px',
                 }}

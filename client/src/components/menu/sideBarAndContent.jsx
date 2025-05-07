@@ -125,7 +125,7 @@ export const SidebarAndContent = () => {
     <Layout
       className="custom-layout"
       style={{
-        height: "clamp(79vh, 81vh, 82vh)",
+        height: '83vh',
         width: "100%",
         bodyBg: extendedThemeConfig.bodyBg,
         padding: "4px 0px",
@@ -145,7 +145,9 @@ export const SidebarAndContent = () => {
         onCollapse={setCollapsed}
         trigger={null}
       >
-        <CollapseButton collapsed={collapsed} setCollapsed={setCollapsed} />
+        <CollapseButton
+          collapsed={collapsed}
+          setCollapsed={setCollapsed} />
         <Menu
           mode="inline"
           selectedKeys={[getSelectedKey(location.pathname)]}
@@ -155,9 +157,7 @@ export const SidebarAndContent = () => {
           style={{
             height: "auto",
             backgroundColor: 'transparent',
-            colorBorder: extendedThemeConfig.colorBorder,
             alignItems: 'center',
-            border: 'none',
           }}
           items={menuItems}
         />
@@ -177,8 +177,7 @@ export const SidebarAndContent = () => {
         {/* Content */}
         <Content
           style={{
-            //height: "auto",
-            height: 'clamp(600px, 90vh, 95vh)',
+            height: "auto",
             //minHeight: '85vh',
             textAlign: "center",
             padding: "4px",

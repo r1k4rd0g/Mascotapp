@@ -3,16 +3,12 @@ import app from './config/server.js'
 import config from './config/configEnv.js'
 import logger from './utils/logger/loggerWinston.js'
 
-// Imports
-
 
 // Variables
 const PORT = config.PORT_DEV || config.PORT_PROD || config.PORT_TEST
-//const __dirname = import.meta.dirname
-//const baseDir = path.join(__dirname, 'routes')
+
 
 // Main function
-
 const startServer = async () => {
   try {
     app.listen(PORT, () => {

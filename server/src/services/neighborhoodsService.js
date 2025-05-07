@@ -50,6 +50,31 @@ class NeighborhoodsService extends Services {
             throw error;
         }
     }
+    updateNeighborhood = async (id, data) => {
+        try {
+            const searchId = id
+            const itemSearch = await this.neighborhoodsDao.getById(searchId);
+            if (!itemSearch) {
+                throw { errorCode: 'COUNTRY_NOT_FOUND', message: `No se encontró el barrio con el ID: ${id}`, statusCode: 404 };
+            }
+            const name = capitalizeWords(data.name);
+            if (!/^[a-zA-Z\s\-\']+$/.test(name)) {
+                throw { errorCode: 'INVALID_COUNTRY_NAME', message: `The country name can only contain letters, spaces, hyphens, and apostrophes: ${name}`, statusCode: 400 };
+            }
+            const nameExist = await this.neighborhoodsDao.getByName(name);
+            if (nameExist && nameExist.id !== itemSearch.dataValues.id) {
+                throw { errorCode: 'COUNTRY_ALREADY_EXISTS', message: `There is already a neighborhoods with that name: ${name}`, statusCode: 409 };
+            }
+            const updatedItem = await this.neighborhoodsDao.update(id, data);
+            if (!updatedItem) {
+                throw { errorCode: 'ERROR_TO_UPDATE', message: `The item could not be updated ${data}`, statusCode: 500 };
+            }
+            return updatedItem;
+        } catch (error) {
+            logger.error('entró en el catch - neighborhoodsService - updateNeighborhood: ' + error);
+            throw error;
+        }
+    }
 }
 
 export const neighborhoodsService = new NeighborhoodsService();

@@ -8,10 +8,7 @@
 * Implementar un nivel de seguridad para ciertas acciones (borrar, desactivar).
 * Explorar la manera de utilizar el mismo programa con diferentes empresas.
 * Generar un `Dockerfile` para el frontend y el entorno de desarrollo (`dev`).
-* Hacer que el color primario de la empresa aparezca al hacer hover en el menú.
-* Establecer que el color primario sea el fondo al hacer clic en un item del menú.
 * Considerar la implementación de una constante de estilo para centralizar los colores de los botones e items del menú.
-* Investigar dónde se muestran los mensajes provenientes del backend (ej: al ingresar datos duplicados).
 * Implementar las tablas de `usuario` y `cliente`, incluyendo permisos y niveles.
 
 ---

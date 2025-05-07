@@ -1,7 +1,7 @@
 //Modules
 import { Schema, model } from "mongoose";
 import { CitiesModel } from "../cities/citiesModel.js";
-import { applyCapitalizeMongoDB } from "../../../../../middlewares/applyCapitalize.js";
+import { applyCapitalizeMongoDB } from "../../../../../utils/applyCapitalize.js";
 
 //Schema
 export const neighborhoodSchema = new Schema(

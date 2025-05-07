@@ -1,7 +1,7 @@
 // Modules
 
 import { model, Schema } from 'mongoose'
-import { applyCapitalizeMongoDB } from '../../../../middlewares/applyCapitalize.js'
+import { applyCapitalizeMongoDB } from '../../../../utils/applyCapitalize.js'
 
 
 // Schema

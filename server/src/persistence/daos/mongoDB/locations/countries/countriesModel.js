@@ -1,6 +1,6 @@
 //Modules
 import { Schema, model } from "mongoose";
-import { applyCapitalizeMongoDB } from "../../../../../middlewares/applyCapitalize.js";
+import { applyCapitalizeMongoDB } from "../../../../../utils/applyCapitalize.js";
 
 //Schema
 export const countrySchema = new Schema(

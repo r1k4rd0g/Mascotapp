@@ -9,12 +9,12 @@ const HttpStatus = {
     CONFLICT: 409,
     INTERNAL_SERVER_ERROR: 500,
 }
-const setCoresHeaders = (res) => {
+/*const setCoresHeaders = (res) => {
     res.header("Access-Control-Allow-Origin", res.req.headers.origin || "*");
     res.header("Access-control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     res.header("Access-Control-Allow-Credentials", "true");
-}
+}*/
 
 class HttpResponse {
     Ok (res, data){

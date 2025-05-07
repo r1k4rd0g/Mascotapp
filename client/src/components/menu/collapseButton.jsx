@@ -17,6 +17,11 @@ export const CollapseButton = ({ collapsed, setCollapsed }) => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 colorBorder: extendedThemeConfig.colorBorder,
+                backgroundColor: extendedThemeConfig.colorBgSidebar,
+                ...(collapsed ?
+                    {} : {
+                        backgroundColor: extendedThemeConfig.colorBgContainer,
+                    }),
             }}
         />
     );

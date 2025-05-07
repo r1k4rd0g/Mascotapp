@@ -1,6 +1,6 @@
 //Modules
 import { DataTypes } from "sequelize";
-import { applyCapitalizeSQL } from "../../../../../middlewares/applyCapitalize.js";
+import { applyCapitalizeSQL } from "../../../../../utils/applyCapitalize.js";
 
 
 //Modelo

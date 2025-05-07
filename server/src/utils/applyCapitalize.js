@@ -1,4 +1,4 @@
-import { capitalizeWords } from "../utils/capitalizeWords.js";
+import { capitalizeWords } from "./capitalizeWords.js";
 
 export const applyCapitalizeMongoDB = (schema, fields) => {
     schema.pre('save', function (next) {

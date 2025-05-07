@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Dashboard } from '../components/dashboard';
 import { Login } from '../components/login';
 import { CustomersPage } from '../pages/customersPage';
@@ -17,6 +17,7 @@ export const IndicatorRoutes = () => {
             <Route path="/register" element={<Login />} />
             <Route element={<ProtectedRoute />} >
                     <Route path="/" element={<MainLayout />} >
+                        <Route index element={<Navigate to="/Dashboard" replace />} />
                         <Route path="/Dashboard" element={<Dashboard />} />
                         <Route path="/clientes/listar" element={<CustomersPage />} />
                         <Route path="/ubicaciones" element={<LocationSelector />} />

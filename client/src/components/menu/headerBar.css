@@ -1,5 +1,45 @@
-.custom-header-menu .ant-menu-item-selected {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Ejemplo de sombreado */
-    border-bottom: none !important;
-    border-radius: 4px; /* Opcional */
+.ant-menu-horizontal {
+    border-bottom: 1px solid #EA3455FF;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+/* Estilos para el hover */
+.custom-header-menu.ant-menu-light.ant-menu-horizontal > .ant-menu-item:hover,
+.custom-header-menu.ant-menu-light > .ant-menu.ant-menu-horizontal > .ant-menu-item:hover,
+.custom-header-menu.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu-title:hover,
+.custom-header-menu.ant-menu-light > .ant-menu.ant-menu-horizontal > .ant-menu-submenu-title:hover {
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(33, 31, 31);
+    background-color: transparent !important; /* El fondo se aplica en la selección */
+    border-radius: 8px;
+}
+
+/* Estilos para el ítem seleccionado */
+.custom-header-menu.ant-menu-light.ant-menu-horizontal > .ant-menu-item-selected,
+.custom-header-menu.ant-menu-light > .ant-menu.ant-menu-horizontal > .ant-menu-item-selected,
+.custom-header-menu.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu-selected,
+.custom-header-menu.ant-menu-light > .ant-menu.ant-menu-horizontal > .ant-menu-submenu-selected {
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(79, 71, 72);
+    background-color: #E0E0E0 !important; /* Fondo primario al seleccionar */
+    border-radius: 8px;
+}
+
+/* Ocultar el ::after predeterminado para la selección */
+.custom-header-menu.ant-menu-light.ant-menu-horizontal > .ant-menu-item-selected::after,
+.custom-header-menu.ant-menu-light > .ant-menu.ant-menu-horizontal > .ant-menu-item-selected::after,
+.custom-header-menu.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu-selected::after,
+.custom-header-menu.ant-menu-light > .ant-menu.ant-menu-horizontal > .ant-menu-submenu-selected::after {
+    border-bottom-width: 0;
+    border-bottom-color: transparent;
+    background-color: transparent; /* Aseguramos que no pinte el fondo */
+}
+
+/* APLICAR BORDER-RADIUS A LOS ITEMS NO SELECCIONADOS/HOVERED PARA MANTENER LA FORMA */
+.custom-header-menu.ant-menu-light.ant-menu-horizontal > .ant-menu-item,
+.custom-header-menu.ant-menu-light > .ant-menu.ant-menu-horizontal > .ant-menu-item,
+.custom-header-menu.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu-title,
+.custom-header-menu.ant-menu-light > .ant-menu.ant-menu-horizontal > .ant-menu-submenu-title {
+    border-radius: 8px; /* Aplicar el border-radius siempre */
 }

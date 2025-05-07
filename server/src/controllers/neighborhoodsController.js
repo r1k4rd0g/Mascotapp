@@ -24,6 +24,23 @@ class NeighborhoodsController extends Controllers {
             next(error);
         };
     }
+    updateNeighborhood = async (req, res, next) => {
+        try {
+            const { id } = req.params;
+            const data = req.body;
+            if(!id || !data) {
+                return httpResponse.BadRequest(res, 'ID and data must be required', req.body, req.params)
+            }
+            const updatedItem = await this.service.updateNeighborhood(id, data);
+            if (!updatedItem) {
+                return httpResponse.BadRequest(res, 'ERROR_TO_UPDATE', updatedItem)
+            }
+            return httpResponse.Ok(res, updatedItem)
+        } catch (error) {
+            logger.error('Entró al catch en neighborhoodController update' + error)
+            next(error);
+        }
+    }
 }
 
 export const neighborhoodsController = new NeighborhoodsController();

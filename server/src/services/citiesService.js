@@ -38,7 +38,7 @@ class CitiesService extends Services {
             throw error;
         }
     };
-    getCitiesByStateId = async (id) => {
+    /*getCitiesByStateId = async (id) => {
         try {
             const itemSearch = await this.citiesDao.getByStateId(id);
             if (!itemSearch) {
@@ -47,6 +47,31 @@ class CitiesService extends Services {
             return itemSearch;
         } catch (error) {
             logger.error('entró en el catch - citiesService - getCitiesByStateId: ' + error);
+            throw error;
+        }
+    }*/
+    updateCity = async (id, data) => {
+        try {
+            const searchId = id
+            const itemSearch = await this.citiesDao.getById(searchId);
+            if (!itemSearch) {
+                throw { errorCode: 'COUNTRY_NOT_FOUND', message: `No se encontró la ciudad con el ID: ${id}`, statusCode: 404 };
+            }
+            const name = capitalizeWords(data.name);
+            if (!/^[a-zA-Z\s\-\']+$/.test(name)) {
+                throw { errorCode: 'INVALID_COUNTRY_NAME', message: `The country name can only contain letters, spaces, hyphens, and apostrophes: ${name}`, statusCode: 400 };
+            }
+            const nameExist = await this.citiesDao.getByName(name);
+            if (nameExist && nameExist.id !== itemSearch.dataValues.id) {
+                throw { errorCode: 'COUNTRY_ALREADY_EXISTS', message: `There is already a city with that name: ${name}`, statusCode: 409 };
+            }
+            const updatedItem = await this.citiesDao.update(id, data);
+            if (!updatedItem) {
+                throw { errorCode: 'ERROR_TO_UPDATE', message: `The item could not be updated ${data}`, statusCode: 500 };
+            }
+            return updatedItem;
+        } catch (error) {
+            logger.error('entró en el catch - citiesService - updateCities: ' + error);
             throw error;
         }
     }
