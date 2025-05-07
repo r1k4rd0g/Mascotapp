@@ -13,6 +13,18 @@
 
 ---
 
+## 07/05/2025
+
+**Frontend:**
+
+* Se implementó un nuevo sistema para navegar por el navegador web, en el sistema, haciendo uso de las rutas de react.
+* Se realizaron más ajustes para que la visualización en celular, tablet, laptop y pc sea óptima.
+
+**Backend:**
+
+* Se implementó control de update en todos el parámetro `name` de `locations`, para que no se pueda editar y guardar un nombre existente, ahora también devuelve el error correspondiente.
+* Se implementaron políticas de ciberseguridad implementando configuraciones en `CORS`, `Helmet`, `Hpp` y `Limiter`, buscando atender a la exposición a ataques XSS, Clickjacking, MIME Sniffing, HPP, ataques de fuerza bruta, ataques DoS a nivel de aplicación, acceso no autorizado a nuestra API y fuga de información de referencia, además de ocultar información sensible sobre nuestro servidor.
+
 ## 23/04/2025
 
 **Frontend:**

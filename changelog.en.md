@@ -13,6 +13,18 @@
 
 ---
 
+## 2025/05/07
+
+**Frontend:**
+
+* A new navigation system was implemented using React Router to allow navigation through the browser within the application.
+* Additional adjustments were made to optimize the display on mobile phones, tablets, laptops, and desktop computers.
+
+**Backend:**
+
+* An update control was added for the name parameter in locations, preventing editing and saving of duplicated names. The system now also returns the appropriate error message.
+* Cybersecurity policies were implemented through the configuration of `CORS`, `Helmet`, `Hpp` and `Limiter`, aiming to address exposure to XSS attacks, Clickjacking, MIME Sniffing, HPP, brute-force attacks, application-level DoS attacks, unauthorized access to our API, and reference information leakage, in addition to hiding sensitive server information.
+
 ## 2025/04/23
 
 **Frontend:**
