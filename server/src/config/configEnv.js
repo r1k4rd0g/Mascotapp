@@ -41,10 +41,10 @@ export default {
     NAME: process.env.NAME,
 
     //HELMET
-    connectSrcHelmet: process.env.CONNECT_SRC_DEVELOP,
-    //connectSrcHelmet: process.env.CONNECT_SRC_PRODUCTION,
+    connectSrcHelmet: process.env.CONNECT_URL,
+
 
     //CORS
-    CORS_ORIGIN: process.env.CORS_ORIGIN_DEVELOP,
-    //CORS_ORIGIN: process.env.CORS_ORIGIN_PRODUCTION,
+    CORS_ORIGIN: process.env.CORS_ORIGIN,
+
 }
