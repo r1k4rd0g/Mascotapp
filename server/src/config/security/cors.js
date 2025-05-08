@@ -6,7 +6,6 @@ const allowedOrigins = [
     'http://localhost:5173',
     config.CORS_ORIGIN,
 ];
-console.log(allowedOrigins);
 const corsOptions = {
     origin: function (origin, callback) {
         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {

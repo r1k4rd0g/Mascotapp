@@ -26,7 +26,7 @@ class HttpResponse {
     }
     BadRequest (res, errorCode, data){
         const message = errorsDictionary[errorCode];
-        setCoresHeaders(res);
+        //setCoresHeaders(res);
         return res.status(HttpStatus.BAD_REQUEST).json({
             status: HttpStatus.BAD_REQUEST,
             message: message,
@@ -34,7 +34,7 @@ class HttpResponse {
         });
     }
     Unauthorized (res, data){
-        setCoresHeaders(res);
+        //setCoresHeaders(res);
         return res.status(HttpStatus.UNAUTHORIZED).json({
             status: HttpStatus.UNAUTHORIZED,
             message: "Unauthorized",
@@ -50,7 +50,7 @@ class HttpResponse {
     }
     NotFound (res, errorCode, data){
         const message = errorsDictionary[errorCode];
-        setCoresHeaders(res);
+        //setCoresHeaders(res);
         return res.status(HttpStatus.NOT_FOUND).json({
             status: HttpStatus.NOT_FOUND,
             message: message,
@@ -59,7 +59,7 @@ class HttpResponse {
     }
     Conflict (res, errorCode, data){
         const message = errorsDictionary[errorCode];
-        setCoresHeaders(res);
+        //setCoresHeaders(res);
         return res.status(HttpStatus.CONFLICT).json({
             status: HttpStatus.CONFLICT,
             message: message,
@@ -68,7 +68,7 @@ class HttpResponse {
     }
     ServerError (res, errorCode, data){
         const message = errorsDictionary[errorCode];
-        setCoresHeaders(res);
+        //setCoresHeaders(res);
         return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
             status: HttpStatus.INTERNAL_SERVER_ERROR,
             message: message,
